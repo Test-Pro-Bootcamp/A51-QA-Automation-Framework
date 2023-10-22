@@ -29,7 +29,7 @@ public class Homework16 extends BaseTest{
         WebElement registrationLink = driver.findElement(By.cssSelector("[href='registration']"));
         registrationLink.click();
 
-        // Verifying redirected to registration page using Assertion, expected result
+        // Verifying redirected to registration page using Assertion, expected results
         String registrationUrl = "https://qa.koel.app/registration";
         Assert.state(Boolean.parseBoolean(driver.getCurrentUrl()), registrationUrl);
 
