@@ -1,9 +1,9 @@
-import dev.failsafe.internal.util.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
@@ -16,7 +16,7 @@ public class Homework16 extends BaseTest{
         options.addArguments("--remote-allow-origins=*");
 
         // initializing Declaration and implicit wait
-        WebDriver driver = new ChromeDriver();
+        WebDriver driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2000));
 
         // Steps
@@ -31,7 +31,7 @@ public class Homework16 extends BaseTest{
 
         // Verifying redirected to registration page using Assertion, expected results
         String registrationUrl = "https://qa.koel.app/registration";
-        Assert.state(Boolean.parseBoolean(driver.getCurrentUrl()), registrationUrl);
+        Assert.assertEquals(driver.getCurrentUrl(), registrationUrl);
 
         // close the browser
         driver.quit();
