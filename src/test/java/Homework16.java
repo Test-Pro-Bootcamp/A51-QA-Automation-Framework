@@ -28,13 +28,10 @@ public class Homework16 extends BaseTest {
         System.out.println("Did this work?");
 
         // Verify that you are redirected to the Registration page using the Assert method.
-        WebElement registrationPage = driver.findElement(By.name("Koel Registration/Reset"));
-        Assert.assertTrue(registrationPage.isDisplayed());
+        String registrationUrl = "https://qa.koel.app/registration";
+        Assert.assertEquals(driver.getCurrentUrl(), registrationUrl);
+
         driver.quit();
-
-        // I have tried just about everything possible and cant find the correct element for Registration page.
-
-
     }
 
 }
