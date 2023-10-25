@@ -97,7 +97,7 @@ public class LoginTests extends BaseTest {
     }
 
     @Test
-    public void loginValidEmailEmptyPassword() throws InterruptedException {
+    public void loginValidEmailEmptyPassword() {
         //Pre-Conditions
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
