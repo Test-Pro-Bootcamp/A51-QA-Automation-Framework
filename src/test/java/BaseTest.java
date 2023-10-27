@@ -37,17 +37,17 @@ public class BaseTest<webElement> {
     //Helper functions for Homework17 task
 
     public void navigateToPage() {
-        driver.get("qa.koel.app/");
+        driver.get(url);
     }
     public void enterEmail(String email) {
         WebElement emailField = driver.findElement(By.cssSelector("input[type='email']"));
         emailField.clear();
-        emailField.sendKeys("adam.johnson@testpro.io");
+        emailField.sendKeys(email);
     }
     public void enterPassword(String password) {
         WebElement passwordField = driver.findElement(By.cssSelector("input[type='password']"));
         passwordField.clear();
-        passwordField.sendKeys("1Te$tStudent");
+        passwordField.sendKeys(password);
     }
     public void clickSubmit() {
         WebElement submit = driver.findElement(By.cssSelector("button[type='submit']"));

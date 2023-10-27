@@ -1,6 +1,8 @@
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.io.StringReader;
+
 
 public class Homework17 extends BaseTest {
     @Test
@@ -20,7 +22,7 @@ public class Homework17 extends BaseTest {
    clickSubmit();
     Thread.sleep(5000);
    //Search for a song
-   searchSong("Reacher");
+   searchSong("Reactor");
    clickViewAllBtn();
    selectFirstSongResult();
    clickAddToBtn();
@@ -33,8 +35,6 @@ public class Homework17 extends BaseTest {
 
     }
 
-    private String getNotificationText() {
-        return null;
-    }
+
 
 }
