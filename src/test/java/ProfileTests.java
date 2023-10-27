@@ -8,6 +8,7 @@ import java.util.UUID;
 public class ProfileTests extends BaseTest {
     @Test
     public void changeProfileName() throws InterruptedException{
+
         navigateToLoginPage();
         //Login
         provideEmail("demo@class.com");
