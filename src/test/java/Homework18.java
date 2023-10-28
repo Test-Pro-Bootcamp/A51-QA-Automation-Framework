@@ -1,0 +1,30 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+public class Homework18 extends BaseTest {
+    @Test
+    public void playSong(){
+        provideEmail("adam.johnson@testpro.io");
+        providePassword("1Te$t$tudent");
+        clickSubmit();
+        clickPlay();
+        Assert.assertTrue(isSongPLaying());
+    }
+
+    private boolean isSongPLaying() {
+    return false;
+    }
+
+    public void clickPlay(){
+        WebElement playNextButton = driver.findElement(By.xpath("//i[@data-testis='play-next-btn']"));
+        WebElement playButton = driver.findElement(By.xpath("//span[@data-testid='play-btn']"));
+        playNextButton.click();
+        playButton.click();
+    }
+    public boolean isSongPlaying(){;
+        WebElement soundBar = driver.findElement(By.xpath("//div[@data-testid='sound-bar-play']"));
+        return soundBar.isDisplayed();
+    }
+}
