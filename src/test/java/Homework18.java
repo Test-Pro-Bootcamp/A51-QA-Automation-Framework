@@ -4,27 +4,32 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class Homework18 extends BaseTest {
-    @Test
-    public void playSong(){
-        provideEmail("adam.johnson@testpro.io");
-        providePassword("1Te$t$tudent");
-        clickSubmit();
-        clickPlay();
-        Assert.assertTrue(isSongPLaying());
+    @Test(priority = 1, description = "Play song and validate is is playing")
+    public void playSong() throws InterruptedException{
+        logIn("adam.johnson@testpro.io", "1Te$t$tudent");
+
+        enterAllSongs();
+        selectSong();
+        enterButtonPLaySong();
+
+        Assert.assertTrue(isDisplayedPlayingSong());
+
+       // provideEmail("adam.johnson@testpro.io");
+        //providePassword("1Te$t$tudent");
+        //clickSubmit();
+        //clickPlay();
+        //Assert.assertTrue(isSongPLaying());
     }
 
-    private boolean isSongPLaying() {
-    return false;
-    }
 
     public void clickPlay(){
-        WebElement playNextButton = driver.findElement(By.xpath("//i[@data-testis='play-next-btn']"));
+        WebElement playNextButton = driver.findElement(By.xpath("//i[@data-testid='play-next-btn']"));
         WebElement playButton = driver.findElement(By.xpath("//span[@data-testid='play-btn']"));
         playNextButton.click();
         playButton.click();
     }
-    public boolean isSongPlaying(){;
-        WebElement soundBar = driver.findElement(By.xpath("//div[@data-testid='sound-bar-play']"));
-        return soundBar.isDisplayed();
+    public boolean isDisplayedPlayingSong(){;
+        WebElement songIsPLaying = driver.findElement(By.cssSelector("[data-testid = 'sound-bar-play']"));
+        return songIsPLaying.isDisplayed();
     }
 }
