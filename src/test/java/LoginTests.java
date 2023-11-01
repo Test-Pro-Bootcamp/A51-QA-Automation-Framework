@@ -26,7 +26,7 @@ public class LoginTests extends BaseTest {
        clickSubmit();
 
        Thread.sleep(2000);
-       Assert.assertEquals(driver.getCurrentUrl(), url);
+       Assert.assertEquals(driver.getCurrentUrl(), newURL);
     }
      @Test
     public void loginValidEmailPassword(){
