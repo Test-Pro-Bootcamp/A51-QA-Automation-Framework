@@ -23,7 +23,7 @@ public class Homework16 extends BaseTest {
 
         WebElement registrationLink = driver.findElement(By.cssSelector("[href='registration']"));
         registrationLink.click();
-        Assert.assertEquals(driver.getCurrentUrl(), url);
+        Assert.assertEquals(driver.getCurrentUrl(), registrationUrl);
         driver.quit();
     }
 }
