@@ -59,7 +59,7 @@ public class BaseTest {
 
     public void provideEmail(String email) {
         try {
-            WebElement emailField = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("input[type='email']")));
+            WebElement emailField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[type='email']")));
             emailField.sendKeys(email);
         } catch (NullPointerException npe) {
         }
@@ -67,7 +67,7 @@ public class BaseTest {
 
     public void providePassword(String password) {
         try {
-            WebElement passwordField = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("input[type='password']")));
+            WebElement passwordField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[type='password']")));
             passwordField.clear();
             passwordField.sendKeys(password);
         } catch (NullPointerException npe) {
@@ -76,7 +76,7 @@ public class BaseTest {
 
     public void clickSubmit() {
         try {
-            WebElement submit = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("button[type='submit']")));
+            WebElement submit = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("button[type='submit']")));
             submit.click();
         } catch (NullPointerException npe) {
         }
@@ -85,7 +85,7 @@ public class BaseTest {
     //Step 1 - Open PLaylist
     public void openPlaylist() {
         try {
-            WebElement emptyPlaylist = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".playlist:nth-child(3)")));
+            WebElement emptyPlaylist = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".playlist:nth-child(3)")));
             emptyPlaylist.click();
         } catch (NullPointerException npe) {
         }
@@ -94,7 +94,7 @@ public class BaseTest {
     //Step 2 - Delete Playlist
     public void clickDeletePlaylistBtn() {
         try {
-            WebElement deletePLaylist = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".btn-delete-playlist")));
+            WebElement deletePLaylist = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".btn-delete-playlist")));
             deletePLaylist.click();
         } catch (NullPointerException npe) {
         }
