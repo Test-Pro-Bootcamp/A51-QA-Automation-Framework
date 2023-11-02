@@ -1,16 +1,31 @@
-<h1>Test Pro A51 Class Automation Framework Repository</h1><br>
+<h1>Homework #18:XML File Configurations</h1><br>
 
-Welcome to the Test Pro A51 Class Automation Framework repository! <br>
+<h2>XML File Configurations</h2>
 
-<h2>Overview</h2>
-This repository contains the Test Pro A51 Class Automation Framework, which serves as an educational tool for students' homework and live class demonstrations.
+* [ ] Create a new branch named **homework-18**.
 
-<h2>Getting Started</h2>
-If you're a student enrolled in the A51 class, follow these steps to get started with the A51 Class Automation Framework:<br><br>
-1.) Clone this repository to your local machine. <br>
-2.) Explore the sample test case in the 'LoginTests' java class located in the 'src' directory under 'test' > 'java' folder <br>
-3.) Complete the assigned homework exercises and participate in live class demonstrations using the framework. <br><br>
-For more detailed instructions regarding the installation of the framework, please refer to the A51 class materials (LMS & slides).
+* [ ] Create a new file, **Homework18.java** in IntelliJ IDEA.
 
-<h2>Contact Information</h2>
-If you have any questions or need further assistance, feel free to contact the course instructor, our support team or send a message in Teams for A51.  
+* [ ] Create a test case, **playSong()** using **_@Test_** annotation.
+
+* [ ] Use the helper/reusable methods we created.
+
+* [ ] Create a new config XML file for the test case.
+
+* [ ] Add **Homework18** class to the new XML file.
+
+* [ ] Specify the **_@Test_** method to be ran in the new XML file. **_Hint: Use the & tags_.**
+
+* [ ] Navigate to _**https://qa.koel.app/**_.
+
+* [ ] Log in with your credentials.
+
+* [ ] Click **_«Play next song»_** **(media player controls)**, then the **Play button** to play a song.
+
+* [ ] Validate that a song is playing by verifying if the **sound bar**, or the **pause button** is displayed.
+
+* [ ] Commit your changes to the new branch **homework-18**.
+
+* [ ] Push your code to the remote repository.
+
+* [ ] Create a pull request.
