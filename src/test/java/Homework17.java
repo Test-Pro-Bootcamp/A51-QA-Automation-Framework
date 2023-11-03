@@ -21,8 +21,7 @@ public class Homework17 extends BaseTest{
         choiceSong();
         addToList();
         choiceList();
-
-
+        
         Assert.assertEquals(notificationMessage(), expectedSongAddedMessage);
 
     }
