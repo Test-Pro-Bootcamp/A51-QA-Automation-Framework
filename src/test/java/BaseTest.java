@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
@@ -17,6 +18,7 @@ public class BaseTest {
 
     public WebDriver driver = null;
     public WebDriverWait wait = null;
+    public static Actions actions = null;
     public  String url = "https://qa.koel.app/";
 
     @BeforeSuite //The annotated method will run before all tests in this suit have run
@@ -35,6 +37,7 @@ public class BaseTest {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
 
+        actions = new Actions(driver);
         wait = new WebDriverWait(driver,Duration.ofSeconds(10));
         url = BaseURL;
         navigateToPage();
