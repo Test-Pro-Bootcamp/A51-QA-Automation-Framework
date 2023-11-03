@@ -8,7 +8,7 @@ public class Homework17 extends BaseTest{
     @Test
     public void addSongToPlaylist() throws InterruptedException{
 
-        String expectedSongAddedMessage = "Added 1 song into \"dasha\"";
+        String expectedSongAddedMessage = "Added 1 song into \"dasha.\"";
 
         navigateToLoginPage();
         provideEmail("daria.chebotnyagina@testpro.io");
@@ -55,6 +55,6 @@ public class Homework17 extends BaseTest{
     public String notificationMessage(){
         WebElement message = driver.findElement(By.cssSelector("div.success.show"));
         return message.getText();
-        
+
     }
 }
