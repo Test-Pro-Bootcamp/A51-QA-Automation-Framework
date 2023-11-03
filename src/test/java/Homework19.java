@@ -3,12 +3,12 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class Homework19 extends BaseTest{
+public class Homework19 extends BaseTest {
 
-@Test
-    public void deletePlaylist()throws InterruptedException{
+    @Test
+    public void deletePlaylist() throws InterruptedException {
 
-        String expecteddeletedPlaylistmsg ="Deleted playlist \"test pro playlist.\"";
+        String expecteddeletedPlaylistmsg = "Deleted playlist \"test pro playlist.\"";
 
         provideEmail("aparajita.jha@testpro.io");
         providePassword("testpro135@");
@@ -18,25 +18,26 @@ public class Homework19 extends BaseTest{
         clickDeletePlaylistBtn();
 
 
-        Assert.assertEquals(getPlaylistDeletedmsg(),expecteddeletedPlaylistmsg);
+        Assert.assertEquals(getPlaylistDeletedmsg(), expecteddeletedPlaylistmsg);
 
     }
 
     public String getPlaylistDeletedmsg() {
-        WebElement notification =driver.findElement(By.cssSelector("div.success.show"));
+        WebElement notification = driver.findElement(By.cssSelector("div.success.show"));
         return notification.getText();
     }
 
-    public void openPlaylist(){
-        WebElement playlist= driver.findElement(By.cssSelector(".playlist:nth-child(3"));
+    public void openPlaylist() {
+        WebElement playlist = driver.findElement(By.cssSelector(".playlist:nth-child(3"));
 
         playlist.click();
 
 
-}
-public void clickDeletePlaylistBtn()throws InterruptedException{
-        WebElement deletePlaylist=driver.findElement(By.cssSelector("[title='Delete this playlist']"));
+    }
+
+    public void clickDeletePlaylistBtn() throws InterruptedException {
+        WebElement deletePlaylist = driver.findElement(By.cssSelector("[title='Delete this playlist']"));
         deletePlaylist.click();
         Thread.sleep(2000);
-}
+    }
 }
