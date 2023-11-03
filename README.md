@@ -2,30 +2,49 @@
 
 <h2>XML File Configurations</h2>
 
-* [ ] Create a new branch named **homework-18**.
+* [x] Create a new branch named **homework-18**.
 
-* [ ] Create a new file, **Homework18.java** in IntelliJ IDEA.
+* [x] Create a new file, **Homework18.java** in IntelliJ IDEA.
 
-* [ ] Create a test case, **playSong()** using **_@Test_** annotation.
+* [x] Create a test case, **playSong()** using **_@Test_** annotation.
 
-* [ ] Use the helper/reusable methods we created.
+* [x] Use the helper/reusable methods we created.
 
-* [ ] Create a new config XML file for the test case.
+* [x] Create a new config XML file for the test case.
 
-* [ ] Add **Homework18** class to the new XML file.
+* [x] Add **Homework18** class to the new XML file.
 
-* [ ] Specify the **_@Test_** method to be ran in the new XML file. **_Hint: Use the & tags_.**
+* [x] Specify the **_@Test_** method to be ran in the new XML file. **_Hint: Use the & tags_.**
 
-* [ ] Navigate to _**https://qa.koel.app/**_.
+* [x] Navigate to _**https://qa.koel.app/**_.
 
-* [ ] Log in with your credentials.
+* [x] Log in with your credentials.
 
-* [ ] Click **_«Play next song»_** **(media player controls)**, then the **Play button** to play a song.
+* [x] Click **_«Play next song»_** **(media player controls)**, then the **Play button** to play a song.
 
-* [ ] Validate that a song is playing by verifying if the **sound bar**, or the **pause button** is displayed.
+* [x] Validate that a song is playing by verifying if the **sound bar**, or the **pause button** is displayed.
 
-* [ ] Commit your changes to the new branch **homework-18**.
+* [x] Commit your changes to the new branch **homework-18**.
 
-* [ ] Push your code to the remote repository.
+* [x] Push your code to the remote repository.
 
-* [ ] Create a pull request.
+* [x] Create a pull request.
+
+# Homework #19: Additional Annotations & DataProviders
+
+* [x] Create a new branch named homework-19.
+* [x] Create a new file Homework19.java in IntelliJ IDEA.
+* [x] Create a test case, deletePlaylist() using @Test annotation.
+* [x] Use the helper/reusable methods we created.
+* [x] Use @Parameters for passing baseUrl from the TestNG config file to the tests.
+* [x] Navigate to "https://qa.koel.app/".
+* [x] Log in with your credentials.
+* [x] Click the playlist you want to delete.
+* [x] We should see the red button "x PLAYLIST" on the top right part of the page, and click on it.
+  
+    ## Note: If the red button is not displayed, let's create a new playlist and click on it.
+  
+* [x] Verify that the confirmation notification displayed has the text, "Deleted playlist {playlist name}".
+* [x] Commit your changes to the new branch homework-19.
+* [x] Push your code to the remote repository.
+* [x] Create a pull request.

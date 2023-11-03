@@ -7,6 +7,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Parameters;
 
 import java.time.Duration;
 
@@ -22,7 +23,8 @@ public class BaseTest {
     }
 
     @BeforeMethod //The annotated method will be run before all the test methods in the current class have been run.
-    public void  launchBrowser(){
+    @Parameters({"BaseURL"})
+    public void  launchBrowser(String BaseURL){
         //Added ChromeOptions argument below to fix websocket error
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
@@ -30,6 +32,8 @@ public class BaseTest {
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
+        url = BaseURL;
+        navigateToPage();
 
     }
     @AfterMethod //The annotated method will be run after each test method
