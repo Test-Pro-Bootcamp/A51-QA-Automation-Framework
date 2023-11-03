@@ -32,19 +32,19 @@
 
 # Homework #19: Additional Annotations & DataProviders
 
-* [ ] Create a new branch named homework-19.
-* [ ] Create a new file Homework19.java in IntelliJ IDEA.
-* [ ] Create a test case, deletePlaylist() using @Test annotation.
-* [ ] Use the helper/reusable methods we created.
-* [ ] Use @Parameters for passing baseUrl from the TestNG config file to the tests.
-* [ ] Navigate to "https://qa.koel.app/".
-* [ ] Log in with your credentials.
-* [ ] Click the playlist you want to delete.
-* [ ] We should see the red button "x PLAYLIST" on the top right part of the page, and click on it.
+* [x] Create a new branch named homework-19.
+* [x] Create a new file Homework19.java in IntelliJ IDEA.
+* [x] Create a test case, deletePlaylist() using @Test annotation.
+* [x] Use the helper/reusable methods we created.
+* [x] Use @Parameters for passing baseUrl from the TestNG config file to the tests.
+* [x] Navigate to "https://qa.koel.app/".
+* [x] Log in with your credentials.
+* [x] Click the playlist you want to delete.
+* [x] We should see the red button "x PLAYLIST" on the top right part of the page, and click on it.
   
     ## Note: If the red button is not displayed, let's create a new playlist and click on it.
   
-* [ ] Verify that the confirmation notification displayed has the text, "Deleted playlist {playlist name}".
-* [ ] Commit your changes to the new branch homework-19.
-* [ ] Push your code to the remote repository.
-* [ ] Create a pull request.
+* [x] Verify that the confirmation notification displayed has the text, "Deleted playlist {playlist name}".
+* [x] Commit your changes to the new branch homework-19.
+* [x] Push your code to the remote repository.
+* [x] Create a pull request.
