@@ -30,11 +30,6 @@ public class BaseTest {
         driver.manage().window().maximize();
     }
 
-    @AfterMethod
-    public void closeBrowser(){
-        driver.quit();
-    }
-
 
     public void navigateToPage() {
         String url = "https://qa.koel.app";
@@ -57,4 +52,10 @@ public class BaseTest {
         WebElement submit = driver.findElement(By.cssSelector("button[type='submit']"));
         submit.click();
     }
+
+    @AfterMethod
+    public void closeBrowser(){
+        driver.quit();
+    }
+
 }
