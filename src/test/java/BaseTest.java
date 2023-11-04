@@ -18,14 +18,11 @@ import java.util.UUID;
 public class BaseTest {
 
     public WebDriver driver = null;
-
-    public WebDriver wait = null;
-
-    public WebDriver until = null;
+    public WebDriverWait wait = null;
     public String url = "https://qa.koel.app";
 
-    public Actions actions = null;
-    //Actions actions = new Actions(driver);
+    //public Actions actions = null;
+    Actions actions = new Actions(driver);
 
     @BeforeSuite
     static void setupClass() {
@@ -45,7 +42,7 @@ public class BaseTest {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.get(url);
         driver.manage().window().maximize();
-        wait = (WebDriver) new WebDriverWait(driver,Duration.ofSeconds(10));
+        wait = new WebDriverWait(driver,Duration.ofSeconds(10));
         url = BaseUrl;
         navigateToPage();
     }
