@@ -16,10 +16,20 @@ import java.time.Duration;
 
 public class BaseTest {
 
-    public WebDriver driver = null;
-    public WebDriverWait wait = null;
+    //public WebDriver driver = null;
+    //public WebDriverWait wait = null;
+    //public static Actions actions = null;
+    //public  String url = "https://qa.koel.app/";
+
+    //References start here
+    public static WebDriver driver = null;
+    public static String url = null;
+
+    public static WebDriverWait wait = null;
+
     public static Actions actions = null;
-    public  String url = "https://qa.koel.app/";
+
+    //References end here
 
     @BeforeSuite //The annotated method will run before all tests in this suit have run
     static void setupClass() {
