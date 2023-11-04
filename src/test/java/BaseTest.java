@@ -17,7 +17,7 @@ import java.time.Duration;
 public class BaseTest {
 
     public WebDriver driver;
-    private WebDriverWait wait;
+    public WebDriverWait wait;
 
     public WebElement notificationMsg;
 
@@ -40,8 +40,7 @@ public class BaseTest {
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         driver.manage().window().maximize();
-
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         url = BaseUrl;
         navigateToPage();
 
