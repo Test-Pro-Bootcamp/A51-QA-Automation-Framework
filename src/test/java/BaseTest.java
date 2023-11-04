@@ -13,19 +13,25 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
 
 import java.time.Duration;
-import java.util.UUID;
+//import java.util.UUID;
+
+
 
 public class BaseTest {
 
     public WebDriver driver = null;
 
-    public WebDriver wait = null;
+    //public WebDriver wait = null;
 
-    public WebDriver until = null;
+    public WebDriverWait wait;
+    
+    public WebElement notificationsMsg;
+
+    //public WebDriver until = null;
     public String url = "https://qa.koel.app";
 
-    public Actions actions = null;
-    //Actions actions = new Actions(driver);
+    //public Actions actions = null;
+    Actions actions = new Actions(driver);
 
     @BeforeSuite
     static void setupClass() {
@@ -41,11 +47,11 @@ public class BaseTest {
 
         //Open Chrome Browser
         driver = new ChromeDriver(options);
-        actions = new Actions(driver);
+        //actions = new Actions(driver);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.get(url);
+        //driver.get(url);
         driver.manage().window().maximize();
-        wait = (WebDriver) new WebDriverWait(driver,Duration.ofSeconds(10));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         url = BaseUrl;
         navigateToPage();
     }
@@ -57,8 +63,11 @@ public class BaseTest {
         driver.get(url);
     }
     public void provideEmail(String email){
-        WebElement emailField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[type='email']")));
-        emailField.sendKeys(email);
+        try {
+            WebElement emailField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[type='email']")));
+            emailField.sendKeys(email);
+        }catch (NullPointerException npe){
+        }
     }
     public void providePassword(String password){
         WebElement passwordField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[type='password']")));

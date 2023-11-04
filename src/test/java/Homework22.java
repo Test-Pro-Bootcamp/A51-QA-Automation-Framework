@@ -5,7 +5,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class Homework21 extends BaseTest {
+public class Homework22 extends BaseTest {
 
     //Prerequisite = User has at created at least one playlist
    String newPlaylistName = "Abracadabra";
