@@ -4,6 +4,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.HomePage;
+import pages.LoginPage;
 
 import java.util.List;
 
@@ -12,6 +14,22 @@ public class HomeTest extends BaseTest{
     String newPlaylistName = "Sample Edited Playlist";
 
     //region Test Cases
+
+    @Test//This method uses POM (Page Object Model) design pattern
+    public void playSongTest() throws InterruptedException {
+
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
+
+        loginPage.provideEmail("demo@class.com");
+        loginPage.providePassword("te$t$tudent");
+        loginPage.clickSubmit();
+
+        chooseAllSongsList();
+        contextClickFirstSong();
+        choosePlayOption();
+        Assert.assertTrue(isSongPlaying());
+    }
     @Test
     public void playSong() throws InterruptedException {
         provideEmail("demo@class.com");
