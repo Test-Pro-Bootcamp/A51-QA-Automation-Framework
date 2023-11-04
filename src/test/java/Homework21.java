@@ -42,6 +42,14 @@ public void renamePlaylist(){
     playlistInputField.sendKeys(Keys.chord(Keys.CONTROL,"A",Keys.BACK_SPACE ));
     playlistInputField.sendKeys("test");
     playlistInputField.sendKeys(Keys.ENTER);
-}
+
 
 }
+ public String getRenamePlaylistSuccessMsg() {
+     WebElement notification = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.success.show")));
+     return notification.getText();
+ }
+
+
+ }
+
