@@ -23,7 +23,6 @@ public class Homework17 extends BaseTest{
         choiceList();
         
         Assert.assertEquals(notificationMessage(), expectedSongAddedMessage);
-
     }
     public void searchField(String name) throws InterruptedException{
         WebElement field = driver.findElement(By.cssSelector("input[type='search']"));
