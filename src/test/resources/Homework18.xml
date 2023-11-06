@@ -5,7 +5,8 @@
 
     <test name="Homework18 Test" preserve-order="false">
         <classes>
-            <class name="Homework18"/>
+            <class name="Homework18">
+            </class>
         </classes>
     </test>
 </suite>
