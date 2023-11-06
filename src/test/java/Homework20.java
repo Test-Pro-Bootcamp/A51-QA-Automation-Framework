@@ -1,5 +1,4 @@
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
@@ -9,6 +8,7 @@ public class Homework20 extends BaseTest {
 
     @Test
     public void deletePlaylist() throws InterruptedException{
+
         String uniquePlaylist = "1-HW19-Playlist";
         String deletePlaylistMsg = "Deleted playlist \"1-HW19-Playlist.\"";
 
@@ -18,18 +18,11 @@ public class Homework20 extends BaseTest {
         providePassword("te$t$tudent");
         clickSubmit();
 
-        //Create empty playlist
-        createPlaylist(uniquePlaylist);
-
-        Thread.sleep(4000);
-
         //Click on empty playlist created
         clickOnPlaylist();
 
         //delete selected playlist
         clickOnDeleteBtn();
-
-        Thread.sleep(2000);
 
         //Expected Results
         WebElement notificationMsg = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.alertify-logs div.success")));//driver.findElement(By.cssSelector("div.alertify-logs div.success"));
@@ -37,30 +30,10 @@ public class Homework20 extends BaseTest {
         Assert.assertEquals(deletePlaylistMsg,notificationMsg.getText());
 
     }
-    private void createPlaylist(String uniquePlaylist) {
-        clickOnCreateNewPlaylistBtn();
-        clickOnMenuNewPlayListMBtn();
-        provideNewPlaylistName(uniquePlaylist);
-    }
 
-    private void provideNewPlaylistName(String uniquePlaylist) {
-        WebElement playListField = driver.findElement(By.cssSelector("input[name='name']"));
-        playListField.clear();
-        playListField.sendKeys(uniquePlaylist);
-        playListField.sendKeys(Keys.ENTER);
-    }
-
-    private void clickOnMenuNewPlayListMBtn() {
-        WebElement newPLBtn = driver.findElement(By.cssSelector("li[data-testid='playlist-context-menu-create-simple']"));
-        newPLBtn.click();
-    }
-
-    private void clickOnCreateNewPlaylistBtn() {
-        WebElement addPLBtn = driver.findElement(By.cssSelector("i[data-testid='sidebar-create-playlist-btn']"));
-        addPLBtn.click();
-    }
     public void clickOnPlaylist(){
-        WebElement playList = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".playlist:nth-child(3)")));//driver.findElement(By.cssSelector(".playlist:nth-child(3)"));
+        WebElement playList = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//section[@id='playlists'] //li[contains( . , '1-HW19-Playlist')]")));
+
         playList.click();
     }
 
