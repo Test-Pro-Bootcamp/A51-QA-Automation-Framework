@@ -7,12 +7,9 @@
         <classes>
             <class name="LoginTests"/>
             <class name="BaseTest"/>
-<<<<<<< HEAD
             <class name="Homework17"/>
             <class name="ProfileTest"/>
-=======
             <class name="Homework16"/>
->>>>>>> main
         </classes>
     </test>
 </suite>
