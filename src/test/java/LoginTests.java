@@ -1,25 +1,48 @@
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
+import java.time.Instant;
 
 public class LoginTests extends BaseTest {
-    @Test
-    public void loginEmptyEmailPassword() {
 
-//      Added ChromeOptions argument below to fix websocket error
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
+    @Test (enabled = false, priority = 2, description = "Login with invalid email and valid password")
+    public void loginInvalidEmailValidPassword() throws InterruptedException {
 
-        WebDriver driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        navigateToPage();
+        provideEmail("invalid@class.com");
+        providePassword("te$t$tudent");
+        clickSubmit();
 
-        String url = "https://qa.koel.app/";
-        driver.get(url);
-        Assert.assertEquals(driver.getCurrentUrl(), url);
-        driver.quit();
+//        Thread.sleep(2000);
+
+        wait.until(ExpectedConditions.urlToBe(url));
+        Assert.assertEquals(driver.getCurrentUrl(), url); //https://qa.koel.app/
     }
+
+    @Test (enabled = true, priority = 1, description = "Login with valid email and valid password")
+    public void loginValidEmailPassword(){
+
+        navigateToPage();
+        provideEmail("ramil.hasanli@testpro.io");
+        providePassword("iutZVH7Q");
+        clickSubmit();
+        isAvatarDisplayed();
+
+        Assert.assertEquals(driver.getCurrentUrl(), url); //https://qa.koel.app/
+    }
+
+    @Test (enabled = false, priority = 3, description = "Login with valid email and empty password")
+    public void loginValidEmailEmptyPassword() throws InterruptedException {
+
+        navigateToPage();
+        provideEmail("demo@class.com");
+        providePassword("");
+        clickSubmit();
+//        Thread.sleep(2000);
+        wait.until(ExpectedConditions.urlToBe(url));
+        Assert.assertEquals(driver.getCurrentUrl(), url); //https://qa.koel.app/
+    }
+
 }
