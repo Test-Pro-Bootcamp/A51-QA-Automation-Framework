@@ -26,7 +26,7 @@ public class BaseTest {
 
    public WebDriver driver;
 
-   public String url = "https://qa.koel.app/";
+   public String url;
 
     @DataProvider(name="LoginData")
     public Object[][] getDataFromDataProviders() {
@@ -58,8 +58,8 @@ public class BaseTest {
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
-        //url = BaseURL;
-        navigateToLoginPage(BaseURL);
+        url = BaseURL;
+        navigateToLoginPage();
 
     }
 @AfterMethod
@@ -69,10 +69,6 @@ public class BaseTest {
 
     public void navigateToLoginPage(){
         driver.get(url);
-    }
-
-    public void navigateToLoginPage(String BaseURL){
-        driver.get(BaseURL);
     }
 
     public void provideEmail(String email){

@@ -9,7 +9,6 @@ public class LoginTests extends BaseTest {
 
     @Test(dataProvider = "LoginData")
     public void loginTests(String email, String password) throws InterruptedException{
-    navigateToLoginPage();
     provideEmail(email);
     providePassword(password);
     clickSubmit();
@@ -22,7 +21,7 @@ public class LoginTests extends BaseTest {
 
     @Test
     public void loginValidEmailPassword(){
-        navigateToLoginPage();
+
         provideEmail("daria.chebotnyagina@testpro.io");
         providePassword("Asdfasdf1");
         clickSubmit();
@@ -32,7 +31,7 @@ public class LoginTests extends BaseTest {
     }
     @Test
     public void loginInvalidEmailValidPassword(){
-        navigateToLoginPage();
+
         provideEmail("invalidEmail@testpro.io");
         providePassword("Asdfasdf1");
         clickSubmit();
@@ -43,7 +42,7 @@ public class LoginTests extends BaseTest {
 
     @Test
     public void loginValidEmailInvalidPassword() throws InterruptedException{
-        navigateToLoginPage();
+
         provideEmail("daria.chebotnyagina@testpro.io");
         providePassword("InvalidPassword");
         clickSubmit();
