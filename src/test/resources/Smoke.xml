@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Smoke">
+    <parameter name="BaseUrl" value="https://qa.koel.app"/>
+    <test name="Homework20">
+        <classes>
+            <class name="Homework20">
+                <methods>
+                    <include name="deletePlaylist"/>
+                </methods>
+            </class>
+        </classes>
+    </test>>
+</suite>
