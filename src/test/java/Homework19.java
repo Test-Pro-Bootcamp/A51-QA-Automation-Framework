@@ -9,7 +9,7 @@ public class Homework19 extends BaseTest{
     public void deletePlaylist() throws InterruptedException{
 
         String actualMessage = "Deleted playlist \"playlist for homework 19.\"";
-        navigateToLoginPage();
+        //navigateToLoginPage();
         provideEmail("daria.chebotnyagina@testpro.io");
         providePassword("Asdfasdf1");
         clickSubmit();

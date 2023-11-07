@@ -8,6 +8,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
+import org.testng.annotations.*;
 
 import java.time.Duration;
 
@@ -15,7 +16,7 @@ public class BaseTest {
 
    public WebDriver driver;
 
-   public String url = "https://qa.koel.app/";
+   public String url;
 
     @BeforeSuite
     static void setupClass() {
@@ -29,20 +30,17 @@ public class BaseTest {
 
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.manage().window().maximize();
-        navigateToLoginPage(BaseURl);
+        url = BaseURl;
+        navigateToLoginPage();
     }
 @AfterMethod
     public void closeBrowser(){
         driver.quit();
     }
 
+
     public void navigateToLoginPage(){
         driver.get(url);
-    }
-
-    public void navigateToLoginPage(String BaseURL){
-        driver.get(BaseURL);
     }
 
     public void provideEmail(String email){
