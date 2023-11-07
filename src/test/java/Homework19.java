@@ -21,14 +21,16 @@ public class Homework19 extends BaseTest{
         Assert.assertEquals(notificationMessage(), actualMessage);
     }
 
-    public void clickOfPlaylist(){
-        WebElement playlist = driver.findElement(By.cssSelector("a[class='active']"));
+    public void clickOfPlaylist() throws InterruptedException{
+        WebElement playlist = driver.findElement(By.xpath("//section//a[contains (text(), 'playlist for homework 19')] "));
         playlist.click();
+        Thread.sleep(2000);
     }
 
-    public void deleteAct(){
+    public void deleteAct()throws InterruptedException{
         WebElement deleteList = driver.findElement(By.cssSelector("button[title='Delete this playlist']"));
         deleteList.click();
+        Thread.sleep(2000);
     }
     public String notificationMessage(){
         WebElement message = driver.findElement(By.cssSelector("div.success.show"));
