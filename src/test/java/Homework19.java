@@ -6,16 +6,17 @@ import org.testng.annotations.Test;
 public class Homework19 extends BaseTest{
 
     @Test
-    public void deletePlaylist(){
+    public void deletePlaylist() throws InterruptedException{
+
+        String actualMessage = "Deleted playlist \"playlist for homework 19.\"";
         navigateToLoginPage();
         provideEmail("daria.chebotnyagina@testpro.io");
         providePassword("Asdfasdf1");
         clickSubmit();
+        Thread.sleep(2000);
 
         clickOfPlaylist();
         deleteAct();
-
-        String actualMessage = "Deleted playlist \"playlist for homework 19.\"";
 
         Assert.assertEquals(notificationMessage(), actualMessage);
     }

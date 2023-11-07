@@ -15,7 +15,7 @@ clickSubmit();
 
     @Test
     public void loginValidEmailPassword(){
-        //navigateToLoginPage();
+        navigateToLoginPage();
         provideEmail("daria.chebotnyagina@testpro.io");
         providePassword("Asdfasdf1");
         clickSubmit();

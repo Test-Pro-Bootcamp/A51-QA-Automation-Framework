@@ -23,14 +23,14 @@ public class BaseTest {
     }
  @BeforeMethod
  @Parameters({"BaseURL"})
-    public void launchBrowser(String BaseUrl){
+    public void launchBrowser(String BaseURl){
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
 
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
-        navigateToLoginPage(BaseUrl);
+        navigateToLoginPage(BaseURl);
     }
 @AfterMethod
     public void closeBrowser(){
