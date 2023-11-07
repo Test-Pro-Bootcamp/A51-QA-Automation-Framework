@@ -1,3 +1,6 @@
+import PageObjectModel.BasePage;
+import PageObjectModel.HomePage;
+import PageObjectModel.LoginPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -8,10 +11,24 @@ import org.testng.annotations.Test;
 public class Homework22 extends BaseTest {
 
     //Prerequisite = User has at created at least one playlist
-   String newPlaylistName = "Abracadabra";
     @Test
-    public void renamePlaylist(){
+    public void renamePlaylist() {
+        String newPlaylistName = "Abracadabra";
+
         //Login
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
+
+        loginPage.login();
+        homePage.doubleClickPlaylist();
+        String playlistName = null;
+        homePage.enterNewPlaylistName(playlistName);
+        Assert.assertTrue(homePage.doesPLaylistExist(playlistName));
+    }
+}
+
+
+       /**
         provideEmail("adam.johnson@testpro.io");
         providePassword("1Te$t$tudent");
         clickSubmit();
@@ -37,4 +54,4 @@ public class Homework22 extends BaseTest {
         return playlistElement.isDisplayed();
     }
     }
-
+**/

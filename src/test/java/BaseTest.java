@@ -21,16 +21,14 @@ public class BaseTest {
 
     public WebDriver driver = null;
 
-    //public WebDriver wait = null;
-
     public WebDriverWait wait;
     
     public WebElement notificationsMsg;
 
-    //public WebDriver until = null;
+    //public WebElement findElement;
+
     public String url = "https://qa.koel.app";
 
-    //public Actions actions = null;
     Actions actions = new Actions(driver);
 
     @BeforeSuite
