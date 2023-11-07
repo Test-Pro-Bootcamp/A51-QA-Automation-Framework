@@ -37,12 +37,12 @@ public class BaseTest {
         driver.quit();
     }
 
-    public void navigateToLoginPage(String BaseURL){
-        driver.get(BaseURL);
-    }
-
     public void navigateToLoginPage(){
         driver.get(url);
+    }
+
+    public void navigateToLoginPage(String BaseURL){
+        driver.get(BaseURL);
     }
 
     public void provideEmail(String email){
