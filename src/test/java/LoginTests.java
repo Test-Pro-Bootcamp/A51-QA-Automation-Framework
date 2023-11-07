@@ -1,6 +1,4 @@
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
@@ -21,7 +19,9 @@ public class LoginTests extends BaseTest {
         HomePage homePage = new HomePage(driver);
 
         loginPage.provideEmail("demo@class.com").providePassword("te$t$tudent").clickSubmitBtn();
-        Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
+        //Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
+        Assert.assertTrue(homePage.getUserAvatar());
+
 
 /*      LoginPage loginPage = new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
@@ -39,13 +39,14 @@ public class LoginTests extends BaseTest {
         navigateToPage();
 
         //Steps
-        provideEmail("demo@class.com");
-        providePassword("te$t$tudent");
-        clickSubmit();
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
+
+        loginPage.provideEmail("demo@class.com").providePassword("te$t$tudent").clickSubmitBtn();
 
         //Expected Result
-        WebElement avatarImg = driver.findElement(By.cssSelector("img[class='avatar']"));
-        Assert.assertTrue(avatarImg.isDisplayed());
+       // WebElement avatarImg = driver.findElement(By.cssSelector("img[class='avatar']"));
+        Assert.assertTrue(homePage.getUserAvatar());
 
     }
     
