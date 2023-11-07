@@ -10,7 +10,7 @@ public class Homework17 extends BaseTest{
 
         String expectedSongAddedMessage = "Added 1 song into \"dasha.\"";
 
-        navigateToLoginPage();
+        //navigateToLoginPage();
         provideEmail("daria.chebotnyagina@testpro.io");
         providePassword("Asdfasdf1");
         clickSubmit();

@@ -7,7 +7,7 @@ public class LoginTests extends BaseTest {
 
     @Test
     public void loginEmptyEmailPassword() {
-navigateToLoginPage();
+//navigateToLoginPage();
 clickSubmit();
         Assert.assertEquals(driver.getCurrentUrl(), url);
 
@@ -15,7 +15,7 @@ clickSubmit();
 
     @Test
     public void loginValidEmailPassword(){
-        navigateToLoginPage();
+        //navigateToLoginPage();
         provideEmail("daria.chebotnyagina@testpro.io");
         providePassword("Asdfasdf1");
         clickSubmit();
