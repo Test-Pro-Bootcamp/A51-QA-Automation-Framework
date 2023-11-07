@@ -12,6 +12,7 @@ import java.time.Duration;
 
 public class LoginTests extends BaseTest {
 
+
     //region Tests
     @Test//This method uses POM (Page Object Model) design pattern
     public void loginValidEmailPasswordTest(){
@@ -19,11 +20,17 @@ public class LoginTests extends BaseTest {
         LoginPage loginPage = new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
 
+        loginPage.provideEmail("demo@class.com").providePassword("te$t$tudent").clickSubmitBtn();
+        Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
+
+/*      LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
+
         loginPage.provideEmail("demo@class.com");
         loginPage.providePassword("te$t$tudent");
         loginPage.clickSubmit();
 
-        Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
+        Assert.assertTrue(homePage.getUserAvatar().isDisplayed());*/
 
     }
     @Test
