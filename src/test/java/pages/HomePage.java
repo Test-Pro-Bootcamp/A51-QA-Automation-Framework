@@ -3,6 +3,7 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class HomePage extends BasePage{
 
@@ -21,4 +22,13 @@ public class HomePage extends BasePage{
     }
     //endregion
 
+    public void chooseAllSongsList() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("li a.songs"))).click();
+    }
+
+    public WebElement hoverPlay() {
+        WebElement play = driver.findElement(By.cssSelector("[data-testid='play-btn'"));
+        actions.moveToElement(play).perform();
+        return wait.until(ExpectedConditions.visibilityOf(play));
+    }
 }

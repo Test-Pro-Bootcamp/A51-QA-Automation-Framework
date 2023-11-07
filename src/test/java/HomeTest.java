@@ -4,6 +4,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.AllSongsPage;
 import pages.HomePage;
 import pages.LoginPage;
 
@@ -15,6 +16,28 @@ public class HomeTest extends BaseTest{
 
     //region Test Cases
 
+
+    @Test//This method uses POM (Page Object Model) design pattern
+    public void playSongTestPageFactory() throws InterruptedException {
+
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
+        AllSongsPage songsPage = new AllSongsPage(driver);
+
+        //Login
+        loginPage.provideEmail("demo@class.com");
+        loginPage.providePassword("te$t$tudent");
+        loginPage.clickSubmitBtn();//clickSubmit();
+
+        homePage.chooseAllSongsList();
+        songsPage.contextClickFirstSong();
+        songsPage.choosePlayOption();
+
+        //chooseAllSongsList();
+        //contextClickFirstSong();
+        //choosePlayOption();
+        Assert.assertTrue(isSongPlaying());
+    }
     @Test//This method uses POM (Page Object Model) design pattern
     public void playSongTest() throws InterruptedException {
 
@@ -23,10 +46,10 @@ public class HomeTest extends BaseTest{
 
         loginPage.provideEmail("demo@class.com");
         loginPage.providePassword("te$t$tudent");
-        loginPage.clickSubmit();
+        //loginPage.clickSubmit();
 
-        chooseAllSongsList();
-        contextClickFirstSong();
+   //     chooseAllSongsList();
+   //     contextClickFirstSong();
         choosePlayOption();
         Assert.assertTrue(isSongPlaying());
     }
@@ -35,8 +58,8 @@ public class HomeTest extends BaseTest{
         provideEmail("demo@class.com");
         providePassword("te$t$tudent");
         clickSubmit();
-        chooseAllSongsList();
-        contextClickFirstSong();
+  //      chooseAllSongsList();
+   //     contextClickFirstSong();
         choosePlayOption();
         Assert.assertTrue(isSongPlaying());
     }
@@ -87,29 +110,40 @@ public class HomeTest extends BaseTest{
     }
 
     @Test
-    public void hoverOverPlayButton(){
+    public void hoverOverPlayButtonOriginal(){
         provideEmail("demo@class.com");
         providePassword("te$t$tudent");
         clickSubmit();
-        Assert.assertTrue(hoverPlay().isDisplayed());
+      //  Assert.assertTrue(hoverPlay().isDisplayed());
+    }
+    @Test
+    public void hoverOverPlayButton(){
+        LoginPage loginpage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
+
+        loginpage.provideEmail("demo@class.com");
+        loginpage.providePassword("te$t$tudent");
+        loginpage.clickSubmitBtn();
+
+        Assert.assertTrue(homePage.hoverPlay().isDisplayed());//hoverPlay().isDisplayed());
     }
     //endregion
 
     //region Helper Methods
-    private WebElement hoverPlay() {
-        WebElement play = driver.findElement(By.cssSelector("[data-testid='play-btn'"));
-        actions.moveToElement(play).perform();
-        return wait.until(ExpectedConditions.visibilityOf(play));
-    }
-
-    private void chooseAllSongsList() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("li a.songs"))).click();
-    }
-
-    private void contextClickFirstSong() {
-        WebElement firstSongElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".all-songs tr.song-item:nth-child(1)")));
-        actions.contextClick(firstSongElement).perform();
-    }
+//    private WebElement hoverPlay() {
+//        WebElement play = driver.findElement(By.cssSelector("[data-testid='play-btn'"));
+//        actions.moveToElement(play).perform();
+//        return wait.until(ExpectedConditions.visibilityOf(play));
+//    }
+//
+//    private void chooseAllSongsList() {
+//        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("li a.songs"))).click();
+//    }
+//
+//    private void contextClickFirstSong() {
+//        WebElement firstSongElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".all-songs tr.song-item:nth-child(1)")));
+//        actions.contextClick(firstSongElement).perform();
+//    }
 
     private void choosePlayOption() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("li.playback"))).click();
