@@ -4,14 +4,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.annotations.Parameters;
 
 import java.time.Duration;
 
-public class Homework19 extends BaseTest {
+public class Homework20 extends BaseTest {
     @Test
     @Parameters({"BaseUrl"})
     public void deletePlaylist(String baseUrl) throws InterruptedException {

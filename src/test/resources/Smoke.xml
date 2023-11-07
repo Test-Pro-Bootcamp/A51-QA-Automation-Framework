@@ -3,9 +3,9 @@
 
 <suite name="Smoke">
     <parameter name="BaseUrl" value="https://qa.koel.app"/>
-    <test name="Homework19">
+    <test name="Homework20">
         <classes>
-            <class name="Homework19">
+            <class name="Homework20">
                 <methods>
                     <include name="deletePlaylist"/>
                 </methods>
