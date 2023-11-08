@@ -80,7 +80,7 @@ public class BaseTest {
 
 
     @DataProvider(name="excel-data")
-    public Object[][] excelLDP() throws IOException {
+    public Object[][] excelLDP() throws IOException{
         Object[][] arrObj;
         arrObj = getExcelData("./src/test/resources/test.xlsx", "Sheet1");
         return arrObj;

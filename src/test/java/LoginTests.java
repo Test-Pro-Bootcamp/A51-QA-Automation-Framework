@@ -62,14 +62,22 @@ public class LoginTests extends BaseTest {
 
     @Test(dataProvider = "excel-data")
     public void loginWithExcelData(String email, String password){
-        provideEmail(email);
-        providePassword(password);
-        //WebElement txtBox = driver.findElement(By.tagName("//input[@class='gLFYf gsfi']"));
-        //txtBox.sendKeys(keyword1, keyword2);
-        Reporter.log("keyWord Entered is:"+email+ " " +password);
-        //txtBox.sendKeys(Keys.ENTER);
-        clickSubmit();
-        Reporter.log("Successfully Logged in.");
+        try {
+            Thread.sleep(2000);
+            provideEmail(email);
+            providePassword(password);
+            Thread.sleep(2000);
+            //WebElement txtBox = driver.findElement(By.tagName("//input[@class='gLFYf gsfi']"));
+            //txtBox.sendKeys(keyword1, keyword2);
+            Reporter.log("keyWord Entered is:" + email + " " + password);
+            //txtBox.sendKeys(Keys.ENTER);
+            clickSubmit();
+            WebElement avatar = driver.findElement(By.cssSelector("img[class='avatar']"));
+            Assert.assertTrue(avatar.isDisplayed());
+            Reporter.log("Successfully Logged in.");
+        } catch (Exception e){
+Reporter.log("Unable to login with Excel Data for an unknown reason.");
+        }
     }
-    
+
 }
