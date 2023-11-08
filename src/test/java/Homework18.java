@@ -21,12 +21,13 @@ public class Homework18 extends BaseTest {
     }
 
     public void clickPlay() throws InterruptedException {
-        WebElement playButton = driver.findElement(By.xpath("//span[@data-testid='play-btn']"));
         WebElement playNextButton = driver.findElement(By.xpath("//i[@data-testid='play-next-btn']"));
+        WebElement playButton = driver.findElement(By.xpath("//span[@data-testid='play-btn']"));
 
-        playButton.click();
-        Thread.sleep(2000);
         playNextButton.click();
+        Thread.sleep(2000);
+        playButton.click();
+
     }
 
     public boolean songPlaying() {
