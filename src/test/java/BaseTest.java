@@ -1,26 +1,23 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.testng.ITest;
 import org.testng.Reporter;
 import org.testng.annotations.*;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.Duration;
 
-/*
+
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 
- */
+
 
 public class BaseTest {
 
@@ -37,13 +34,6 @@ public class BaseTest {
                 {"",""}
         };
     }
-
-    /*
-    @DataProvider(name="excel-data")
-    public Object[][] excelLDP() throws IOException{
-        Object[][] arrObj = getExcelData("\\src\\test\\resources\\test.xlsx", "test.xlsx");
-        return arrObj;
-    }*/
 
     @BeforeSuite
     static void setupClass() {
@@ -88,14 +78,12 @@ public class BaseTest {
         submit.click();
     }
 
-    /*
-    @Test(dataProvider = "excel-data")
-    public void search(String keyword1, String keyword2){
-        WebElement txtBox = driver.findElement(By.tagName("//input[@class='gLFYf gsfi']"));
-        txtBox.sendKeys(keyword1, keyword2);
-        Reporter.log("keyWord Entered is:"+keyword1+ " " +keyword2);
-        txtBox.sendKeys(Keys.ENTER);
-        Reporter.log("Search results are displayed.");
+
+    @DataProvider(name="excel-data")
+    public Object[][] excelLDP() throws IOException {
+        Object[][] arrObj;
+        arrObj = getExcelData("./src/test/resources/test.xlsx", "Sheet1");
+        return arrObj;
     }
 
     public String[][] getExcelData(String fileName, String sheetName){
@@ -113,15 +101,15 @@ public class BaseTest {
             data = new String[numOfRows-1][numOfColumns];
 
             for(int i=1; i<numOfRows; i++) {
-            for(int j=0; j<numOfColumns; j++){
-                row = sheet.getRow(i);
-                cell = row.getCell(j);
-                data [i-1][j] = cell.getStringCellValue();
-              }
+                for(int j=0; j<numOfColumns; j++){
+                    row = sheet.getRow(i);
+                    cell = row.getCell(j);
+                    data [i-1][j] = cell.getStringCellValue();
+                }
             }
         }  catch (Exception e) {
             System.out.println("Something went wrong." +e);
         }
         return data;
-    }*/
+    }
 }
