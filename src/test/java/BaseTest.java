@@ -32,9 +32,10 @@ public class BaseTest {
 
         //Open Chrome Browser
         driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         url = BaseUrl;
         navigateToPage();
+        driver.manage().window().maximize();
         Thread.sleep(3000);
     }
     @AfterMethod
@@ -45,17 +46,16 @@ public class BaseTest {
         driver.get(url);
     }
 
-    public void provideEmail(String email) throws InterruptedException{
+    public void provideEmail(String email){
         WebElement emailField = driver.findElement(By.cssSelector("input[type='email']"));
+        emailField.clear();
         emailField.sendKeys(email);
-        Thread.sleep(3000);
     }
 
-    public void providePassword(String password) throws InterruptedException{
+    public void providePassword(String password){
         WebElement passwordField = driver.findElement(By.cssSelector("input[type='password']"));
         passwordField.clear();
         passwordField.sendKeys(password);
-        Thread.sleep(3000);
     }
 
     public void clickSubmit(){
@@ -63,16 +63,14 @@ public class BaseTest {
         submit.click();
     }
     //Step 1 - Open PLaylist
-    public void openPlaylist() throws InterruptedException {
+    public void openPlaylist(){
         WebElement emptyPlaylist = driver.findElement(By.cssSelector(".playlist:nth-child(3)"));
         emptyPlaylist.click();
-        Thread.sleep(3000);
     }
     //Step 2 - Delete Playlist
-    public void clickDeletePlaylistBtn() throws InterruptedException {
+    public void clickDeletePlaylistBtn(){
         WebElement deletePLaylist = driver.findElement(By.cssSelector(".btn-delete-playlist"));
         deletePLaylist.click();
-        //Thread.sleep(2000);
     }
     //Step 3 - Verify Playlist has been deleted
     public String getDeletedPlaylistMsg(){
