@@ -71,4 +71,5 @@ public class LoginTests extends BaseTest {
         clickSubmit();
         Reporter.log("Successfully Logged in.");
     }
+    
 }
