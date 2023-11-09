@@ -1,19 +1,23 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import java.time.Duration;
 
 public class Homework19 extends BaseTest{
 
     @Test
-    public void deletePlaylist() throws InterruptedException{
+    public void deletePlaylist(){
 
         String actualMessage = "Deleted playlist \"playlist for homework 19.\"";
-        //navigateToLoginPage();
+
         provideEmail("daria.chebotnyagina@testpro.io");
         providePassword("Asdfasdf1");
         clickSubmit();
-        Thread.sleep(2000);
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
         clickOfPlaylist();
         deleteAct();
@@ -21,19 +25,19 @@ public class Homework19 extends BaseTest{
         Assert.assertEquals(notificationMessage(), actualMessage);
     }
 
-    public void clickOfPlaylist() throws InterruptedException{
-        WebElement playlist = driver.findElement(By.xpath("//section//a[contains (text(), 'playlist for homework 19')] "));
+    public void clickOfPlaylist(){
+        WebElement playlist = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//section//a[contains (text(), 'playlist for homework 19')]")));
         playlist.click();
-        Thread.sleep(2000);
     }
 
-    public void deleteAct()throws InterruptedException{
-        WebElement deleteList = driver.findElement(By.cssSelector("button[title='Delete this playlist']"));
+    public void deleteAct(){
+        WebElement deleteList = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("button[title='Delete this playlist']")));
         deleteList.click();
-        Thread.sleep(2000);
+
     }
     public String notificationMessage(){
-        WebElement message = driver.findElement(By.cssSelector("div.success.show"));
+        WebElement message = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.success.show")));
         return message.getText();
     }
+
 }
