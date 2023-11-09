@@ -4,6 +4,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.Reporter;
 import org.testng.annotations.DataProvider;
@@ -34,7 +35,8 @@ public class LoginTests extends BaseTest {
         providePassword("Asdfasdf1");
         clickSubmit();
 
-        WebElement avatar = driver.findElement(By.cssSelector("img[class='avatar']"));
+        WebElement avatar = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("img[class='avatar']")));
+        //WebElement avatar = driver.findElement(By.cssSelector("img[class='avatar']"));
         Assert.assertTrue(avatar.isDisplayed());
     }
     @Test
@@ -78,6 +80,10 @@ public class LoginTests extends BaseTest {
         } catch (Exception e){
 Reporter.log("Unable to login with Excel Data for an unknown reason.");
         }
+    }
+
+    public void waitForAnElementToBeVisible(String cssLocator){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("")));
     }
 
 }
