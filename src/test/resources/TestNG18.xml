@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="TestNG">
+<suite name="TestNG18">
 
     <test name="Example Test" preserve-order="false">
         <classes>
-            <class name="Pages.LoginPage"/>
-            <class name="Pages.BasePage"/>
             <class name="Homework22"/>
-            <class name="BaseTest"/>
         </classes>
     </test>
 </suite>
