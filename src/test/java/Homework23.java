@@ -6,7 +6,7 @@ public class Homework23 extends BaseTest{
     //Prerequisite - empty playlist to delete
 
     @Test
-    public void deletePlaylist(){
+    public void deletePlaylist() throws InterruptedException{
         String expectedPLayListDeletedMessage = "Deleted playlist \"Golden Girls.\"";
 
         provideEmail("adam.johnson@testpro.io");

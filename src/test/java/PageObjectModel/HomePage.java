@@ -9,7 +9,7 @@ public class HomePage extends BasePage{
 
 
     public boolean isAvatarDisplayed() {
-        return true;
+        return false;
     }
 }
 
