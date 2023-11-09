@@ -4,9 +4,30 @@
 <suite name="TestNG">
 
     <test name="Example Test" preserve-order="false">
+        <parameter name="baseURL" value="https://qa.koel.app/"/>
         <classes>
-            <class name="LoginTests"/>
-            <class name="BaseTest"/>
+<!--            <class name="LoginTests"/>-->
+<!--            <class name="BaseTest"/>-->
+            <class name="Homework17">
+                <methods>
+                    <exclude name="addSongToPlaylist"/>
+                </methods>
+            </class>
+            <class name="Homework18">
+                <methods>
+                    <exclude name="playSong"/>
+                </methods>
+            </class>
+            <class name="Homework19">
+                <methods>
+                    <exclude name="deletePlaylist"/>
+                </methods>
+            </class>
+            <class name="Homework20">
+                <methods>
+                    <include name="deletePlaylist"/>
+                </methods>
+            </class>
         </classes>
     </test>
 </suite>
