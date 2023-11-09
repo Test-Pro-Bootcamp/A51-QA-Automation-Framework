@@ -20,6 +20,7 @@ public class LoginPage extends BasePage {
 
     //Methods
     public LoginPage clickSubmitBtn(){
+
         submitButtonLocator.click();
         //click(submitButtonLocator);
         return this;
@@ -54,11 +55,11 @@ public class LoginPage extends BasePage {
     }
 
     //region Locators
-  //  By emailField = By.cssSelector("input[type='email']");
+    //  By emailField = By.cssSelector("input[type='email']");
 
-  //  By passwordField = By.cssSelector("input[type='password']");
+    //  By passwordField = By.cssSelector("input[type='password']");
 
-  //  By submitBtn = By.cssSelector("button[type='submit']");
+    //  By submitBtn = By.cssSelector("button[type='submit']");
     //endregion
 
     //region Helper Methods
