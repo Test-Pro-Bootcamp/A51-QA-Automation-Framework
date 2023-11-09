@@ -25,5 +25,14 @@ public class BasePage {
     public void doubleClick (By locator) {
         actions.doubleClick(findElement(locator)).perform();
     }
+    public void navigate(String url) {
+        driver.get(url);
+    }
+    public void quitDriver() {
+        driver.quit();
+    }
+    public WebDriver getDriver() {
+        return driver;
+    }
 }
 

@@ -8,17 +8,15 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
+import pom.BasePage;
 
 import java.time.Duration;
 import java.util.UUID;
 
 public class BaseTest {
 
-    public  WebDriver driver = null;
     public  String url = null;
-    public  WebDriverWait wait = null;
-    public  Actions actions = null;
-
+    public  BasePage basePage = null;
     @DataProvider(name="IncorrectLoginData")
     public Object[][] getDataFromDataProviders() {
 
@@ -40,22 +38,21 @@ public class BaseTest {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
 
-        driver = new ChromeDriver(options);
+        ChromeDriver driver = new ChromeDriver(options);
+
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
-
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        actions = new Actions(driver);
+        basePage = new BasePage(driver);
 
         url = BaseURL;
         navigateToPage();
     }
     @AfterMethod
     public void closeBrowser() {
-        driver.quit();
+        basePage.quitDriver();
     }
     public  void navigateToPage() {
-        driver.get(url);
+        basePage.navigate(url);
     }
 
 }
