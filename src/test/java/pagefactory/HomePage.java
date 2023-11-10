@@ -1,5 +1,6 @@
 package pagefactory;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,6 +16,9 @@ public class HomePage extends BasePage {
 
     @FindBy(css = "div.success.show")
     WebElement popUpNotification;
+
+    @FindBy(css = "li a.songs")
+    WebElement allSongsList;
 
     public HomePage(WebDriver givenDriver) {
         super(givenDriver);
@@ -34,6 +38,11 @@ public class HomePage extends BasePage {
         return this;
     }
 
+    public HomePage chooseAllSongsList() {
+
+        click(allSongsList);
+        return this;
+    }
     //Changed the approach for assert
     public String getPlaylistName () {
         return findElement(firstPlaylist).getText();
@@ -41,6 +50,5 @@ public class HomePage extends BasePage {
     public boolean isAvatarDisplayed() {
         return findElement(avatarIcon).isDisplayed();
     }
-
 
 }
