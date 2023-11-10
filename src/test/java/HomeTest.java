@@ -1,4 +1,5 @@
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
@@ -7,6 +8,8 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 public class HomeTest extends BaseTest{
+
+    String newPlaylistName = "new name for playlist";
 
     @Test
     public void playSongsWithContextClick(){
@@ -54,6 +57,42 @@ Thread.sleep(2000);
         Assert.assertTrue(getPlaylistDetails().contains(String.valueOf(countSongs())));
     }
 
+    @Test
+    public void changeNameOfPlaylist() throws InterruptedException{
+
+        String updatePlaylistMsg = "Updated playlist \"new name for playlist.\"";
+
+        //login
+        provideEmail("daria.chebotnyagina@testpro.io");
+        providePassword("Asdfasdf1");
+        clickSubmit();
+        Thread.sleep(2000);
+        //Double click
+        doubleClickPlaylist();
+        Thread.sleep(2000);
+        //Enter new name for playlist
+        enterNewPlaylistName();
+        Thread.sleep(2000);
+        //Assertion
+        Assert.assertEquals(getRenamePlaylistSuccessMsg(),updatePlaylistMsg);
+    }
+
+    public void doubleClickPlaylist(){
+        WebElement playlistElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".playlist:nth-child(3)")));
+        action.doubleClick(playlistElement).perform();
+    }
+
+    public void enterNewPlaylistName(){
+        WebElement newNamePlaylist = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[name='name']")));
+        newNamePlaylist.sendKeys(Keys.chord(Keys.CONTROL, "A", Keys.BACK_SPACE));
+        newNamePlaylist.sendKeys(newPlaylistName);
+        newNamePlaylist.sendKeys(Keys.ENTER);
+    }
+
+    public String getRenamePlaylistSuccessMsg(){
+        WebElement notification = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.success.show")));
+        return notification.getText();
+    }
     public void choosePlaylistByName(String playListName){
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(text(),'"+playListName+"')]"))).click();
     }
