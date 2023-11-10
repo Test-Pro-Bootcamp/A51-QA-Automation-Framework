@@ -1,8 +1,8 @@
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pom.AllSongsPage;
-import pom.HomePage;
-import pom.LoginPage;
+import pagefactory.AllSongsPage;
+import pagefactory.HomePage;
+import pagefactory.LoginPage;
 
 public class ActionsTests extends BaseTest {
 
@@ -14,13 +14,15 @@ public class ActionsTests extends BaseTest {
         HomePage homePage = new HomePage(driver);
         AllSongsPage allSongs = new AllSongsPage(driver);
 
-        loginPage.provideEmail("demo@class.com");
-        loginPage.providePassword("te$t$tudent");
-        loginPage.clickSubmit();
-        homePage.chooseAllSongsList();
-        allSongs.contextClickFirstSong();
-        allSongs.choosePlayOption();
-        Assert.assertTrue(allSongs.isSongPlaying());
+        loginPage.provideEmail("demo@class.com")
+                 .providePassword("te$t$tudent")
+                 .clickSubmit();
 
+        homePage.chooseAllSongsList();
+
+        allSongs.contextClickFirstSong()
+                .choosePlayOption();
+
+        Assert.assertTrue(allSongs.isSongPlaying());
     }
 }
