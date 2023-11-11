@@ -1,3 +1,4 @@
+import PageObjectModel.LoginPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -9,11 +10,12 @@ public class Homework23 extends BaseTest{
     public void deletePlaylist() throws InterruptedException{
         String expectedPLayListDeletedMessage = "Deleted playlist \"Golden Girls.\"";
 
-        provideEmail("adam.johnson@testpro.io");
-        providePassword("1Te$t$tudent");
-        clickSubmit();
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.provideEmailToLogin("adam.johnson@testpro.io").providePasswordToLogin("1Te$t$tudent").clickSubmitBtnToLogin();
         openPlaylist();
+        Thread.sleep(5000);
         clickDeletePlaylistBtn();
+        Thread.sleep(5000);
         Assert.assertEquals(getDeletedPlaylistMsg(), expectedPLayListDeletedMessage);
     }
 

@@ -91,12 +91,10 @@ public class BaseTest {
         } catch (NullPointerException npe) {
         }
     }
-    //.playlist:nth-child(3)
-    //#playlists > ul > li:nth-child(3) > a
 
 
     //Step 2 - Delete Playlist
-    public void clickDeletePlaylistBtn() {
+    public void clickDeletePlaylistBtn() throws InterruptedException{
         try {
             WebElement deletePLaylist = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".btn-delete-playlist")));
             deletePLaylist.click();
@@ -105,13 +103,15 @@ public class BaseTest {
     }
 
     //Step 3 - Verify Playlist has been deleted
-    public String getDeletedPlaylistMsg() {
+    public String getDeletedPlaylistMsg() throws InterruptedException {
+
+        String msg = "";
         try {
-            notificationMsg = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.success.show")));
-        } catch (NullPointerException npe) {
-            //return notificationMsg.getText();
-        }
-        return notificationMsg.getText();
+            //Thread.sleep(2000);
+            WebElement notificationMsg = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.success.show")));
+            msg = msg + notificationMsg.getText();
+        } catch (Exception e) {
+        }return msg;
     }
 }
 

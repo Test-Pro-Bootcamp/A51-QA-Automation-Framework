@@ -13,23 +13,26 @@ public class LoginPage extends BasePage {
 
     //Locators using Selenium Page Factory
     @FindBy(css = "[type='email']")
-    WebElement emailTxtField;
+    private WebElement emailTxtField;
     @FindBy(css = "[type='password']")
-    WebElement passwordTxtField;
+    private WebElement passwordTxtField;
     @FindBy(css = "[type='submit']")
-    WebElement submitLoginButton;
+    private WebElement submitLoginButton;
 
 
     //Helper methods using Selenium Page Factory
 
-    public void provideEmailToLogin(String email){
+    public LoginPage provideEmailToLogin(String email){
         emailTxtField.sendKeys(email);
+        return this;
     }
-    public void providePasswordToLogin(String password){
+    public LoginPage providePasswordToLogin(String password){
         passwordTxtField.sendKeys(password);
+        return this;
     }
-    public void clickSubmitBtnToLogin(){
+    public LoginPage clickSubmitBtnToLogin(){
         submitLoginButton.click();
+        return this;
     }
 
 
