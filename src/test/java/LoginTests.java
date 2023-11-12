@@ -1,3 +1,5 @@
+import PageObjectModel.LoginPage;
+import PageObjectModel.HomePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -8,7 +10,17 @@ import java.time.Duration;
 
 public class LoginTests extends BaseTest {
     @Test
-    public void loginEmptyEmailPassword() {
+    public void loginEmptyEmailPasswordByPageFactory() {
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
+
+        loginPage.provideEmailToLogin("adam.johnson@testPro.io");
+        loginPage.providePasswordToLogin("1Te$t$tudent");
+        loginPage.clickSubmitBtnToLogin();
+
+        Assert.assertTrue(homePage.isAvatarDisplayed());
+
+
 
 //      Added ChromeOptions argument below to fix websocket error
         ChromeOptions options = new ChromeOptions();
