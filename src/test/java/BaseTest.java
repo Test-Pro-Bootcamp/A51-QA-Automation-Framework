@@ -20,99 +20,35 @@ public class BaseTest {
 
     public WebDriver driver;
     public WebDriverWait wait;
-    public WebElement notificationMsg;
 
 
-    public String url = "https://qa.koel.app";
-
+    //Setup WebDriverManager for ChromeDriver
     @BeforeSuite
     static void setupClass() {
         WebDriverManager.chromedriver().setup();
     }
 
+    //Launch Chrome browser and navigate to BaseUrl
     @BeforeMethod
     @Parameters({"BaseUrl"})
     public void launchBrowser(String BaseUrl) throws InterruptedException {
         //Added ChromeOptions argument to fix websocket error
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
-
-        //Open Chrome Browser
+        options.addArguments("--disable-notifications", "--remote-allow-origins=*", "--incognito", "--start-maximized");
+        options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
         driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-        url = BaseUrl;
-        navigateToPage();
-        driver.manage().window().maximize();
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+        driver.get(BaseUrl);
+        //wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        //wait = WebDriverWait;
     }
 
+    //Close the browser after each test method
     @AfterMethod
     public void closeBrowser() {
         driver.quit();
     }
 
-    //Prerequisites
-    public void navigateToPage() {
-        driver.get(url);
-    }
 
-    public void provideEmail(String email) {
-        try {
-            WebElement emailField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[type='email']")));
-            emailField.clear();
-            emailField.sendKeys(email);
-        } catch (NullPointerException npe) {
-        }
-    }
-
-    public void providePassword(String password) {
-        try {
-            WebElement passwordField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[type='password']")));
-            passwordField.clear();
-            passwordField.sendKeys(password);
-        } catch (NullPointerException npe) {
-        }
-    }
-
-    public void clickSubmit() {
-        try {
-            WebElement submit = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("button[type='submit']")));
-            submit.click();
-        } catch (NullPointerException npe) {
-        }
-    }
-
-    //Step 1 - Open PLaylist
-    public void openPlaylist() {
-        try {
-            WebElement emptyPlaylist = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#playlists > ul > li:nth-child(3) > a")));
-            emptyPlaylist.click();
-        } catch (NullPointerException npe) {
-        }
-    }
-
-
-    //Step 2 - Delete Playlist
-    public void clickDeletePlaylistBtn() throws InterruptedException{
-        try {
-            WebElement deletePLaylist = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".btn-delete-playlist")));
-            deletePLaylist.click();
-        } catch (NullPointerException npe) {
-        }
-    }
-
-    //Step 3 - Verify Playlist has been deleted
-    public String getDeletedPlaylistMsg() throws InterruptedException {
-
-        String msg = "";
-        try {
-            //Thread.sleep(2000);
-            WebElement notificationMsg = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.success.show")));
-            msg = msg + notificationMsg.getText();
-        } catch (Exception e) {
-        }return msg;
-    }
 }
-
 
