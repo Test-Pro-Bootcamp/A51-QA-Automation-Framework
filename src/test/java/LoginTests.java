@@ -17,10 +17,25 @@ import java.io.IOException;
 
 public class LoginTests extends BaseTest {
 
-    @Test
-    public void loginValidEmailPasswordTest(){
+/*
+    @Test(dataProvider = "LoginData")
+    public void loginValidEmailPasswordTest(String email, String password){
         LoginPage loginPage = new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
+
+        loginPage.provideEmail(email);
+        loginPage.providePassword(password);
+        loginPage.provideSubmit();
+
+        Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
+    }
+*/
+    //LoginPage loginPage = new LoginPage(driver);
+    //HomePage homePage = new HomePage(driver);
+    @Test
+    public void loginValidEmailPasswordTest() {
+        LoginPage loginPage = new LoginPage(driver);
+       HomePage homePage = new HomePage(driver);
 
         loginPage.provideEmail("daria.chebotnyagina@testpro.io");
         loginPage.providePassword("Asdfasdf1");

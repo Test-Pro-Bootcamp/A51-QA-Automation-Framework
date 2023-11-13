@@ -27,11 +27,10 @@ import javax.swing.*;
 public class BaseTest {
 
     //References start
-   public static WebDriver driver = null;
-   public static WebDriverWait wait = null;
-   public static String url = null;
-
-   public static Actions action = null;
+   WebDriver driver;
+   WebDriverWait wait;
+   String url;
+   Actions action;
    //References end
 
     //DataProvider start
