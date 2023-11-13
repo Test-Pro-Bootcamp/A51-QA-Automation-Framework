@@ -8,6 +8,8 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -16,6 +18,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
 
+import java.net.MalformedURLException;
+import java.net.URI;
 import java.time.Duration;
 
 public class BaseTest {
@@ -38,7 +42,7 @@ public class BaseTest {
     }
     @BeforeMethod
     @Parameters({"BaseURL"})
-    public void launchBrowser(String BaseURL){
+    public void launchBrowser(String BaseURL) throws MalformedURLException {
        // ChromeOptions options = new ChromeOptions();
       //  options.addArguments("--remote-allow-origins=*");
        // driver = new ChromeDriver(options);
@@ -53,14 +57,22 @@ public class BaseTest {
         navigateToLoginPage();
     }
 
-    public static WebDriver pickBrowser(String browser){
+    public static WebDriver pickBrowser(String browser) throws MalformedURLException {
+        DesiredCapabilities caps = new DesiredCapabilities();
+        String gridURL = "http://169.254.105.91:4444";
         switch (browser){
-            case "firefox":
-                WebDriverManager.firefoxdriver().setup();
-                return driver = new FirefoxDriver();
-            case "Safari":
+            case "safari":
                 WebDriverManager.safaridriver().setup();
                 return driver = new SafariDriver();
+            //Selenium Grid
+            case "grid-chrome": //gradle clean test -Dbrowser=grid-chrome
+                caps.setCapability("browser","chrome");
+                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
+
+            case "grid-safari": //gradle clean test -Dbrowser=grid-safari
+                caps.setCapability("browserName","safari");
+                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
+
             default:
                 WebDriverManager.chromedriver().setup();
                 ChromeOptions options = new ChromeOptions();
