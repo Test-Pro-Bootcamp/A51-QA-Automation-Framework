@@ -5,13 +5,13 @@ import org.testng.annotations.Test;
 
 public class Homework19 extends BaseTest {
 
-    @Test
-    public void deletePlaylist() throws InterruptedException {
+    @Test(dataProvider = "LoginData")
+    public void deletePlaylist(String email, String password) throws InterruptedException {
         String expectedPlaylistDeletedNotification = "Deleted playlist";
 
         navigateToLoginPage();
-        provideEmail("sanjeela.chitrakar@testpro.io");
-        providePassword("te$t$tudent1");
+        provideEmail(email);
+        providePassword(password);
         clickSubmit();
 
         Thread.sleep(2000);

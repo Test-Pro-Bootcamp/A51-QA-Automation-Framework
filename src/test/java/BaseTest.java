@@ -4,10 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.*;
 
 import java.time.Duration;
 
@@ -16,6 +13,14 @@ public class BaseTest {
     public WebDriver driver;
 
     public String url = "https:qa.koel.app";
+
+    @DataProvider(name="LoginData")
+    public Object[][] getDataFromDataProvider(){
+        return new Object[][]{
+                {"sanjeela.chitrakar@testpro.io", "te$t$tudent1"}
+
+        };
+    }
 
     @BeforeSuite
     static void setupClass() {
