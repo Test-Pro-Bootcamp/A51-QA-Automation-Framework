@@ -1,17 +1,13 @@
 import Pages.HomePage;
 import Pages.LoginPage;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.time.Duration;
-
 public class LoginTests extends BaseTest {
+
     @Test
     public void loginValidEmailPasswordTest(){
         LoginPage loginPage = new LoginPage(driver);
@@ -26,7 +22,8 @@ public class LoginTests extends BaseTest {
 
     @Test
     public void loginEmptyEmailPassword() {
-       navigateToLoginPage();
+        String BaseURL = "https://qa.koel.app";
+        navigateToLoginPage(BaseURL);
        clickSubmit();
        Assert.assertEquals(driver.getCurrentUrl(), url);
     }
@@ -34,7 +31,8 @@ public class LoginTests extends BaseTest {
     public void loginValidEmailPassword(){
 
         //Steps
-        navigateToLoginPage();
+         String BaseURL = "https://qa.koel.app"; ;
+         navigateToLoginPage(BaseURL);
         provideEmail("demo@class.com");
         providePassword("te$t$tudent");
         clickSubmit();
@@ -45,7 +43,8 @@ public class LoginTests extends BaseTest {
     }
     @Test
     public void loginInvalidEmailValidPassword(){
-        navigateToLoginPage();
+        String BaseURL = "https://qa.koel.app";;
+        navigateToLoginPage(BaseURL);
         provideEmail("invalidemail@class.com");
         providePassword("te$t$tudent");
         clickSubmit();
@@ -57,7 +56,8 @@ public class LoginTests extends BaseTest {
     }
     @Test
     public void loginValidEmailEmptyPassword() {
-        navigateToLoginPage();
+        String BaseURL = "https://qa.koel.app";;
+        navigateToLoginPage(BaseURL);
         provideEmail("demo@class.com");
         clickSubmit();
         //Expected Result

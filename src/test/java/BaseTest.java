@@ -4,10 +4,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -16,6 +16,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.time.Duration;
 
 public class BaseTest {
@@ -28,6 +30,8 @@ public class BaseTest {
 
      Actions actions;
 
+     private static final ThreadLocal<WebDriver> threadDriver = new ThreadLocal<>();
+
 
     @BeforeSuite
     static void setupClass() {
@@ -38,7 +42,19 @@ public class BaseTest {
     }
     @BeforeMethod
     @Parameters({"BaseURL"})
-    public void launchBrowser(String BaseURL){
+    public void setupBrowser(String BaseURL) throws MalformedURLException {
+        threadDriver.set(pickBrowser(System.getProperty("browser")));
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        navigateToLoginPage(BaseURL);
+    }
+
+    public static WebDriver getDriver(){
+        return threadDriver.get();
+    }
+
+    @BeforeMethod
+    @Parameters({"BaseURL"})
+    public void launchBrowser(String BaseURL) throws MalformedURLException {
        // ChromeOptions options = new ChromeOptions();
       //  options.addArguments("--remote-allow-origins=*");
        // driver = new ChromeDriver(options);
@@ -53,7 +69,14 @@ public class BaseTest {
         navigateToLoginPage();
     }
 
-    public static WebDriver pickBrowser(String browser){
+    private void navigateToLoginPage() {
+    }
+
+    public static WebDriver pickBrowser(String browser) throws MalformedURLException{
+
+        DesiredCapabilities caps = new DesiredCapabilities();
+        String gridURL = "http://169.254.105.91:4444";
+
         switch (browser){
             case "firefox":
                 WebDriverManager.firefoxdriver().setup();
@@ -61,6 +84,8 @@ public class BaseTest {
             case "Safari":
                 WebDriverManager.safaridriver().setup();
                 return driver = new SafariDriver();
+            case "cloud":
+                return lambdaTest();
             default:
                 WebDriverManager.chromedriver().setup();
                 ChromeOptions options = new ChromeOptions();
@@ -69,12 +94,39 @@ public class BaseTest {
 
         }
     }
-    @AfterMethod
-    public void closeBrowser(){
-       driver.quit();
+
+
+    public static WebDriver lambdaTest() throws MalformedURLException {
+        String username = "arleisha.strauder";
+        String authKey = "43H824kbpjoBxVgAN6EZ8YunDXKel9uETZJTEZazwJDZWntFCv";
+        String hub = "@hub.lambdatest.com/wd/hub";
+
+        DesiredCapabilities caps = new DesiredCapabilities();
+        caps.setCapability("platform", "Mac");
+        caps.setCapability("browserName", "Chrome");
+        caps.setCapability("version", "119.0");
+        caps.setCapability("resolution", "1024x768");
+        caps.setCapability("build", "TestNG with Java");
+        caps.setCapability("name", BaseTest.class.getName());
+        //caps.setCapability("plugin", "java-testNG");
+
+        return new RemoteWebDriver(new URL("https://" +username+ ":" +authKey + hub), caps);
     }
 
-    public void navigateToLoginPage(){
+
+
+    /*@AfterMethod
+    public void closeBrowser(){
+       driver.quit();
+    }*/
+    @AfterMethod
+    public void tearDown(){
+        threadDriver.get().close();
+        threadDriver.remove();
+    }
+
+
+    public void navigateToLoginPage(String baseURL){
         driver.get(url);
     }
 
