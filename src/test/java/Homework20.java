@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 public class Homework20 extends BaseTest {
 
     @Test
-    public void deletePlaylist() throws InterruptedException {
+    public void deletePlaylist()  {
         String expectedPlaylistDeletedNotification = "Deleted playlist";
 
         navigateToLoginPage();
@@ -27,7 +27,7 @@ public class Homework20 extends BaseTest {
         myPlaylist.click();
     }
 
-    public void clickDeletePlaylistBtn() throws InterruptedException {
+    public void clickDeletePlaylistBtn() {
         WebElement deletePlaylist = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[class='del btn-delete-playlist']")));
         deletePlaylist.click();
 
