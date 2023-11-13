@@ -1,3 +1,5 @@
+import Pages.HomePage;
+import Pages.LoginPage;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -14,6 +16,18 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 public class LoginTests extends BaseTest {
+
+    @Test
+    public void loginValidEmailPasswordTest(){
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
+
+        loginPage.provideEmail("daria.chebotnyagina@testpro.io");
+        loginPage.providePassword("Asdfasdf1");
+        loginPage.provideSubmit();
+
+        Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
+    }
 
 
     @Test(dataProvider = "LoginData")
