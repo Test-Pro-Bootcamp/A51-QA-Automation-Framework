@@ -2,9 +2,8 @@ import PageObjectModel.LoginPage;
 import PageObjectModel.HomePage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import org.openqa.selenium.WebElement;
 
-public class Homework23 extends BaseTest {
+public class Homework24 extends BaseTest {
 
    // public WeDriver clickDeletePlaylistBtn;
 
