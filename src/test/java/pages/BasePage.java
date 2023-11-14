@@ -24,7 +24,8 @@ public class BasePage {
     }
 
     public void click(WebElement webElement){
-        findElement(webElement).click();
+        wait.until(ExpectedConditions.elementToBeClickable(webElement)).click();
+
 
     }
 

@@ -5,17 +5,17 @@ import pages.HomePage;
 import pages.LoginPage;
 import org.openqa.selenium.WebDriver;
 
-public class Homework23 extends BasePage {
+public class Homework23 extends BaseTest {
 
-    public Homework23(WebDriver givenDriver) {
-        super(givenDriver);
-    }
+    //public Homework23(WebDriver givenDriver) {
+        //super(givenDriver);
+   // }
 
     @Test
 
-    public void renamePlaylist()throws InterruptedException{
+    public void renamePlaylist(){
 
-        String updatedPlaylistName= "updated playlist \"melodious album.\" ";
+        String updatedPlaylistName= "Updated playlist \"melodious album.\"";
 
         LoginPage loginPage= new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
@@ -23,7 +23,7 @@ public class Homework23 extends BasePage {
         loginPage.provideEmail("aparajita.jha@testpro.io");
         loginPage.providePassword("testpro135@");
         loginPage.clickSubmit();
-        Thread.sleep(2000);
+
         homePage.contextClickPlaylist();
         homePage.clickEdit();
         homePage.enterNewPlaylistName("melodious album");

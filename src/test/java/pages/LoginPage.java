@@ -17,7 +17,7 @@ public class LoginPage extends BasePage {
 
     //By emailField= By.cssSelector("[Type='email']");
     @FindBy(css = "[Type='email']")
-    private WebElement emailTxtField;
+     WebElement emailTxtField;
 
     @FindBy(css = "[Type='password']")
     WebElement passwordTxtField;
