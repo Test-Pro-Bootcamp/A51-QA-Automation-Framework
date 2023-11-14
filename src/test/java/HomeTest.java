@@ -1,3 +1,6 @@
+import Pages.AllSongsPage;
+import Pages.HomePage;
+import Pages.LoginPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -23,6 +26,26 @@ chooseAllSongsList();
 contextClickFirstSong();
         // Choose Play
 choosePlayOption();
+        //Assertion
+        WebElement play = driver.findElement(By.cssSelector("div[data-testid='sound-bar-play']"));
+        Assert.assertTrue(play.isDisplayed());
+    }
+
+    public void playSongsWithClick(){
+
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
+        AllSongsPage allSongsPage = new AllSongsPage();
+        //Login
+        provideEmail("daria.chebotnyagina@testpro.io");
+        providePassword("Asdfasdf1");
+        clickSubmit();
+        //Choose all songs list
+        chooseAllSongsList();
+        // Right/Context Click
+        contextClickFirstSong();
+        // Choose Play
+        choosePlayOption();
         //Assertion
         WebElement play = driver.findElement(By.cssSelector("div[data-testid='sound-bar-play']"));
         Assert.assertTrue(play.isDisplayed());
