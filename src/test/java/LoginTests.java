@@ -32,17 +32,7 @@ public class LoginTests extends BaseTest {
 */
     //LoginPage loginPage = new LoginPage(driver);
     //HomePage homePage = new HomePage(driver);
-    @Test
-    public void loginValidEmailPasswordTest() {
-        LoginPage loginPage = new LoginPage(driver);
-       HomePage homePage = new HomePage(driver);
 
-        loginPage.provideEmail("daria.chebotnyagina@testpro.io");
-        loginPage.providePassword("Asdfasdf1");
-        loginPage.provideSubmit();
-
-        Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
-    }
 
 
     @Test(dataProvider = "LoginData")

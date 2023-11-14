@@ -10,12 +10,17 @@ public class HomePage extends BasePage{
     }
 
     //Locator
-    By userAvatarIcon = By.cssSelector("img.avatar");
+    By playNextSongIcon = By.xpath("//i[@title='Play next song']");
+    By playIcon = By.xpath("//span[@title='Play or resume']");
+    By result = By.xpath("//img[@alt='Sound bars']");
 
-    //Helper
-    public WebElement getUserAvatar(){
-        return findElement(userAvatarIcon);
+    public void getPlayNextSong(){
+        findElement(playNextSongIcon).click();
     }
-
-
+    public void getPlay(){
+        findElement(playIcon).click();
+    }
+    public WebElement getResult(){
+        return findElement(result);
+    }
 }
