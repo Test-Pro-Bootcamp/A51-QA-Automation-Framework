@@ -37,7 +37,7 @@ public class BaseTest {
     static void setupClass() {
        // WebDriverManager.chromedriver().setup();
        //   WebDriverManager.firefoxdriver().setup();
-          WebDriverManager.safaridriver().setup();
+         // WebDriverManager.safaridriver().setup();
 
     }
     @BeforeMethod
@@ -52,7 +52,7 @@ public class BaseTest {
         return threadDriver.get();
     }
 
-    @BeforeMethod
+    /*@BeforeMethod
     @Parameters({"BaseURL"})
     public void launchBrowser(String BaseURL) throws MalformedURLException {
        // ChromeOptions options = new ChromeOptions();
@@ -65,12 +65,10 @@ public class BaseTest {
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         actions = new Actions(driver);
         driver.manage().window().maximize();
-        url = BaseURL;
-        navigateToLoginPage();
-    }
+        navigateToLoginPage(BaseURL);
+    }*/
 
-    private void navigateToLoginPage() {
-    }
+
 
     public static WebDriver pickBrowser(String browser) throws MalformedURLException{
 
@@ -91,7 +89,6 @@ public class BaseTest {
                 ChromeOptions options = new ChromeOptions();
                 options.addArguments("--remote-allow-origins=*");
                 return driver = new ChromeDriver(options);
-
         }
     }
 
@@ -102,14 +99,13 @@ public class BaseTest {
         String hub = "@hub.lambdatest.com/wd/hub";
 
         DesiredCapabilities caps = new DesiredCapabilities();
-        caps.setCapability("platform", "Mac");
+        caps.setCapability("platform", "macOS Sonoma 14");
         caps.setCapability("browserName", "Chrome");
         caps.setCapability("version", "119.0");
         caps.setCapability("resolution", "1024x768");
         caps.setCapability("build", "TestNG with Java");
         caps.setCapability("name", BaseTest.class.getName());
         //caps.setCapability("plugin", "java-testNG");
-
         return new RemoteWebDriver(new URL("https://" +username+ ":" +authKey + hub), caps);
     }
 

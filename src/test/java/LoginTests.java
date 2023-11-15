@@ -8,6 +8,26 @@ import org.testng.annotations.Test;
 
 public class LoginTests extends BaseTest {
 
+
+    @Test
+    public void loginSuccessTest(){
+        LoginPage loginPage = new LoginPage(getDriver());
+        HomePage homePage = new HomePage(getDriver());
+
+        loginPage.provideEmail("demo@class.com");
+        loginPage.providePassword("te$t$tudent");
+        loginPage.clickSubmit();
+        Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
+    }
+    @Test
+    public void loginInvalidCredentials(){
+        LoginPage loginPage = new LoginPage(getDriver());
+        loginPage.provideEmail("");
+        loginPage.providePassword("te$t$tudent");
+        loginPage.clickSubmit();
+        Assert.assertTrue(loginPage.getRegistrationLink().isDisplayed());
+    }
+
     @Test
     public void loginValidEmailPasswordTest(){
         LoginPage loginPage = new LoginPage(driver);
@@ -16,10 +36,8 @@ public class LoginTests extends BaseTest {
         loginPage.provideEmail("demo@class.com");
         loginPage.providePassword("te$t$tudent");
         loginPage.clickSubmit();
-
         Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
     }
-
     @Test
     public void loginEmptyEmailPassword() {
         String BaseURL = "https://qa.koel.app";
