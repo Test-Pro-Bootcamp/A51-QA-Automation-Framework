@@ -45,7 +45,7 @@ public class BaseTest {
     @Parameters({"BaseURL"})
     public void launchBrowser(String BaseURL) throws MalformedURLException {
 
-        driver = pickBrowser(System.getProperty("browser"));
+        driver = pickBrowser(System.getProperty("firefox"));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
 
@@ -100,7 +100,7 @@ public class BaseTest {
 
     public static WebDriver pickBrowser(String browser) throws MalformedURLException {
         DesiredCapabilities caps = new DesiredCapabilities();
-        String gridURL = "http://192.168.55.100:4444";//replace with your grid url
+        String gridURL = "http://192.168.1.43:4444";//replace with your grid url
 
         //java -jar selenium-server-4.15.0.jar standalone --selenium-manager true
 
