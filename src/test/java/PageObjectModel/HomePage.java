@@ -12,7 +12,7 @@ public class HomePage extends BasePage{
 
     @FindBy(css = ".playlist:nth-child(3)")
     private WebElement emptyPlaylistLocator;
-    
+
     @FindBy(css = "#playlistWrapper > header > div.song-list-controls > span > button")
     private WebElement deletePlaylistLocator;
     @FindBy(css = "div.success.show")
