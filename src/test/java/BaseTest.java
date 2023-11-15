@@ -4,11 +4,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+<<<<<<< Updated upstream
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+=======
+>>>>>>> Stashed changes
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -34,12 +37,15 @@ public class BaseTest {
     //Setup WebDriverManager for ChromeDriver
     @BeforeSuite
     static void setupClass() {
-        WebDriverManager.chromedriver().setup();
+
+        //WebDriverManager.chromedriver().setup();
+        WebDriverManager.safaridriver().setup();
     }
 
     //Launch Chrome browser and navigate to BaseUrl
     @BeforeMethod
     @Parameters({"BaseUrl"})
+<<<<<<< Updated upstream
     public void launchBrowser(String BaseUrl) throws InterruptedException, MalformedURLException {
         driver = pickBrowser(System.getProperty("browser"));
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
@@ -79,6 +85,36 @@ public class BaseTest {
                 options.addArguments("--disable-notifications", "--remote-allow-origins=*", "--incognito", "--start-maximized");
                 return driver = new ChromeDriver(options);
 
+        }
+=======
+    public void launchBrowser(String BaseUrl) throws InterruptedException {
+        //Added ChromeOptions argument to fix websocket error
+        //ChromeOptions options = new ChromeOptions();
+        //options.addArguments("--disable-notifications", "--remote-allow-origins=*", "--incognito", "--start-maximized");
+        //options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
+        //driver = new ChromeDriver(options);
+
+        driver = pickBrowser(System.getProperty("browser"));
+
+        driver = new SafariDriver();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+        driver.get(BaseUrl);
+        //wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        //wait = WebDriverWait;
+>>>>>>> Stashed changes
+    }
+
+    public static WebDriver pickBrowser(String browser){
+        switch (browser){
+            case "Safari":
+                WebDriverManager.safaridriver().setup();
+                return driver = new SafariDriver();
+            default:
+                WebDriverManager.chromedriver().setup();
+                ChromeOptions options = new ChromeOptions();
+                options.addArguments("--disable-notifications", "--remote-allow-origins=*", "--incognito", "--start-maximized");
+                //options.addArguments("--remote-allow-origins=*");
+                return driver = new ChromeDriver(options);
         }
     }
 
