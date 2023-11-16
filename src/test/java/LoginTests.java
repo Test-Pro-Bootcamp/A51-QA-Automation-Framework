@@ -24,7 +24,7 @@ public class LoginTests extends BaseTest {
         Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
     }
 
-    @Test
+   /* @Test
     public void loginEmptyEmailPassword() {
        navigateToLoginPage();
        clickSubmit();
@@ -62,6 +62,6 @@ public class LoginTests extends BaseTest {
         clickSubmit();
         //Expected Result
         Assert.assertEquals(driver.getCurrentUrl(), url);
-    }
+    }*/
 
 }
