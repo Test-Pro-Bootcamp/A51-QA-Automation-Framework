@@ -11,7 +11,7 @@ public class Homework17 extends BaseTest{
     public void addSongToPlaylist() throws InterruptedException{
 
         String expectedAddedSongToPlaylistSuccessMsg = "Added 1 song into \"AutoLesson 17.\"";
-        navigateToLoginPage();
+        navigateToLoginPage(BaseURL);
         //Login
         provideEmail("demo@class.com");
         providePassword("te$t$tudent");
