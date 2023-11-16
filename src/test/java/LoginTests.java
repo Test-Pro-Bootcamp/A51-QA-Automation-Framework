@@ -1,12 +1,34 @@
+import pagesObjectModel.HomePage;
+import pagesObjectModel.LoginPage;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.Reporter;
 import org.testng.annotations.Test;
 
+/**
+ *
+ */
 public class LoginTests extends BaseTest {
+    @Test
+    public void loginValidEmailPasswordTest(){
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
+
+        loginPage.provideEmail("sanjeela.chitrakar@testpro.io");
+        loginPage.providePassword("te$t$tudent1");
+        loginPage.clickSubmit();
+
+        Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
+    }
+
+    /**
+     * This method takes Login Data from Dataprovider and user Thread.sleep for wait along with Explicit Waits.
+     * @param email
+     * @param password
+     * @throws InterruptedException
+     */
 
 
 

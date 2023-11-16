@@ -36,12 +36,15 @@ public class BaseTest {
     @DataProvider(name="LoginData")
     public Object[][] getDataFromDataProvider(){
         return new Object[][]{
-                {"demo@class.com", "te$t$tudent"},
+                {"sanjeela.chitrakar@testpro.io", "te$t$tudent1"},
                 {"invalidemail@class.com", "te$t$tudent"},
                 {"demo@class.com", "InvalidPassword"},
                 {"",""}
         };
     }
+
+
+
     @DataProvider(name="excel-data")
     public Object[][] excelDP() throws IOException{
         Object[][] arrObj = getExcelData("./src/test/resources/test.xlsx", "Sheet1");
@@ -55,12 +58,12 @@ public class BaseTest {
     //References Start Here
 
 
-    public WebDriver driver;
-    public String url = "https:qa.koel.app";
+    public static WebDriver driver = null;
+    public static String url = null;
 
-    public WebDriverWait wait;
+    public static WebDriverWait wait = null;
 
-    Actions actions;
+    public static Actions actions = null;
 
 
     //References End Here
