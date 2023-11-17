@@ -13,6 +13,8 @@ public class BaseTest {
 
     public WebDriver driver = null;
 
+    String url = "https://qa.koel.app";
+
 
     @BeforeSuite
     static void setupClass() {
