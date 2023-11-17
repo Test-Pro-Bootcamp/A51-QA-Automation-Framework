@@ -27,35 +27,31 @@ public class HomePage extends BasePage {
     WebElement message;
 
 
-    public HomePage searchField(String name) throws InterruptedException {
+    public HomePage searchField(String name){
         field.clear();
         field.sendKeys(name);
-        Thread.sleep(2000);
+
         return this;
 
     }
 
-    public HomePage provideViewAll() throws InterruptedException {
+    public HomePage provideViewAll(){
         viewAll.click();
-        Thread.sleep(2000);
         return this;
     }
 
-    public HomePage choiceSong() throws InterruptedException {
+    public HomePage choiceSong(){
         song.click();
-        Thread.sleep(2000);
         return this;
     }
 
-    public HomePage addToList() throws InterruptedException {
+    public HomePage addToList(){
         buttonAdd.click();
-        Thread.sleep(2000);
         return this;
     }
 
-    public HomePage choiceList() throws InterruptedException {
+    public HomePage choiceList(){
         list.click();
-        Thread.sleep(2000);
         return this;
     }
     public String notificationMessage(){

@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.concurrent.TimeUnit;
 
 public class BasePage {
     WebDriver driver;
@@ -20,7 +21,7 @@ public class BasePage {
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         actions = new Actions(driver);
         PageFactory.initElements(driver, this);
-
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
     public WebElement findElement(By locator){

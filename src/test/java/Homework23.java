@@ -8,17 +8,15 @@ import org.testng.annotations.Test;
 public class Homework23 extends BaseTest{
 
     @Test
-    public void addSongToPlaylist() throws InterruptedException{
+    public void addSongToPlaylist(){
         LoginPage loinPage = new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
-
-
+        
         String expectedSongAddedMessage = "Added 1 song into \"dasha.\"";
 
         loinPage.provideEmailToLogin("daria.chebotnyagina@testpro.io")
                 .providePasswordToLogin("Asdfasdf1")
                 .clickSubmitBtnToLogin();
-        Thread.sleep(2000);
 
         homePage.searchField("birthday")
                 .provideViewAll()
