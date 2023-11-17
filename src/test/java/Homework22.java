@@ -21,13 +21,13 @@ public class Homework22 extends BaseTest{
     }
 
     @Test
-    public void playSongTest(){
+    public void playSongTest() throws InterruptedException {
         LoginPage loginpage = new LoginPage(driver);
         HomePage homepage = new HomePage(driver);
 
         loginpage.login();
-        homepage.getClickNextSong();
-        homepage.getPlaySong();
+        homepage.clickNextSong();
+        homepage.clickPlay();
 
         Assert.assertTrue(homepage.getResult().isDisplayed());
     }
