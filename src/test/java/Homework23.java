@@ -11,7 +11,7 @@ public class Homework23 extends BaseTest{
     public void addSongToPlaylist(){
         LoginPage loinPage = new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
-        
+
         String expectedSongAddedMessage = "Added 1 song into \"dasha.\"";
 
         loinPage.provideEmailToLogin("daria.chebotnyagina@testpro.io")
