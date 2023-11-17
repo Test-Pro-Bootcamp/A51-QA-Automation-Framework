@@ -39,14 +39,12 @@ public class HomePage extends BasePage{
     }
 
 //helper methods for test play song
-public void clickNextSong()throws InterruptedException{
+public void clickNextSong(){
     findElement(nextSong).click();
-    Thread.sleep(2000);
 }
 
-    public void clickPlay() throws InterruptedException{
+    public void clickPlay(){
         findElement(playSong).click();
-        Thread.sleep(2000);
     }
     public WebElement getResult(){
         return findElement(resultIcon);
