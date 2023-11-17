@@ -57,32 +57,14 @@ public class BaseTest {
 
     public WebDriver lambdaTest() throws MalformedURLException {
 
-/*      Test Pro Instructor LambdaTest account
-
-        1.) Navigate to https://accounts.lambdatest.com/login
-
-        2.) Login using Google email
-
-        Email: lambdatest.testpro@gmail.com
-        Password: testpro123
-
-        3.) Run command in IntelliJ Terminal:
-         gradle clean test -Dbrowser=cloud
-
-        4.) View the cloud automations in
-        https://accounts.lambdatest.com/dashboard
-
-
-       Configured for the Test Pro lambdatest account
-  */
         String hubURL = "https://hub.lambdatest.com/wd/hub";
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("browserName", "Firefox");
         capabilities.setCapability("browserVersion", "107.0");
         HashMap<String, Object> ltOptions = new HashMap<>();
-        ltOptions.put("user", "lambdatest.testpro");
-        ltOptions.put("accessKey", "Op3WvHgSXBtuyR1TVO1wnBgA6qG34RvRcL9HWa8HLKzX4kSf5B");
+        ltOptions.put("user", "iryna.berezkina");
+        ltOptions.put("accessKey", "pLHDHTXNoHGmnwETQAPOJs7hVHMcgkfNbnDFsiCza6zsu2NG9t");
         ltOptions.put("build", "Selenium 4");
         ltOptions.put("name", this.getClass().getName());
         ltOptions.put("platformName", "Windows 10");
