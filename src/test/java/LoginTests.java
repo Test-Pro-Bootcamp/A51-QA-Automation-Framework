@@ -44,6 +44,17 @@ public class LoginTests extends BaseTest {
         Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
     }
 
+    @Test
+    public void loginValidEmailPasswordPageFactory() {
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
+
+        loginPage.provideEmailToLogin("daria.chebotnyagina@testpro.io")
+                .providePasswordToLogin("Asdfasdf1")
+                .clickSubmitBtnToLogin();
+
+        Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
+    }
 
     @Test(dataProvider = "LoginData")
     public void loginTests(String email, String password) throws InterruptedException{

@@ -31,24 +31,24 @@ choosePlayOption();
         Assert.assertTrue(play.isDisplayed());
     }
 
+    @Test
+
     public void playSongsWithClick(){
 
         LoginPage loginPage = new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
-        AllSongsPage allSongsPage = new AllSongsPage();
+        AllSongsPage allSongsPage = new AllSongsPage(driver);
         //Login
-        provideEmail("daria.chebotnyagina@testpro.io");
-        providePassword("Asdfasdf1");
-        clickSubmit();
+        loginPage.login();
         //Choose all songs list
-        chooseAllSongsList();
+        homePage.chooseAllSongsList();
         // Right/Context Click
-        contextClickFirstSong();
+        allSongsPage.contextClickFirstSong();
         // Choose Play
-        choosePlayOption();
+        allSongsPage.choosePlayOption();
         //Assertion
-        WebElement play = driver.findElement(By.cssSelector("div[data-testid='sound-bar-play']"));
-        Assert.assertTrue(play.isDisplayed());
+
+        Assert.assertTrue(allSongsPage.isSongPlaying());
     }
 
     @Test
@@ -61,6 +61,17 @@ choosePlayOption();
 Thread.sleep(2000);
         //Assertion
         Assert.assertTrue(hoverPlay().isDisplayed());
+    }
+
+    @Test
+    public void hoverOverPlayButton_inPages() throws InterruptedException{
+    LoginPage loginpage = new LoginPage(driver);
+    HomePage homepage = new HomePage(driver);
+
+    loginpage.login();
+    Thread.sleep(2000);
+        //Assertion
+        Assert.assertTrue(homepage.hoverPlay().isDisplayed());
     }
 
     @Test
