@@ -2,45 +2,31 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.HomePage;
+import pages.LoginPage;
 
 
-    public class Homework24 extends BaseTest {
+public class Homework24 extends BaseTest {
+
 
         @Test
-        public void deletePlaylist() throws InterruptedException {
 
-            String expecteddeletedPlaylistmsg = "Deleted playlist \"test pro playlist.\"";
+        public void validemailvalidpasswordlogin(){
 
-            provideEmail("aparajita.jha@testpro.io");
-            providePassword("testpro135@");
-            clickSubmit();
-            Thread.sleep(2000);
-            openPlaylist();
-            clickDeletePlaylistBtn();
+           // String updatedPlaylistName= "Updated playlist \"melodious album.\"";
 
+            LoginPage loginPage= new LoginPage(driver);
+            HomePage homePage = new HomePage(driver);
 
-            Assert.assertEquals(getPlaylistDeletedmsg(), expecteddeletedPlaylistmsg);
+            loginPage.provideEmail("aparajita.jha@testpro.io");
+            loginPage.providePassword("testpro135@");
+            loginPage.clickSubmit();
 
+            Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
         }
 
-        public String getPlaylistDeletedmsg() {
-            WebElement notification = driver.findElement(By.cssSelector("div.success.show"));
-            return notification.getText();
-        }
-
-        public void openPlaylist() {
-            WebElement playlist = driver.findElement(By.cssSelector(".playlist:nth-child(3"));
-
-            playlist.click();
 
 
-        }
-
-        public void clickDeletePlaylistBtn() throws InterruptedException {
-            WebElement deletePlaylist = driver.findElement(By.cssSelector("[title='Delete this playlist']"));
-            deletePlaylist.click();
-            Thread.sleep(2000);
-        }
 
     }
 

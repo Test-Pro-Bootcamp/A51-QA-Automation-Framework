@@ -26,6 +26,9 @@ public class HomePage extends BasePage{
     @FindBy(css="div.success.show")
     WebElement renamePlaylistSuccessMsg;
 
+    @FindBy(css="img.avatar")
+    WebElement userAvatarIcon;
+
     public HomePage contextClickPlaylist(){
         contextClick(playlistExisting);
         return this;
@@ -37,9 +40,9 @@ public class HomePage extends BasePage{
         return this;
  }
 
-//    public WebElement getUserAvatar(){
-//        return findElement(userAvatarIcon);
-//    }
+  public WebElement getUserAvatar(){
+  return findElement(userAvatarIcon);
+ }
 
     public HomePage enterNewPlaylistName(String playlistName){
         findElement(playlistNameField);
