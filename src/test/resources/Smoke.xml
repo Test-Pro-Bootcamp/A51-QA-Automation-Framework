@@ -5,9 +5,9 @@
     <parameter name="BaseURL" value="https://qa.koel.app/"></parameter>
     <test name="Smoke Test" preserve-order="false">
         <classes>
-            <class name="LoginTests">
+            <class name="Homework26">
                <methods>
-                    <include name="loginValidEmailPassword"/>
+                    <include name="loginValidEmailPasswordSuccess"/>
                   <!-- <include name="loginTests"/> -->
                    <!-- <include name="loginWithExcelData"/> -->
                </methods>
