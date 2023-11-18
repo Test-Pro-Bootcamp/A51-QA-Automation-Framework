@@ -5,7 +5,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class HomePage extends BasePage {
-
     @FindBy(css = ".avatar")
     private WebElement userAvatarIcon;
 
@@ -18,8 +17,12 @@ public class HomePage extends BasePage {
     @FindBy(css = ".show.success")
     private WebElement notification;
 
-    public boolean HomePage(WebDriver givenDriver){
+    public HomePage(WebDriver givenDriver) {
         super(givenDriver);
+    }
+
+    //added constructor
+
 
         public boolean getUserAvatar(){
             return userAvatarIcon.isEnabled();
@@ -39,30 +42,6 @@ public class HomePage extends BasePage {
             findElement(notification);
             return notification.isDisplayed();
         }
-
-
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
+//removed extra curly brace
+//}

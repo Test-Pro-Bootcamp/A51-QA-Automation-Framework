@@ -43,10 +43,10 @@ public class LoginPage extends BasePage {
         clickSubmitBtn();
     }
 }
+//removed extra curly brace
 
 
 
 
 
 
-}

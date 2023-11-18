@@ -5,11 +5,14 @@
 
         <parameter name="BaseUrl" value="https://qa.koel.app/"/>
         <test name="Example Test" preserve-order="false">
+            <parameter name="browser" value="firefox"/>
+            <parameter name="browser" value="chrome"/>
+            <parameter name="browser" value="safari"/>
 
         <classes>
             <class name="BaseTest"/>
             <class name="LoginTests"/>
-            <class name="Homework24"/>
+<!--&lt;!&ndash;            <class name="Homework24"/>&ndash;&gt; comment this for now, unfinished test case-->
         </classes>
     </test>
 </suite>

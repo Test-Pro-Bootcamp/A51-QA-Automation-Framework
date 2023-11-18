@@ -1,3 +1,5 @@
+import Pages.HomePage;
+import Pages.LoginPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -15,12 +17,13 @@ public class Homework24 extends BaseTest {
         HomePage homePage = new HomePage(driver);
 
         //THEN
-        loginPage.provideEmailToLogin("adam.johnson@testpro.io").providePasswordToLogin("1Te$t$tudent").clickSubmitBtnToLogin();
-        homePage.openPlaylist();
-        homePage.clickDeletePlaylistBtn();
-
+        //call login methods from LoginPage
+        loginPage.provideEmail("adam.johnson@testpro.io").providePassword("1Te$t$tudent").clickSubmitBtn();
+        /*
+        homePage.openPlaylist(); change these methods and check HomePage page object
         //WHEN
         Assert.assertEquals(homePage.getDeletedPlaylistMsg(), expectedPLayListDeletedMessage);
+         */
     }
 
 

@@ -41,35 +41,5 @@ public class BasePage {
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
+//removed extra curly brace
+//}
