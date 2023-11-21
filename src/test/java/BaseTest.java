@@ -4,7 +4,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -13,6 +18,8 @@ import org.testng.annotations.*;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URI;
 import java.time.Duration;
 
 
@@ -27,11 +34,11 @@ import javax.swing.*;
 public class BaseTest {
 
     //References start
-   WebDriver driver;
-   WebDriverWait wait;
-   String url;
-   Actions action;
-   //References end
+    public static WebDriver driver;
+    WebDriverWait wait;
+    public String url = "https://qa.koel.app";
+    Actions action;
+    //References end
 
     //DataProvider start
     @DataProvider(name="LoginData")
@@ -82,51 +89,58 @@ public class BaseTest {
 
     @BeforeSuite
     static void setupClass() {
-        WebDriverManager.chromedriver().setup();
     }
- @BeforeMethod
- @Parameters({"BaseURL"})
-    public void launchBrowser(String BaseURL){
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
-
-        driver = new ChromeDriver(options);
-        //driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10)); - Implicitly Wait
-     //Explicitly Wait:
+    @BeforeMethod
+    @Parameters({"BaseURL"})
+    public void launchBrowser(String BaseURL) throws MalformedURLException {
+        driver = pickBrowser(System.getProperty("browser"));
+        //Explicitly Wait:
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         action = new Actions(driver);
         driver.manage().window().maximize();
         url = BaseURL;
         navigateToLoginPage();
-
     }
-@AfterMethod
+
+    public static WebDriver pickBrowser(String browser) throws MalformedURLException {
+        DesiredCapabilities caps = new DesiredCapabilities();
+        String gridURL = "http://192.168.1.188:4444";
+
+        switch(browser){
+            case "firefox":
+                WebDriverManager.firefoxdriver().setup();
+                return driver = new FirefoxDriver();
+            case "MicrosoftEdge":
+                WebDriverManager.edgedriver().setup();
+                EdgeOptions edgeoptions = new EdgeOptions();
+                edgeoptions.addArguments("--remote-allow-origins=*");
+                return driver = new EdgeDriver(edgeoptions);
+
+            //Selenium Grid
+            case "grid-edge": //gradle clean test -Dbrowser=grid-edge
+                caps.setCapability("browser", "MicrosoftEdge");
+                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(),caps);
+            case "grid-firefox": //gradle clean test -Dbrowser=grid-edge
+                caps.setCapability("browserName", "firefox");
+                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(),caps);
+            case "grid-chrome": //gradle clean test -Dbrowser=grid-edge
+                caps.setCapability("browserName", "chrome");
+                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(),caps);
+            default:
+                WebDriverManager.chromedriver().setup();
+                ChromeOptions options = new ChromeOptions();
+                options.addArguments("--remote-allow-origins=*");
+                return driver = new ChromeDriver(options);
+
+        }
+    }
+    @AfterMethod
     public void closeBrowser(){
         driver.quit();
     }
 
     public void navigateToLoginPage(){
         driver.get(url);
-    }
-
-    public void provideEmail(String email){
-        WebElement emailField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[type='email']")));
-        //WebElement emailField = driver.findElement(By.cssSelector("input[type='email']"));
-        emailField.clear();
-        emailField.sendKeys(email);
-    }
-
-    public void providePassword(String password){
-        WebElement passwordField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[type='password']")));
-        //WebElement passwordField = driver.findElement(By.cssSelector("input[type='password']"));
-        passwordField.clear();
-        passwordField.sendKeys(password);
-    }
-
-    public void clickSubmit(){
-        WebElement submit = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("button[type='submit']")));
-        //WebElement submit = driver.findElement(By.cssSelector("button[type='submit']"));
-        submit.click();
     }
 
 }

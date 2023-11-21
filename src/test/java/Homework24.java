@@ -1,11 +1,9 @@
 import Pages.HomePage;
 import Pages.LoginPage;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class Homework23 extends BaseTest{
+public class Homework24 extends BaseTest{
 
     @Test
     public void addSongToPlaylist(){
