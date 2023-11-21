@@ -13,14 +13,13 @@ import java.time.Duration;
 
 public class LoginTests extends BaseTest {
     @Test
-    public void loginValidEmailPasswordTest(){
-        LoginPage loginPage = new LoginPage(driver);
-        HomePage homePage = new HomePage(driver);
+    public void loginSuccessTest(){
+        LoginPage loginPage = new LoginPage(getDriver());
+        HomePage homePage = new HomePage(getDriver());
 
         loginPage.provideEmail("demo@class.com");
         loginPage.providePassword("te$t$tudent");
-        loginPage.clickSubmit();
-
+        loginPage.clickSubmitBtn();
         Assert.assertTrue(homePage.getUserAvatar());
     }
 

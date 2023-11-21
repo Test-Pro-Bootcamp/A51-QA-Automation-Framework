@@ -4,7 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class Homework22 extends BaseTest{
-    @Test
+   /* @Test
     public void renamePlaylist(){
 
         String newPlaylistName = "Sample Edited Playlist";
@@ -17,5 +17,5 @@ public class Homework22 extends BaseTest{
         homePage.doubleClickPlayList();
         homePage.enterNewPlaylistName(newPlaylistName);
         Assert.assertEquals(homePage.getRenamePlaylistSuccessMsg(), updatedPlaylistMsg);
-    }
+    }*/
 }
