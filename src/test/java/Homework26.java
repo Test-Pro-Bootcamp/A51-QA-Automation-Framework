@@ -15,7 +15,7 @@ public class Homework26  extends BaseTest{
         loginPage.provideEmail("fake@fakeaccount.com");
         loginPage.providePassword("te$t$tudent");
         loginPage.clickSubmit();
-
+        //assertion
         Assert.assertTrue(homePage.getUserAvatar());
 
     }
