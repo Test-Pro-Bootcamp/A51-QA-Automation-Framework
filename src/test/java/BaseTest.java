@@ -153,6 +153,14 @@ private static final ThreadLocal <WebDriver> threadDriver = new ThreadLocal<>();
 
         }
     }
+
+    public WebDriver lambdaTest(){
+        String username = "";
+        String authKey = "";
+        String hub = "";
+        DesiredCapabilities caps = new DesiredCapabilities();
+        return null;
+    }
     /*
 @AfterMethod
     public void closeBrowser(){
