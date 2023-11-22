@@ -23,5 +23,8 @@ test {
         //suites "src/test/resources/Smoke.xml"
         //suites "src/test/resources/Regression.xml"
     }
+    ext {
+        suite=project.findProperty("suite")?: "defaultSuitename"
+    }
 
 }
