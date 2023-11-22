@@ -17,6 +17,25 @@ import java.io.IOException;
 
 public class LoginTests extends BaseTest {
 
+    @Test
+    public void loginSuccessTest(){
+        LoginPage loginPage = new LoginPage(getDriver());
+        HomePage homePage = new HomePage(getDriver());
+        loginPage.provideEmailToLogin("daria.chebotnyagina@testpro.io")
+                .providePasswordToLogin("Asdfasdf1")
+                .clickSubmitBtnToLogin();
+        Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
+
+    }
+    @Test
+    public void loginInvalidCredentials(){
+        LoginPage loginPage = new LoginPage(getDriver());
+        HomePage homePage = new HomePage(getDriver());
+        loginPage.provideEmailToLogin("")
+                .providePasswordToLogin("Asdfasdf1")
+                .clickSubmitBtnToLogin();
+        Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
+    }
 /*
     @Test(dataProvider = "LoginData")
     public void loginValidEmailPasswordTest(String email, String password){
@@ -29,7 +48,7 @@ public class LoginTests extends BaseTest {
 
         Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
     }
-*/
+
     //LoginPage loginPage = new LoginPage(driver);
     //HomePage homePage = new HomePage(driver);
     @Test
@@ -125,5 +144,5 @@ Reporter.log("Unable to login with Excel Data for an unknown reason.");
     public void waitForAnElementToBeVisible(String cssLocator){
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("")));
     }
-
+*/
 }

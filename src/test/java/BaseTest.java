@@ -86,12 +86,25 @@ public class BaseTest {
         return data;
     }
     //DataProvider end
+private static final ThreadLocal <WebDriver> threadDriver = new ThreadLocal<>();
 
     @BeforeSuite
     static void setupClass() {
         //WebDriverManager.firefoxdriver().setup();
     }
- @BeforeMethod
+
+    @BeforeMethod
+    @Parameters({"BaseURL"})
+    public void setupBrowser() throws MalformedURLException{
+        threadDriver.set(pickBrowser(System.getProperty("browser")));
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        navigateToLoginPage();
+    }
+    public static WebDriver getDriver(){
+        return threadDriver.get();
+    }
+ /*
+    @BeforeMethod
  @Parameters({"BaseURL"})
     public void launchBrowser(String BaseURL) throws MalformedURLException {
         //ChromeOptions options = new ChromeOptions();
@@ -107,7 +120,7 @@ public class BaseTest {
         url = BaseURL;
         navigateToLoginPage();
     }
-
+*/
     public static WebDriver pickBrowser(String browser) throws MalformedURLException{
         DesiredCapabilities caps = new DesiredCapabilities();
         String gridURL = "http://192.168.1.188:4444";
@@ -140,11 +153,17 @@ public class BaseTest {
 
         }
     }
+    /*
 @AfterMethod
     public void closeBrowser(){
         driver.quit();
     }
-
+*/
+    @AfterMethod
+    public void tearDown(){
+        threadDriver.get().close();
+        threadDriver.remove();
+    }
     public void navigateToLoginPage(){
         driver.get(url);
     }
