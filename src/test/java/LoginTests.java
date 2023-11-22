@@ -19,8 +19,8 @@ public class LoginTests extends BaseTest {
 
     @Test
     public void loginSuccessTest(){
-        LoginPage loginPage = new LoginPage(getDriver());
-        HomePage homePage = new HomePage(getDriver());
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
         loginPage.provideEmailToLogin("daria.chebotnyagina@testpro.io")
                 .providePasswordToLogin("Asdfasdf1")
                 .clickSubmitBtnToLogin();
@@ -29,8 +29,8 @@ public class LoginTests extends BaseTest {
     }
     @Test
     public void loginInvalidCredentials(){
-        LoginPage loginPage = new LoginPage(getDriver());
-        HomePage homePage = new HomePage(getDriver());
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
         loginPage.provideEmailToLogin("")
                 .providePasswordToLogin("Asdfasdf1")
                 .clickSubmitBtnToLogin();
