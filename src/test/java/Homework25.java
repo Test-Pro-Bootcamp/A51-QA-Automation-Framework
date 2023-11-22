@@ -1,26 +1,14 @@
 import Pages.HomePage;
 import Pages.LoginPage;
-import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
-import org.testng.Reporter;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-
-public class LoginTests extends BaseTest {
+public class Homework25 extends BaseTest {
 
     @Test
     public void loginSuccessTest(){
-        LoginPage loginPage = new LoginPage(driver);
-        HomePage homePage = new HomePage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
+        HomePage homePage = new HomePage(getDriver());
         loginPage.provideEmailToLogin("daria.chebotnyagina@testpro.io")
                 .providePasswordToLogin("Asdfasdf1")
                 .clickSubmitBtnToLogin();
@@ -29,8 +17,8 @@ public class LoginTests extends BaseTest {
     }
     @Test
     public void loginInvalidCredentials(){
-        LoginPage loginPage = new LoginPage(driver);
-        HomePage homePage = new HomePage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
+        HomePage homePage = new HomePage(getDriver());
         loginPage.provideEmailToLogin("")
                 .providePasswordToLogin("Asdfasdf1")
                 .clickSubmitBtnToLogin();

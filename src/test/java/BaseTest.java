@@ -93,7 +93,7 @@ private static final ThreadLocal <WebDriver> threadDriver = new ThreadLocal<>();
     static void setupClass() {
         //WebDriverManager.firefoxdriver().setup();
     }
-/*
+
     @BeforeMethod
     @Parameters({"BaseURL"})
     public void setupBrowser() throws MalformedURLException{
@@ -104,7 +104,7 @@ private static final ThreadLocal <WebDriver> threadDriver = new ThreadLocal<>();
     public static WebDriver getDriver(){
         return threadDriver.get();
     }
- */
+ /*
     @BeforeMethod
  @Parameters({"BaseURL"})
     public void launchBrowser(String BaseURL) throws MalformedURLException {
@@ -121,7 +121,7 @@ private static final ThreadLocal <WebDriver> threadDriver = new ThreadLocal<>();
         url = BaseURL;
         navigateToLoginPage();
     }
-
+*/
     public static WebDriver pickBrowser(String browser) throws MalformedURLException{
         DesiredCapabilities caps = new DesiredCapabilities();
         String gridURL = "http://192.168.1.188:4444";
