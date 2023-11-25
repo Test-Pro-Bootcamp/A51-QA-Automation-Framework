@@ -13,6 +13,8 @@ public class BasePage {
     protected WebDriver driver;
     protected WebDriverWait wait;
     protected Actions actions;
+
+
     //private int timeSeconds = 5;
 
     public BasePage(WebDriver givenDriver) {

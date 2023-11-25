@@ -36,8 +36,9 @@ public class BaseTest {
     public WebDriverWait wait;
     public static Actions actions = null;
 
+    //ThreadLocal<WebDriver> ThreadDriver;
 
-
+    private static final ThreadLocal<WebDriver> threadDriver = new ThreadLocal<>();
 
 
     //Setup WebDriverManager for ChromeDriver
@@ -47,6 +48,30 @@ public class BaseTest {
     }
 
     //Launch browser(s) and navigate to BaseUrl
+    @BeforeMethod
+    @Parameters({"BaseURL"})
+    public void setupBroweser(String BaseURL) throws MalformedURLException{
+        threadDriver.set(pickBrowser(System.getProperty("browser")));
+
+        //threadDriver = new ThreadLocal<>();
+        //threadDriver set(driver);
+
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        driver.manage().window().maximize();
+        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        actions = new Actions(driver);
+        url = BaseURL;
+        navigateToPage();
+    }
+    public void navigateToPage () {
+        driver.get(url);
+    }
+
+    public static WebDriver getDriver(){
+        return threadDriver.get();
+    }
+
+    /**
     @BeforeMethod
     @Parameters({"BaseUrl"})
     //changed launchBrowser to void method which has no return statement
@@ -64,7 +89,7 @@ public class BaseTest {
     public void navigateToPage () {
         driver.get(url);
     }
-
+**/
         public static WebDriver pickBrowser(String browser) throws MalformedURLException {
             DesiredCapabilities caps = new DesiredCapabilities();
             String gridURL = "http://172.30.97.60:4444";//replaced with current Grid URL
@@ -100,12 +125,36 @@ public class BaseTest {
             }
         }
 
+        public WebDriver lambdaTest(){
+            String username ="adam.johnson@testpro";
+            String authKey ="ebbsAPRVhS57sbKTXkwsRDlPVIZi5BqReWLeiP65TyPGPGgQNm";
+            String hub ="@hub.lambdatest.com/wd/hub";
+
+            DesiredCapabilities caps = new DesiredCapabilities();
+            caps.setCapability("platform", "Windows 10");
+            caps.setCapability("browserName", "Chrome");
+            caps.setCapability("version", "119.0");
+            caps.setCapability("resolution", "2560x1600");
+            caps.setCapability("build", "TestNG with Java");
+            caps.setCapability("name", this.getClass().getName());
+            caps.setCapability("plugin", "java-testNG");
+
+
+            return null;
+        }
+
     //Close the browser after each test method
+@AfterMethod
+    public void teardown(){
+            threadDriver.get().close();
+            threadDriver.remove();
+    }
+    /**
     @AfterMethod
     public void closeBrowser() {
         driver.quit();
     }
-
+**/
 
 }
 
