@@ -42,5 +42,3 @@ public class Homework19 extends BaseTest {
     }
 
 }
-
-// This comment is has nothing to do with this code!
