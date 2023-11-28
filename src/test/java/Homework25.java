@@ -7,8 +7,8 @@ public class Homework25 extends BaseTest {
 
     @Test
     public void loginSuccessTest(){
-        LoginPage loginPage = new LoginPage(getDriver());
-        HomePage homePage = new HomePage(getDriver());
+        LoginPage loginPage = new LoginPage(getThreadLocal());
+        HomePage homePage = new HomePage(getThreadLocal());
         loginPage.provideEmailToLogin("daria.chebotnyagina@testpro.io")
                 .providePasswordToLogin("Asdfasdf1")
                 .clickSubmitBtnToLogin();
@@ -17,8 +17,8 @@ public class Homework25 extends BaseTest {
     }
     @Test
     public void loginInvalidCredentials(){
-        LoginPage loginPage = new LoginPage(getDriver());
-        HomePage homePage = new HomePage(getDriver());
+        LoginPage loginPage = new LoginPage(getThreadLocal());
+        HomePage homePage = new HomePage(getThreadLocal());
         loginPage.provideEmailToLogin("")
                 .providePasswordToLogin("Asdfasdf1")
                 .clickSubmitBtnToLogin();
