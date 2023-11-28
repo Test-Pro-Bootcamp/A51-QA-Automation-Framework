@@ -29,6 +29,8 @@ public class HomePage extends BasePage{
     @FindBy(css="img.avatar")
     WebElement userAvatarIcon;
 
+
+
     public HomePage contextClickPlaylist(){
         contextClick(playlistExisting);
         return this;

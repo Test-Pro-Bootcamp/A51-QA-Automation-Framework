@@ -20,12 +20,17 @@ import org.testng.annotations.Parameters;
 
 import java.net.MalformedURLException;
 import java.net.URI;
+import java.net.URL;
 import java.time.Duration;
+import java.util.HashMap;
+
+import static java.sql.DriverManager.getDriver;
 
 public class BaseTest {
 
-    public static WebDriver driver;
-    public String url = "https://qa.koel.app/";
+    public static WebDriver driver = null;
+    public String url = null;
+    public static final ThreadLocal<WebDriver>threadDriver = new ThreadLocal<>();
     public WebDriverWait wait;
     public Actions actions;
 
@@ -37,22 +42,18 @@ public class BaseTest {
     @BeforeMethod
     @Parameters({"BaseURL"})
       public void launchBrowser(String BaseURL) throws MalformedURLException{
-//        ChromeOptions options = new ChromeOptions();
-//        options.addArguments("--remote-allow-origins=*");
-//        options.addArguments("--disable-notifications");
 
-        //driver = new ChromeDriver(options);
-        //driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver = pickBrowser(System.getProperty("browser"));
-        wait= new WebDriverWait(driver,Duration.ofSeconds(10));
-
-        actions = new Actions(driver);
+      threadDriver.set(pickBrowser(System.getProperty("browser")));
+      getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
          url = BaseURL;
         navigateToPage(BaseURL);
     }
+public static WebDriver getDriver(){
+        return threadDriver.get();
 
-    public static WebDriver pickBrowser(String browser)throws MalformedURLException {
+}
+    public WebDriver pickBrowser(String browser)throws MalformedURLException {
         DesiredCapabilities caps = new DesiredCapabilities();
         String gridURL= "http://192.168.86.147:4444";
 
@@ -80,6 +81,9 @@ public class BaseTest {
                 caps.setCapability("browserName","chrome");
                 return driver = new RemoteWebDriver(URI.create(gridURL).toURL(),caps);
 
+            case "cloud ":
+                return lambdaTest();
+
 
             default:
                 WebDriverManager.chromedriver().setup();
@@ -90,11 +94,41 @@ public class BaseTest {
         }
 
     }
+//public WebDriver lamdaTest()throws MalformedURLException{
+//        String username="capri.aparajita";
+//        String authKey = "JAYg1AzwrPdpE7aQYj5BszdwwdNQYSI6hCQvPsidCqT22xlCJ1";
+//        String hub ="@hub.lambdatest.com/wd/hub";
+//        DesiredCapabilities caps = new DesiredCapabilities();
+//        caps.setCapability("platform" , "Windows11");
+//        caps.setCapability("browserName" , "Chrome");
+//        caps.setCapability("version" , "119.0.");
+//        caps.setCapability("resolution" , "12024x768");
+//        caps.setCapability("platform" , "Windows11");
+//        caps.setCapability("platform" , "Windows11");
+//        caps.setCapability("platform" , "Windows11");
+//
+//        return null;
+//}
+    public WebDriver lambdaTest()throws MalformedURLException{
+        String hubURL = "https://hub.lambdatest.com/wd/hub" ;
 
+        ChromeOptions browserOptions = new ChromeOptions();
+        browserOptions.setPlatformName("Windows 10");
+        browserOptions.setBrowserVersion("120.0");
+        HashMap<String, Object> ltOptions = new HashMap<String, Object>();
+        ltOptions.put("username", "capri.aparajita");
+        ltOptions.put("accessKey", "JAYg1AzwrPdpE7aQYj5BszdwwdNQYSI6hCQvPsidCqT22xlCJ1");
+        ltOptions.put("project", "Untitled");
+        ltOptions.put("w3c", true);
+        ltOptions.put("plugin", "java-testNG");
+        browserOptions.setCapability("LT:Options", ltOptions);
+        return new RemoteWebDriver(new URL(hubURL),browserOptions);
+    }
 
     @AfterMethod
-    public void closeBrowser(){
-        driver.quit();
+    public void tearDown(){
+        threadDriver.get().close();
+        threadDriver.remove();
 
     }
     public void navigateToPage(String BaseURL) {

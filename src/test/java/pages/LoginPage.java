@@ -24,6 +24,12 @@ public class LoginPage extends BasePage {
     @FindBy(css = "[Type='submit']")
     WebElement submitButtonLocator;
 
+    @FindBy(xpath="//*[@id='app']/div/div/form/div[1]/img")
+    WebElement koelIcon;
+
+    @FindBy(css="[href ='registration']")
+    WebElement registrationLink;
+
     public void provideEmail(String email) {
         emailTxtField.sendKeys(email);
     }
@@ -35,4 +41,14 @@ public class LoginPage extends BasePage {
             submitButtonLocator.click();
         }
 
+
+
+    public  WebElement getRegistrationLink() {
+        return registrationLink;
+
+    }
+
+//    public WebElement registrationLink() {
+//        return null;
+//    }
 }
