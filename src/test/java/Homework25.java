@@ -22,9 +22,20 @@ public class Homework25 extends BaseTest {
         loginPage.provideEmailToLogin("")
                 .providePasswordToLogin("Asdfasdf1")
                 .clickSubmitBtnToLogin();
+        Assert.assertEquals(getThreadLocal().getCurrentUrl(),"https://qa.koel.app/");
+    }
+
+    /*
+    @Test
+    public void loginInvalidCredentials(){
+        LoginPage loginPage = new LoginPage(getThreadLocal());
+        HomePage homePage = new HomePage(getThreadLocal());
+        loginPage.provideEmailToLogin("")
+                .providePasswordToLogin("Asdfasdf1")
+                .clickSubmitBtnToLogin();
         Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
     }
-/*
+
     @Test(dataProvider = "LoginData")
     public void loginValidEmailPasswordTest(String email, String password){
         LoginPage loginPage = new LoginPage(driver);
