@@ -1,25 +1,86 @@
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
+import pageObjectModel.HomePage;
+import pageObjectModel.LoginPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.time.Duration;
-
 public class LoginTests extends BaseTest {
+
     @Test
-    public void loginEmptyEmailPassword() {
+    public void loginSuccessTest() {
 
-//      Added ChromeOptions argument below to fix websocket error
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
+        LoginPage loginPage = new LoginPage(getThreadLocal());
+        HomePage homePage = new HomePage(getThreadLocal());
 
-        WebDriver driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        loginPage.provideEmailToLogin("lolitamantsiuk@gmail.com");
+        loginPage.providePasswordToLogin("te$t$tudent");
+        loginPage.clickSubmitBtn();
+        Assert.assertTrue(loginPage.getRegistrationLink().isDisplayed());
+    }
 
-        String url = "https://qa.koel.app/";
-        driver.get(url);
-        Assert.assertEquals(driver.getCurrentUrl(), url);
-        driver.quit();
+    @Test
+    public void loginValidEmailPasswordTest() {
+        LoginPage loginPage = new LoginPage(getThreadLocal());
+        HomePage homePage = new HomePage(getThreadLocal());
+
+        loginPage.provideEmailToLogin("lolitamantsiuk@gmail.com");
+        loginPage.providePasswordToLogin("te$t$tudent");
+        loginPage.clickSubmitBtn();
+
+        Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
+    }
+
+    // FLUENT WAY STARTS HERE
+    @Test
+    public void loginValidEmailPasswordByPageFactory() {
+        LoginPage loginPage = new LoginPage(getThreadLocal());
+        HomePage homePage = new HomePage(getThreadLocal());
+
+        loginPage.provideEmailToLogin("lolitamantsiuk@gmail.com");
+        loginPage.providePasswordToLogin("te$t$tudent");
+        loginPage.clickSubmitBtn();
+
+        Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
+    }
+
+    @Test
+    public static void loginEmptyEmailPasswordTest() {
+        LoginPage loginPage = new LoginPage(getThreadLocal());
+
+        loginPage.provideEmailToLogin("");
+        loginPage.providePasswordToLogin("te$t$tudent");
+        loginPage.clickSubmitBtn();
+
+        Assert.assertTrue(loginPage.getRegistrationLink().isDisplayed());
+    }
+    @Test
+    public static void loginEmptyPasswordTest() {
+        LoginPage loginPage = new LoginPage(getThreadLocal());
+
+        loginPage.provideEmailToLogin("lolitamantsiuk@gmail.com");
+        loginPage.providePasswordToLogin("");
+        loginPage.clickSubmitBtn();
+
+        Assert.assertTrue(loginPage.getRegistrationLink().isDisplayed());
+    }
+
+    @Test
+    public static void loginWrongEmailTest() {
+        LoginPage loginPage = new LoginPage(getThreadLocal());
+
+        loginPage.provideEmailToLogin("demo@class.com");
+        loginPage.providePasswordToLogin("te$t$tudent");
+        loginPage.clickSubmitBtn();
+
+        Assert.assertTrue(loginPage.getRegistrationLink().isDisplayed());
+    }
+
+    @Test
+    public void loginSucceedTest() {
+        LoginPage loginPage = new LoginPage(getThreadLocal());
+        HomePage homePage = new HomePage(getThreadLocal());
+
+        loginPage.provideLoginSucceed();
+
+        Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
     }
 }
