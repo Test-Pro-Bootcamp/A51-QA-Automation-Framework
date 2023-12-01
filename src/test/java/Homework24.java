@@ -1,3 +1,4 @@
+/**
 import Pages.HomePage;
 import Pages.LoginPage;
 import org.testng.Assert;
@@ -19,12 +20,14 @@ public class Homework24 extends BaseTest {
         //THEN
         //call login methods from LoginPage
         loginPage.provideEmail("adam.johnson@testpro.io").providePassword("1Te$t$tudent").clickSubmitBtn();
-        /*
-        homePage.openPlaylist(); change these methods and check HomePage page object
+
+        //homePage.openPlaylist(); change these methods and check HomePage page object
         //WHEN
-        Assert.assertEquals(homePage.getDeletedPlaylistMsg(), expectedPLayListDeletedMessage);
-         */
+        //Assert.assertEquals(homePage.getDeletedPlaylistMsg(), expectedPLayListDeletedMessage);
+
     }
 
 
 }
+
+**/

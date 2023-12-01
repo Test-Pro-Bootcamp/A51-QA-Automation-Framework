@@ -6,10 +6,6 @@ import org.openqa.selenium.support.FindBy;
 
 public class LoginPage extends BasePage {
 
-    @FindBy(css = "button[type='submit']")
-    private WebElement submitButtonLocator;
-    // Represents the submit button on the login form.
-
     @FindBy(css = "[type='email']")
     private WebElement emailField;
     // Represents the email input field on the login form.
@@ -18,14 +14,14 @@ public class LoginPage extends BasePage {
     private WebElement passwordField;
     // Represents the password input field on the login form.
 
+    @FindBy(css = "button[type='submit']")
+    private WebElement submitButtonLocator;
+    // Represents the submit button on the login form.
+
     public LoginPage(WebDriver givenDriver) {
         super(givenDriver);
     }
 
-    public LoginPage clickSubmitBtn() {
-        submitButtonLocator.click();
-        return this;
-    }
 
     public LoginPage provideEmail(String email) {
         emailField.sendKeys(email);
@@ -37,13 +33,18 @@ public class LoginPage extends BasePage {
         return this;
     }
 
+    public LoginPage clickSubmitBtn() {
+        submitButtonLocator.click();
+        return this;
+    }
+
     public void provideLoginSucceed() {
         provideEmail("adam.johnson@testpro.io");
         providePassword("1Te$t$tudent");
         clickSubmitBtn();
     }
 }
-//removed extra curly brace
+
 
 
 

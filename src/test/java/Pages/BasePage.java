@@ -4,7 +4,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
@@ -14,8 +13,6 @@ public class BasePage {
     protected WebDriverWait wait;
     protected Actions actions;
 
-
-    //private int timeSeconds = 5;
 
     public BasePage(WebDriver givenDriver) {
         driver = givenDriver;
@@ -43,5 +40,3 @@ public class BasePage {
     }
 
 }
-//removed extra curly brace
-//}
