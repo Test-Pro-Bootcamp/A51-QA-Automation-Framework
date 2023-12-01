@@ -5,20 +5,12 @@ import pom.LoginPage;
 
 
 public class LoginTests extends BaseTest {
-
-    //Page Object Model example
     @Test
     public void loginValidEmailPassword() {
 
         LoginPage loginPage = new LoginPage(basePage.getDriver());
+        loginPage.login();
         HomePage homePage = new HomePage(basePage.getDriver());
-
-        loginPage.provideEmail("demo@class.com");
-        loginPage.providePassword("te$t$tudent");
-        loginPage.clickSubmit();
-
         Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
-
     }
-
 }

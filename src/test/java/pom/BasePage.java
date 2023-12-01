@@ -34,5 +34,8 @@ public class BasePage {
     public WebDriver getDriver() {
         return driver;
     }
+    public void contextClick(WebElement element) {
+        actions.contextClick(element).perform();
+    }
 }
 

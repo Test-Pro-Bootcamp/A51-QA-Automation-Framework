@@ -2,26 +2,28 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pom.HomePage;
+import pom.LoginPage;
+import pom.ProfilePage;
+
 public class ProfileTests extends BaseTest {
     @Test
-    public void changeProfileName() throws InterruptedException {
+    public void changeProfileName() {
 
-        navigateToPage();
+        LoginPage loginPage = new LoginPage(basePage.getDriver());
+        loginPage.login();
 
-        provideEmail("demo@class.com");
-        providePassword("te$t$tudent");
-        clickSubmit();
+        HomePage homePage = new HomePage(basePage.getDriver());
+        homePage.getAvatarIcon().click();
 
-        clickAvatarIcon();
+        ProfilePage profilePage = new ProfilePage(basePage.getDriver());
+        String randomName = profilePage.generateRandomName();
 
-        String randomName = generateRandomName();
+        profilePage.getProfileNameInput().clear();
+        profilePage.getProfileNameInput().sendKeys(randomName);
+        profilePage.getSaveButton().click();
 
-        provideCurrentPassword("te$t$tudent");
-        provideProfileName(randomName);
-        clickSaveButton();
-
-        WebElement actualProfileName = driver.findElement(By.cssSelector("a.view-profile>span"));
-        Assert.assertEquals(actualProfileName.getText(), randomName);
+        Assert.assertEquals(homePage.getProfileName().getText(), randomName);
     }
 }
 
