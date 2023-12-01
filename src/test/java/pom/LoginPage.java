@@ -20,10 +20,17 @@ public class LoginPage extends BasePage{
         findElement(submitBtn).click();
     }
     public void login(){
-        provideEmail("demo@class.com");
-        providePassword("te$t$tudent");
+        provideEmail(getEmail());
+        providePassword(getPassword());
         clickSubmit();
     }
+    public String getEmail() {
+        return "demo@class.com";
+    }
+    public String getPassword() {
+        return "te$t$tudent";
+    }
+
 }
 
 

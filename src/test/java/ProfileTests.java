@@ -8,7 +8,7 @@ import pom.ProfilePage;
 
 public class ProfileTests extends BaseTest {
     @Test
-    public void changeProfileName() {
+    public void changeProfileName() throws InterruptedException {
 
         LoginPage loginPage = new LoginPage(basePage.getDriver());
         loginPage.login();
@@ -19,10 +19,12 @@ public class ProfileTests extends BaseTest {
         ProfilePage profilePage = new ProfilePage(basePage.getDriver());
         String randomName = profilePage.generateRandomName();
 
+        profilePage.getPasswordField().sendKeys(loginPage.getPassword());
         profilePage.getProfileNameInput().clear();
         profilePage.getProfileNameInput().sendKeys(randomName);
         profilePage.getSaveButton().click();
 
+        Thread.sleep(2000);
         Assert.assertEquals(homePage.getProfileName().getText(), randomName);
     }
 }

@@ -14,6 +14,7 @@ public class ProfilePage extends BasePage {
     By profileNameInput = By.cssSelector("[name='name']");
     By submitButton = By.cssSelector("button[type='submit']");
     By saveButton = By.cssSelector("button.btn-submit");
+    By passwordField = By.cssSelector("[name='current_password']");
     public String generateRandomName() {
         return UUID.randomUUID().toString().replace("-", "");
     }
@@ -25,5 +26,8 @@ public class ProfilePage extends BasePage {
     }
     public WebElement getSaveButton() {
         return findElement(saveButton);
+    }
+    public WebElement getPasswordField() {
+        return findElement(passwordField);
     }
 }
