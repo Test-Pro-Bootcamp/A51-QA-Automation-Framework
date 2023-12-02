@@ -88,7 +88,7 @@ public static WebDriver getDriver(){
             default:
                 WebDriverManager.chromedriver().setup();
                 ChromeOptions options = new ChromeOptions();
-                options.setBinary("C:\\ThePAthtoChrome.exe");
+                options.setBinary("\"C:\\Program Files\\JetBrains\\IntelliJ IDEA Community Edition 2023.2.1\\jbr\\bin\\chrome_elf.dll\"");
 
                 options.addArguments("--remote-allow-origins=*");
                options.addArguments("--disable-notifications");
