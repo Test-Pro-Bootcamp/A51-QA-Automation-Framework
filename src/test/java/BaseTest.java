@@ -88,7 +88,9 @@ public static WebDriver getDriver(){
             default:
                 WebDriverManager.chromedriver().setup();
                 ChromeOptions options = new ChromeOptions();
-               options.addArguments("--remote-allow-origins=*");
+                options.setBinary("C:\\ThePAthtoChrome.exe");
+
+                options.addArguments("--remote-allow-origins=*");
                options.addArguments("--disable-notifications");
                return driver = new ChromeDriver(options);
         }
