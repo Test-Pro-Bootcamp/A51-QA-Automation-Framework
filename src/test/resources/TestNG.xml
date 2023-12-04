@@ -3,17 +3,16 @@
 
     <suite name="TestNG" parallel="methods" thread-count="3">
 
-        <parameter name="BaseURL" value="https://qa.koel.app/"/>
+
         <test name="Example Test" preserve-order="false">
-            <!--commented out, not sure if needed-->
+            <parameter name="BaseURL" value="https://qa.koel.app/"/>
+            <!--commented out, not sure if needed
             <parameter name="browser" value="firefox"/>
             <parameter name="browser" value="chrome"/>
-            <parameter name="browser" value="safari"/>
-
+            <parameter name="browser" value="safari"/>-->
         <classes>
 <!--            <class name="BaseTest"/>-->
             <class name="LoginTests"/>
-<!--&lt;!&ndash;            <class name="Homework24"/>&ndash;&gt; comment this for now, unfinished test case-->
         </classes>
     </test>
 </suite>
