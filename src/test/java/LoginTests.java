@@ -1,25 +1,71 @@
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
+import org.testng.Reporter;
 import org.testng.annotations.Test;
-
-import java.time.Duration;
+import pages.HomePage;
+import pages.LoginPage;
 
 public class LoginTests extends BaseTest {
+
+
     @Test
-    public void loginEmptyEmailPassword() {
+    public void loginSuccessTest() {
+        HomePage homePage = new HomePage(getDriver());
+        LoginPage loginPage =  new LoginPage(getDriver());
+        loginPage.provideEmail("fake@fakeaccount.com")
+                .providePassword("te$t$tudent")
+                .clickSubmitBtn();
+        Assert.assertTrue(homePage.getUserAvatar());
+    }
 
-//      Added ChromeOptions argument below to fix websocket error
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
+    @Test
+    public void loginWrongPasswordTest() {
+        HomePage homePage = new HomePage(getDriver());
+        LoginPage loginPage =  new LoginPage(getDriver());
+        loginPage.provideEmail("fake@fakeaccount.com")
+                .providePassword("wrongPassword")
+                .clickSubmitBtn();
+        loginPage.getRegistrationLink();
+    }
 
-        WebDriver driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+    @Test
+    public void loginWrongEmailTest() {
+        HomePage homePage = new HomePage(getDriver());
+        LoginPage loginPage =  new LoginPage(getDriver());
+        loginPage.provideEmail("wrong@wrong.mail")
+                .providePassword("te$t$tudent")
+                .clickSubmitBtn();
+        loginPage.getRegistrationLink();
+    }
 
-        String url = "https://qa.koel.app/";
-        driver.get(url);
-        Assert.assertEquals(driver.getCurrentUrl(), url);
-        driver.quit();
+    @Test
+    public void loginEmptyPasswordTest() {
+        HomePage homePage = new HomePage(getDriver());
+        LoginPage loginPage =  new LoginPage(getDriver());
+        loginPage.provideEmail("fake@fakeaccount.com")
+                .providePassword("")
+                .clickSubmitBtn();
+        loginPage.getRegistrationLink();
+    }
+    @Test(dataProvider = "LoginData")
+    public void loginWithLoginData(String email, String password) {
+        HomePage homePage = new HomePage(getDriver());
+        LoginPage loginPage =  new LoginPage(getDriver());
+        loginPage.provideEmail(email)
+                .providePassword(password)
+                .clickSubmitBtn();
+        Assert.assertTrue(homePage.getUserAvatar());
+    }
+    @Test(dataProvider = "excel-data")
+    public void loginWithExcelData(String email, String password){
+        HomePage homePage = new HomePage(getDriver());
+        LoginPage loginPage =  new LoginPage(getDriver());
+        try{
+            loginPage.provideEmail(email)
+                    .providePassword(password)
+                            .clickSubmitBtn();
+            Assert.assertTrue(homePage.getUserAvatar());
+        } catch(Exception e){
+            Reporter.log("Unable to login with Excel Data for an unknown reason." + e);
+        }
     }
 }
