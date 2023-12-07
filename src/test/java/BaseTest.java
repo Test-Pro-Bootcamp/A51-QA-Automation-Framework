@@ -35,7 +35,6 @@ public class BaseTest {
         driver.quit();
     }
 
-
     public void navigateToPage() {
         driver.get(url);
     }

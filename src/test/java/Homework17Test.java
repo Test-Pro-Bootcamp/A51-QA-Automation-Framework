@@ -12,7 +12,7 @@ public class Homework17Test extends BaseTest {
 
 public void addSongToPlaylist() throws InterruptedException {
 
-        String songAddedMessage = "Added 1 song into \"Test Play\" ";
+        String songAddedMessage = "Added 1 song into \"Test Play.\"";
 
         //Pre-Condition
         navigateToPage();
@@ -54,9 +54,10 @@ public void addToButton() throws InterruptedException {
     Thread.sleep(2000);
 }
 //Step 5
-public void selectPlaylist() {
+public void selectPlaylist() throws InterruptedException {
     WebElement playlist = driver.findElement(By.xpath("//section[@id='songResultsWrapper']//li[contains(text(),'Test Play')]"));
     playlist.click();
+    Thread.sleep(3000);
 }
 public String getAddToPlaylistSuccessMsg () {
         WebElement notification = driver.findElement(By.cssSelector("div.success.show"));
