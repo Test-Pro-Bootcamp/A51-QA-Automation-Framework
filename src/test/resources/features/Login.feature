@@ -17,6 +17,7 @@ Feature: Login feature
 
     Examples:
       |email                          |password|
-      |daria.chebotnyagina@testpro.io |Asdfasdf1|
-      |daria.chebotnyagina@gmail.com |Asdfasdf1|
-      |daria.chebot@gmail.com |Asdfasdf1|
+      |daria.chebotnyagina@testpro.io |         |
+      |daria.chebotnyagina@gmail.com  |Asdfasdf1|
+      |daria.chebot@gmail.com         |Asdfasdf1|
+      |daria.chebotnyagina@testpro.io |Asdfasdf|
