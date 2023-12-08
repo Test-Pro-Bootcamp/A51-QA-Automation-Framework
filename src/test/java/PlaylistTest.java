@@ -3,15 +3,19 @@ import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.LoginPage;
 
+public class PlaylistTest extends BaseTest {
 
-public class Homework22 extends BaseTest{
+    //public Homework23(WebDriver givenDriver) {
+        //super(givenDriver);
+   // }
 
     @Test
 
     public void renamePlaylist(){
-        String updatedPlaylistName = "Updated playlist \"melodious album.\"";
 
-        LoginPage loginPage = new LoginPage(driver);
+        String updatedPlaylistName= "Updated playlist \"melodious album.\"";
+
+        LoginPage loginPage= new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
 
         loginPage.provideEmail("aparajita.jha@testpro.io");
@@ -22,6 +26,7 @@ public class Homework22 extends BaseTest{
         homePage.clickEdit();
         homePage.enterNewPlaylistName("melodious album");
 
-Assert.assertEquals(homePage.getRenamePlaylistSuccessMsg(),updatedPlaylistName);
+        Assert.assertEquals(homePage.getRenamePlaylistSuccessMsg(),updatedPlaylistName);
+
     }
 }

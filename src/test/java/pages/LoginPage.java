@@ -25,10 +25,12 @@ public class LoginPage extends BasePage {
     WebElement submitButtonLocator;
 
     public void provideEmail(String email) {
+
         emailTxtField.sendKeys(email);
     }
         public void providePassword (String password){
-            passwordTxtField.sendKeys(password);
+
+        passwordTxtField.sendKeys(password);
         }
 
         public void clickSubmit () {

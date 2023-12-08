@@ -25,6 +25,49 @@ public class HomePage extends BasePage{
     //By renamePlaylistSuccessMsg = By.cssSelector("div.success.show");
     @FindBy(css="div.success.show")
     WebElement renamePlaylistSuccessMsg;
+    @FindBy(css="img.avatar")
+    WebElement userAvatarIcon;
+
+    @FindBy(xpath="//*[@id='sidebar']/section[1]/ul/li[3]/a")
+    WebElement allSongs;
+
+    @FindBy(xpath="//*[@id='userBadge']/a[1]")
+    WebElement profileLink;
+
+    @FindBy(xpath="//*[@id='mainFooter']/div[1]/span/span[2]/i")
+    WebElement playSong;
+
+    @FindBy(xpath="//*[@id='mainFooter']/div[1]")
+    WebElement playNextSong;
+
+    @FindBy(css= "[data-testid='sound-bar-play']")
+    WebElement soundBar;
+    @FindBy(css="[href='registration']")
+    WebElement registrationLink;
+
+
+    public HomePage currentSongPlay(){
+        click(playSong);
+        return this;
+    }
+     public HomePage nextSongPlay(){
+        click(playNextSong);
+        return this;
+     }
+
+     public Boolean isSongPlaying(){
+         return soundBar.isDisplayed();
+     }
+
+    public HomePage clickProfileLink(){
+        click(profileLink);
+        return this;
+    }
+    public HomePage clickAllSongs(){
+        click(allSongs);
+        return this;
+    }
+
 
     public HomePage contextClickPlaylist(){
         contextClick(playlistExisting);
@@ -37,9 +80,9 @@ public class HomePage extends BasePage{
         return this;
  }
 
-//    public WebElement getUserAvatar(){
-//        return findElement(userAvatarIcon);
-//    }
+    public WebElement getUserAvatar(){
+        return findElement(userAvatarIcon);
+    }
 
     public HomePage enterNewPlaylistName(String playlistName){
         findElement(playlistNameField);
@@ -52,6 +95,10 @@ public class HomePage extends BasePage{
     public String getRenamePlaylistSuccessMsg(){
         return findElement (renamePlaylistSuccessMsg).getText();
 
+    }
+
+    public WebElement getRegistrationLink() {
+        return findElement(registrationLink);
     }
 }
 

@@ -23,7 +23,7 @@ import java.time.Duration;
 public class BaseTest {
  public WebDriver driver = null;
 
-    //public WebDriver driver;
+
     public String url = "https://qa.koel.app/";
     public WebDriverWait wait;
     public Actions actions;
@@ -35,22 +35,18 @@ public class BaseTest {
     }
 
 
-   @BeforeMethod
+//   @BeforeMethod
+//
+//   public void LaunchBrowser() {
+//       ChromeOptions options = new ChromeOptions();
+//       options.addArguments("--remote-allow-origins=*");
+//
+//       driver = new ChromeDriver(options);
+//       driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+//   }
 
-   public void LaunchBrowser() {
-       ChromeOptions options = new ChromeOptions();
-       options.addArguments("--remote-allow-origins=*");
-
-       driver = new ChromeDriver(options);
-       driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-   }
 
 
-    public void navigateToLoginpage(){
-        String url = "https://qa.koel.app/";
-        driver.get(url);
-
-    }
 
 
     @BeforeMethod
@@ -95,7 +91,7 @@ public class BaseTest {
     }
     public void clickSubmit(){
 
-        WebElement submit=driver.findElement(By.cssSelector("[type='submit']"));
+        WebElement submit=wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[type='submit']")));
         submit.click();
 
     }
