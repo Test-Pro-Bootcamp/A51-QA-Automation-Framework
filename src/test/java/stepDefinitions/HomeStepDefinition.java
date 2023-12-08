@@ -1,9 +1,6 @@
 package stepDefinitions;
 
-import Pages.AllSongsPage;
-import Pages.HomePage;
-import Pages.LoginPage;
-import Pages.PlayList;
+import Pages.*;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
@@ -11,7 +8,9 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -37,10 +36,12 @@ public class HomeStepDefinition {
     public void closeBrowser(){
         driver.quit();
     }
+
+
     @Given("I open login page")
     public void iOpenLoginPage() {
         driver.get("https://qa.koel.app/");
-    }    
+    }
     @And("I open Home Page")
     public void iOpenHomePage() {
         LoginPage loginPage = new LoginPage(driver);
@@ -92,4 +93,40 @@ public class HomeStepDefinition {
     }
 
 
+    @And("I search the song {string}")
+    public void iSearchTheSong(String name) {
+        PlayList playList = new PlayList(driver);
+        playList.searchField(name);
+    }
+
+    @And("I click view all button")
+    public void iClickViewAllButton() {
+        PlayList playList = new PlayList(driver);
+        playList.provideViewAll();
+    }
+
+    @And("I choose the song")
+    public void iChooseTheSong() {
+        PlayList playList = new PlayList(driver);
+        playList.choiceSong();
+    }
+
+    @And("I add this song in the play list")
+    public void iAddThisSongInThePlayList() {
+        PlayList playList = new PlayList(driver);
+        playList.addToList();
+    }
+
+    @And("I choose the play list")
+    public void iChooseThePlayList() {
+        PlayList playList = new PlayList(driver);
+        playList.choiceList();
+    }
+
+    @Then("I see the notification Message about adding the song")
+    public void iSeeTheNotificationMessageAboutAddingTheSong() {
+        String expectedSongAddedMessage = "Added 1 song into \"new name for playlist.\"";
+        PlayList playList = new PlayList(driver);
+        Assert.assertEquals(playList.notificationMessage(), expectedSongAddedMessage);
+    }
 }

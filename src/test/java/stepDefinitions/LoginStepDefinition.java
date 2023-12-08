@@ -36,6 +36,8 @@ public class LoginStepDefinition {
     public void closeBrowser(){
         driver.quit();
     }
+
+
     @Given("I open Login Page")
     public void iOpenLoginPage() {
         driver.get("https://qa.koel.app/");
