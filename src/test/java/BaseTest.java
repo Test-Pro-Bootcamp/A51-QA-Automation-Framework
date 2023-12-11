@@ -19,6 +19,7 @@ import org.testng.annotations.Parameters;
 
 import java.net.MalformedURLException;
 import java.net.URI;
+import java.net.URL;
 import java.time.Duration;
 
 public class BaseTest {
@@ -69,6 +70,21 @@ public class BaseTest {
     }
 
     //region Helper Methods
+    public static WebDriver lambdaTest() throws MalformedURLException {
+        String userName= "khrys415";
+        String authenticationKey = "bfsnu5KKEGMs0QSQRdf40hIJDebc2YS0YzL6NdFUa21pTeyo84";
+        String hub = "@hub.lambdatest.com/wd/hub";
+
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability("browserName", "Chrome");
+        capabilities.setCapability("browserVersion", "120.0");
+        capabilities.setCapability("username", "khrys415");
+        capabilities.setCapability("accessKey", "bfsnu5KKEGMs0QSQRdf40hIJDebc2YS0YzL6NdFUa21pTeyo84");
+        capabilities.setCapability("platformName", "Windows 10");
+        capabilities.setCapability("project", "Untitled");
+
+        return new RemoteWebDriver(new URL("https//"+userName+":"+authenticationKey+hub),capabilities);
+    }
     public static WebDriver pickBrowser(String browser) throws MalformedURLException {
         DesiredCapabilities caps = new DesiredCapabilities();
         String gridURL = "http://localhost:4444";//"http://10.74.130.198:4444";
@@ -91,6 +107,8 @@ public class BaseTest {
             case "grid-chrome":// gradle clean test -Dbrowser=grid-chrome
                 caps.setCapability("browseName", "chrome");
                 return driver = new RemoteWebDriver(URI.create(gridURL).toURL(),caps);
+            case "cloud":
+                return lambdaTest();
             default:
                 WebDriverManager.chromedriver().setup();
                 ChromeOptions options = new ChromeOptions();
