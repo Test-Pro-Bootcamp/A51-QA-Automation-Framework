@@ -44,7 +44,7 @@ public class Homework21Test extends BaseTest {
 
     public void playlistNewName() {
         WebElement playlistNameField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@name='name']")));
-        playlistNameField.sendKeys(Keys.chord(Keys.CONTROL,"A",Keys.BACK_SPACE));
+        playlistNameField.sendKeys(Keys.chord(Keys.COMMAND,"A",Keys.BACK_SPACE));
         playlistNameField.sendKeys("Test Play2");
         playlistNameField.sendKeys(Keys.ENTER);
     }
