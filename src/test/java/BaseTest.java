@@ -36,6 +36,7 @@ public class BaseTest {
     public static WebDriverWait wait = null;
 
     public static Actions actions = null;
+    private static final ThreadLocal <WebDriver> threadDriver = new ThreadLocal<>();
 
     //References end here
 
@@ -44,16 +45,20 @@ public class BaseTest {
         //WebDriverManager.chromedriver().setup();
         WebDriverManager.firefoxdriver().setup();
     }
-
-    @BeforeMethod //The annotated method will be run before all the test methods in the current class have been run.
+    @BeforeMethod
+    @Parameters({"BaseURL"})
+    public void setupBrowser(String BaseURL) throws MalformedURLException {
+        threadDriver.set(pickBrowser(System.getProperty("browser")));
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        navigateToPage(BaseURL);
+    }
+    public static WebDriver getDriver(){
+        return threadDriver.get();
+    }
+   /* @BeforeMethod //The annotated method will be run before all the test methods in the current class have been run.
     @Parameters({"BaseURL"})
     public void  launchBrowser(String BaseURL) throws MalformedURLException {
-        //Added ChromeOptions argument below to fix websocket error
-        //ChromeOptions options = new ChromeOptions();
-        //options.addArguments("--remote-allow-origins=*");
 
-        //driver = new ChromeDriver(options);
-        //driver =new FirefoxDriver();
         driver = pickBrowser(System.getProperty("browser"));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
@@ -63,7 +68,27 @@ public class BaseTest {
         url = BaseURL;
         navigateToPage();
 
-    }
+    }*/
+   /*    @BeforeMethod //The annotated method will be run before all the test methods in the current class have been run.
+    //    @Parameters({"BaseURL"})
+    //    public void  launchBrowser(String BaseURL) throws MalformedURLException {
+    //        //Added ChromeOptions argument below to fix websocket error
+    //        //ChromeOptions options = new ChromeOptions();
+    //        //options.addArguments("--remote-allow-origins=*");
+    //
+    //        //driver = new ChromeDriver(options);
+    //        //driver =new FirefoxDriver();
+    //        driver = pickBrowser(System.getProperty("browser"));
+    //        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+    //        driver.manage().window().maximize();
+    //
+    //        actions = new Actions(driver);
+    //        wait = new WebDriverWait(driver,Duration.ofSeconds(10));
+    //        url = BaseURL;
+    //        navigateToPage();
+    //
+        }
+     */
     @AfterMethod //The annotated method will be run after each test method
     public void closeBrowser(){
         driver.quit();
@@ -116,8 +141,11 @@ public class BaseTest {
                 return driver = new ChromeDriver(options);
         }
     }
-    protected void navigateToPage() {
+    public void navigateToPage() {
         driver.get(url);
+    }
+    public void navigateToPage(String BaseURL){
+        getDriver().get(BaseURL);
     }
 
     protected void provideEmail(String email) {
