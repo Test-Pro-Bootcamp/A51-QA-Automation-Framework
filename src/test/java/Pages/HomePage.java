@@ -30,7 +30,7 @@ public class HomePage extends BasePage {
         public void edit() {
             click(clickEdit);
         }
-        public void renamePlaylist(String playlistName) {
+        public void editPlaylistName(String playlistName) {
             findElement(playlistNameField).sendKeys(Keys.chord(Keys.COMMAND,"A",Keys.BACK_SPACE));
             findElement(playlistNameField).sendKeys(playlistName);
             findElement(playlistNameField).sendKeys(Keys.ENTER);

@@ -21,6 +21,7 @@ public class BasePage {
         driver = givenDriver;
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         actions = new Actions(driver);
+    }
 
         public WebElement findElement (By locator){
 
@@ -37,4 +38,4 @@ public class BasePage {
         }
 
     }
-}
+

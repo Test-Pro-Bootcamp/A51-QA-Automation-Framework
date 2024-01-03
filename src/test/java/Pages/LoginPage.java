@@ -26,7 +26,7 @@ public class LoginPage extends BasePage {
         click(submit);
         }
     public void login(){
-      provideEmail("https://qa.koel.app/");
+      provideEmail("sade.harris@testpro.io");
       providePassword("te$t$tudent");
       clickSubmit();
     }

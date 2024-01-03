@@ -21,7 +21,7 @@ public class Homework22Test extends BaseTest {
         loginPage.login();
         homePage.clickPlaylist();
         homePage.edit();
-        homePage.renamePlaylist(newPlaylistName);
+        homePage.editPlaylistName(newPlaylistName);
         Assert.assertEquals(homePage.getRenameSuccessMsg(), renameSuccessMsg);
 
     }
