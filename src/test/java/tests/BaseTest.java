@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
 
 import java.time.Duration;
@@ -13,6 +14,8 @@ import java.time.Duration;
 public class BaseTest {
     public WebDriver driver = null;
     public String url;
+
+    public WebDriverWait wait;
 
     @BeforeSuite
     static void setupClass() {
@@ -26,7 +29,11 @@ public class BaseTest {
         options.addArguments("--remote-allow-origins=*");
 
         driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
+        //driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
+        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+
         url = BaseURL;
         navigateToPage();
     }
@@ -47,7 +54,7 @@ public class BaseTest {
     @DataProvider (name = "ValidLoginData")
     public static Object[][] getInvalidDataFromDataProvider(){
         return new Object[][]{
-                {"alina.nikolaienko@testpro.io", "OPJKDUhA"}
+                {"alina.nikolaienko@testpro.io", "OPJKDUhA"} //alina.nikolaienko+1@testpro.io eZNqX9hp
         };
     }
 
