@@ -30,44 +30,35 @@ import org.testng.Reporter;
 
 
 public class BaseTest {
-    //added for cloud test
-    private static final ThreadLocal<WebDriver> THREAD_LOCAL = new ThreadLocal<>();
-    //added for cloud test
-    private WebDriver driver;
-    //added for cloud test
-    public static WebDriver getThreadLocal(){
-        return THREAD_LOCAL.get();
-    }
-    //commented out for now
-    //public static WebDriver driver;
-    public static String url;
+
+    public WebDriver driver;
     public WebDriverWait wait;
-    public static Actions actions = null;
+    public Actions actions;
+    public String url;
+    private final ThreadLocal<WebDriver> threadDriver = new ThreadLocal<>();
 
 
-//commented out for now
-    /**
-    Setup WebDriverManager for ChromeDriver
+    //Setup WebDriverManager for ChromeDriver
     @BeforeSuite
     static void setupClass() {
         WebDriverManager.chromedriver().setup();
     }
-    **/
+
+    public WebDriver getDriver() {
+        return threadDriver.get();
+    }
+
 
     //Launch browser(s) and navigate to BaseUrl
     @BeforeMethod
     @Parameters({"BaseURL"})
-    //added for cloud test
-    public void setUpBrowser(@Optional String baseURL) throws MalformedURLException {
-        THREAD_LOCAL.set(pickBrowser(System.getProperty("browser")));
-        THREAD_LOCAL.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-        THREAD_LOCAL.get().manage().window().maximize();
-        //THREAD_LOCAL.get().manage().deleteAllCookies();
-        getThreadLocal().get(baseURL);
-        System.out.println("Browser setup by Thread " + Thread.currentThread().getId() + " and Driver reference is: " + getThreadLocal());
+    public void setUpBrowser(String BaseURL) throws MalformedURLException {
+        threadDriver.set(pickBrowser(System.getProperty("browser")));
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        navigateToLogin(BaseURL);
     }
-    //added for cloud test
-    public WebDriver lambdaTest() throws MalformedURLException{
+
+    public WebDriver lambdaTest() throws MalformedURLException {
         String username = "adam.johnsontestpro";
         String authkey = "ebbsAPRVhS57sbKTXkwsRDlPVIZi5BqReWLeiP65TyPGPGgQNm";
         String hub = "@hub.lambdatest.com/wd/hub";
@@ -81,6 +72,7 @@ public class BaseTest {
         caps.setCapability("plugin", "java-testNG");
         return new RemoteWebDriver(new URL("https://" + username + ":" + authkey + hub), caps);
     }
+
     public WebDriver pickBrowser(String browser) throws MalformedURLException {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         String gridURL = "http://10.2.127.17:4444";
@@ -108,15 +100,22 @@ public class BaseTest {
             default:
                 WebDriverManager.chromedriver().setup();
                 ChromeOptions optionsChrome = new ChromeOptions();
-                optionsChrome.addArguments("--disable-notifications","--remote-allow-origins=*", "--incognito","--start-maximized");
+                optionsChrome.addArguments("--disable-notifications", "--remote-allow-origins=*", "--incognito", "--start-maximized");
                 optionsChrome.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
                 return driver = new ChromeDriver(optionsChrome);
         }
     }
 
     @AfterMethod
-    public void tearDown() {
-        THREAD_LOCAL.get().close();
-        THREAD_LOCAL.remove();
+    public void closeBrowser() {
+        //close the current instance and remove it from grid testing
+        threadDriver.get().close();
+        threadDriver.remove();
+    }
+
+
+    //navigate to login page
+    public void navigateToLogin(String baseURL) {
+        getDriver().get(baseURL);
     }
 }

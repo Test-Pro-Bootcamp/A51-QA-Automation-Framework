@@ -17,6 +17,9 @@ public class HomePage extends BasePage {
     @FindBy(css = ".show.success")
     private WebElement notification;
 
+    @FindBy(xpath = "//*[id='userBadge']/a[1]")
+    private WebElement profileLink;
+
     public HomePage(WebDriver givenDriver) {
         super(givenDriver);
     }
@@ -33,15 +36,47 @@ public class HomePage extends BasePage {
             return this;
 
         }
+
         public HomePage deletePlaylist(){
             deletePlaylistBtn.click();
             return this;
         }
 
-        public boolean notificationText(){
+        public boolean notificationText() {
             findElement(notification);
             return notification.isDisplayed();
         }
+
+            public HomePage clickProfileLink() {
+                profileLink.click();
+                return this;
+            }
+
     }
-//removed extra curly brace
-//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

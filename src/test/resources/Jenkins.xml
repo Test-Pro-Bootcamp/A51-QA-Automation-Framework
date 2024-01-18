@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Jenkins" parallel="methods" thread-count="2">
+
+    <test name="Jenkins" preserve-order="false">
+        <parameter name="BaseURL" value="https://qa.koel.app/"/>
+
+        <classes>
+            <class name="LoginTests">
+                <methods>
+                    <include name="loginSuccessTest"/>
+                    <include name="loginEmptyEmailTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

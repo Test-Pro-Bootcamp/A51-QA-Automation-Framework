@@ -3,10 +3,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
+import java.util.List;
 
 public class BasePage {
     protected WebDriver driver;
@@ -14,16 +16,28 @@ public class BasePage {
     protected Actions actions;
 
 
-    public BasePage(WebDriver givenDriver) {
+        private int timeSeconds = 5;
+        @FindBy(css = "[data-testis='sound-bar-play']")
+                private WebElement soundBarVisualizer;
+        public BasePage(WebDriver givenDriver){
         driver = givenDriver;
-        wait = new WebDriverWait(driver, Duration.ofSeconds(3));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         actions = new Actions(driver);
         PageFactory.initElements(driver, this);
     }
 
-    protected void doubleClick(WebElement locator) {
-        wait.until(ExpectedConditions.elementToBeClickable(locator));
-        actions.doubleClick(locator).perform();
+
+//Reusable methods that are inherited by other pages
+protected void click(By locator) {
+    wait.until(ExpectedConditions.elementToBeClickable(locator));
+}
+
+    protected void contextClick(WebElement webElement){
+        actions.contextClick(findElement(webElement)).perform();
+    }
+
+    protected void doubleClick(WebElement webElement) {
+            actions.doubleClick(findElement(webElement)).perform();
     }
 
     protected void contextClickSong(WebElement locator) {
@@ -31,12 +45,19 @@ public class BasePage {
         actions.contextClick(locator).perform();
     }
 
-    protected void click(By locator) {
-        wait.until(ExpectedConditions.elementToBeClickable(locator));
+    protected List<WebElement> findElements(By locator){
+            List<WebElement> elements;
+            elements = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
+            return elements;
     }
 
     protected WebElement findElement(WebElement element) {
         return wait.until(ExpectedConditions.visibilityOf(element));
+    }
+
+    public boolean isSongPlaying(){
+        findElement(soundBarVisualizer);
+        return soundBarVisualizer.isDisplayed();
     }
 
 }
