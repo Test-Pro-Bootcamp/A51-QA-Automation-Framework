@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="RegressionTests" parallel="methods" thread-count="1">
+
+    <test name="Regression Tests" preserve-order="false">
+        <parameter name="BaseURL" value="https://qa.koel.app/"/>
+
+        <classes>
+            <class name="AlbumTests"/>
+            <class name="AllSongsTests"/>
+            <class name="ProfileTests"/>
+        </classes>
+    </test>
+</suite>

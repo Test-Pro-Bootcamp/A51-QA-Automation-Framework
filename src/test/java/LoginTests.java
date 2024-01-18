@@ -1,25 +1,52 @@
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import Pages.HomePage;
+import Pages.LoginPage;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.time.Duration;
+import org.testng.Reporter;
+
 
 public class LoginTests extends BaseTest {
+
     @Test
-    public void loginEmptyEmailPassword() {
-
-//      Added ChromeOptions argument below to fix websocket error
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
-
-        WebDriver driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-
-        String url = "https://qa.koel.app/";
-        driver.get(url);
-        Assert.assertEquals(driver.getCurrentUrl(), url);
-        driver.quit();
+    public void loginSuccessTest() {
+        LoginPage loginPage = new LoginPage(getDriver());
+        HomePage homePage = new HomePage(getDriver());
+        loginPage.provideEmail("adam.johnson@testpro.io").providePassword("1Te$t$tudent").clickSubmitBtn();
+        Assert.assertTrue(homePage.getUserAvatar());
     }
+
+    @Test
+    public void loginWrongEmailTest() {
+        LoginPage loginPage = new LoginPage(getDriver());
+        HomePage homePage = new HomePage(getDriver());
+        loginPage.provideEmail("incorrect@email.com").providePassword("1Te$t$tudent").clickSubmitBtn();
+        loginPage.getRegistrationLink();
+    }
+
+    @Test
+    public void loginWrongPasswordTest() {
+        LoginPage loginPage = new LoginPage(getDriver());
+        HomePage homePage = new HomePage(getDriver());
+        loginPage.provideEmail("adam.johnson@testpro.io").providePassword("AbraCadabra").clickSubmitBtn();
+        loginPage.getRegistrationLink();
+    }
+
+    @Test
+    public void loginEmptyEmailTest() {
+        LoginPage loginPage = new LoginPage(getDriver());
+        HomePage homePage = new HomePage(getDriver());
+        loginPage.provideEmail("").providePassword("1Te$t$tudent").clickSubmitBtn();
+        loginPage.getRegistrationLink();
+    }
+
+    @Test
+    public void loginEmptyPasswordTest() {
+        LoginPage loginPage = new LoginPage(getDriver());
+        HomePage homePage = new HomePage(getDriver());
+        loginPage.provideEmail("adam.johnson@testpro.io").providePassword("").clickSubmitBtn();
+        loginPage.getRegistrationLink();
+    }
+
 }
