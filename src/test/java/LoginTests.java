@@ -1,25 +1,53 @@
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
+import Pages.HomePage;
+import Pages.LoginPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.time.Duration;
 
 public class LoginTests extends BaseTest {
+
     @Test
-    public void loginEmptyEmailPassword() {
+    public static void loginEmptyEmailPasswordTest() {
+        //changed for cloud test
+        LoginPage loginPage = new LoginPage(getThreadLocal());
+        loginPage.provideEmail("");
+        loginPage.providePassword("12345678");
+        loginPage.clickSubmitBtn();
+        Assert.assertTrue(loginPage.getRegistrationLink().isDisplayed());
+    }
+    @Test
+    public  static void loginWrongPasswordTest() {
+        LoginPage loginPage = new LoginPage(getThreadLocal());
+        loginPage.provideEmail("zhanna.ivanova@testpro.io");
+        loginPage.providePassword("1234678");
+        loginPage.clickSubmitBtn();
+        Assert.assertTrue(loginPage.getRegistrationLink().isDisplayed());
 
-//      Added ChromeOptions argument below to fix websocket error
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
+    }
+    @Test
+    public static void loginEmptyPasswordTest(){
+        LoginPage loginPage = new LoginPage(getThreadLocal());
+        loginPage.provideEmail("zhanna.ivanova@testpro.io");
+        loginPage.providePassword("");
+        loginPage.clickSubmitBtn();
+        Assert.assertTrue(loginPage.getRegistrationLink().isDisplayed());
 
-        WebDriver driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+    }
 
-        String url = "https://qa.koel.app/";
-        driver.get(url);
-        Assert.assertEquals(driver.getCurrentUrl(), url);
-        driver.quit();
+    @Test
+    public static void loginWrongEmailTest(){
+        LoginPage loginPage = new LoginPage(getThreadLocal());
+        loginPage.provideEmail("zhana.ivanova@testpro.io");
+        loginPage.providePassword("12345678");
+        loginPage.clickSubmitBtn();
+        Assert.assertTrue(loginPage.getRegistrationLink().isDisplayed());
+    }
+    @Test
+    public void loginSucceedTest(){
+        LoginPage loginPage = new LoginPage(getThreadLocal());
+        HomePage homePage = new HomePage(getThreadLocal());
+        loginPage.provideLoginSucceed();
+        Assert.assertTrue(homePage.getUserAvatar());
     }
 }
+
