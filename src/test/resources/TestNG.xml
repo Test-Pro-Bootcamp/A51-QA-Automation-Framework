@@ -6,6 +6,8 @@
     <test name="Example Test" preserve-order="false">
         <classes>
             <class name="tests.SearchTests"/>
+            <class name="tests.AllSongsTests"/>
+            <class name="tests.LoginTests"/>
         </classes>
     </test>
 </suite>
