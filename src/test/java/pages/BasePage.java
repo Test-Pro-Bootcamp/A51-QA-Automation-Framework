@@ -28,4 +28,5 @@ public class BasePage {
     protected void click(WebElement webElement) {
         wait.until(ExpectedConditions.elementToBeClickable(webElement)).click();
     }
+    
 }

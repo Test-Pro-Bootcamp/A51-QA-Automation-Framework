@@ -50,18 +50,15 @@ public class LoginTests extends BaseTest {
     @Test
     public void loginValidEmailInvalidPassword() {
         LoginPage loginPage = new LoginPage(driver);
-
         loginPage.provideEmail("email@gmail.com")
                 .providePassword("OPJKDUhA")
                 .clickSubmit();
-
         Assert.assertEquals(driver.getCurrentUrl(), loginPage.getUrl());
     }
 
     @Test (dataProvider = "InvalidLoginData", dataProviderClass = BaseTest.class)
     public void unableLoginWithDataProvider(String email, String password) {
         LoginPage loginPage = new LoginPage(driver);
-
         loginPage.provideEmail(email)
                 .provideEmail(password)
                 .clickSubmit();
