@@ -20,18 +20,15 @@ public class LoginTests extends BaseTest {
     public void loginValidEmailValidPassword() {
         LoginPage loginPage = new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
-
         loginPage.provideEmail("alina.nikolaienko@testpro.io")
                 .providePassword("OPJKDUhA")
                 .clickSubmit();
-
         Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
     }
 
     @Test
     public void loginEmptyEmailEmptyPassword() {
         LoginPage loginPage = new LoginPage(driver);
-
         loginPage.provideEmail("")
                 .providePassword("")
                 .clickSubmit();
