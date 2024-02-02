@@ -1,48 +1,57 @@
 package tests;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import java.time.Duration;
+import pages.AllSongsPage;
+import pages.HomePage;
+import pages.LoginPage;
 
 public class AllSongsTests extends BaseTest {
     @Test
     public void countSongsInPlaylist() {
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
+        AllSongsPage allSongsPage = new AllSongsPage(driver);
 
-//      Added ChromeOptions argument below to fix websocket error
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
+        loginPage.login();
+        //Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
 
-        WebDriver driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        homePage.clickAllSongs();
+        //String songsURL = "https://qa.koel.app/#!/songs";
+        //Assert.assertEquals(driver.getCurrentUrl(), songsURL);
 
-        String url = "https://qa.koel.app/";
-        driver.get(url);
+        int actualSongsQuantity = allSongsPage.countSongs();
+        int visibleSongsQuantity = allSongsPage.parseVisibleQuantityOfSongs(allSongsPage.visibleQuantityOfSongsAndDuration());
 
-        WebElement loginInput = driver.findElement(By.cssSelector("[type='email']"));
-        loginInput.click();
-        loginInput.clear();
-        loginInput.sendKeys("");
-
-        WebElement passwordInput = driver.findElement(By.cssSelector("[type='password']"));
-        passwordInput.click();
-        passwordInput.clear();
-        passwordInput.sendKeys("");
-
-        WebElement loginButton = driver.findElement(By.cssSelector("[type='submit']"));
-        loginButton.click();
-
-        Assert.assertEquals(driver.getCurrentUrl(), url);
-        //WebElement avatar = driver.findElement(By.cssSelector(".avatar"));
-        //Assert.assertTrue(avatar.isDisplayed());
-        driver.quit();
+        Assert.assertEquals(actualSongsQuantity, visibleSongsQuantity);
     }
 
+    @Test
+    public void songsDurationValue(){
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
+        AllSongsPage allSongsPage = new AllSongsPage(driver);
+
+        loginPage.login();
+        //Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
+
+        homePage.clickAllSongs();
+        String songsURL = "https://qa.koel.app/#!/songs";
+        Assert.assertEquals(driver.getCurrentUrl(), songsURL);
 
 
+        String infoForDuration = allSongsPage.visibleQuantityOfSongsAndDuration();
+        String calculatedDuration = allSongsPage.calculateTotalDuration();
+        String visibleDuration = allSongsPage.parseVisibleDurationOfSongs(infoForDuration);
+
+        if (calculatedDuration.equals(visibleDuration)) {
+            System.out.println("Calculated and visible durations match!");
+        } else {
+            System.out.println("Calculated and visible durations do not match!");
+            System.out.println("Calculated Duration: " + calculatedDuration);
+            System.out.println("Visible Duration: " + visibleDuration);
+        }
+
+        Assert.assertEquals(calculatedDuration, visibleDuration);
+    }
 }

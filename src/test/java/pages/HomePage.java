@@ -19,6 +19,14 @@ public class HomePage extends BasePage{
     @FindBy (css = "[type='search']")
     private WebElement searchElement;
 
+    @FindBy (css = ".songs")
+    private WebElement allSongs;
+
+    public void clickAllSongs(){
+        WebElement allSongsMenu = wait.until(ExpectedConditions.visibilityOf(allSongs));
+        allSongsMenu.click();
+    }
+
     public WebElement getUserAvatar(){
         //WebElement userAvatar = driver.findElement(By.cssSelector("img.avatar"));
         //WebElement userAvatar =  wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("img.avatar")));

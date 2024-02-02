@@ -32,6 +32,8 @@ public class LoginPage extends BasePage {
         return this;
     }
 
+
+
     public LoginPage providePassword (String password){
         //WebElement passwordElement = driver.findElement(By.cssSelector("input[type='password']"));
         //WebElement passwordElement = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("input[type='password']")));
