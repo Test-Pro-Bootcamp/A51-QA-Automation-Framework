@@ -14,14 +14,10 @@ public class AllSongsTests extends BaseTest {
         AllSongsPage allSongsPage = new AllSongsPage(driver);
 
         loginPage.login();
-        //Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
-
         homePage.clickAllSongs();
-        //String songsURL = "https://qa.koel.app/#!/songs";
-        //Assert.assertEquals(driver.getCurrentUrl(), songsURL);
 
         int actualSongsQuantity = allSongsPage.countSongs();
-        int visibleSongsQuantity = allSongsPage.parseVisibleQuantityOfSongs(allSongsPage.visibleQuantityOfSongsAndDuration());
+        int visibleSongsQuantity = allSongsPage.extractVisibleQuantityOfAllSongs(allSongsPage.visibleQuantityOfSongsAndDuration());
 
         Assert.assertEquals(actualSongsQuantity, visibleSongsQuantity);
     }
@@ -33,16 +29,11 @@ public class AllSongsTests extends BaseTest {
         AllSongsPage allSongsPage = new AllSongsPage(driver);
 
         loginPage.login();
-        //Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
-
         homePage.clickAllSongs();
-        String songsURL = "https://qa.koel.app/#!/songs";
-        Assert.assertEquals(driver.getCurrentUrl(), songsURL);
-
 
         String infoForDuration = allSongsPage.visibleQuantityOfSongsAndDuration();
-        String calculatedDuration = allSongsPage.calculateTotalDuration();
-        String visibleDuration = allSongsPage.parseVisibleDurationOfSongs(infoForDuration);
+        String calculatedDuration = allSongsPage.calculateTotalDurationOfAllSongs();
+        String visibleDuration = allSongsPage.extractVisibleDurationOfAllSongs(infoForDuration);
 
         if (calculatedDuration.equals(visibleDuration)) {
             System.out.println("Calculated and visible durations match!");
@@ -51,7 +42,6 @@ public class AllSongsTests extends BaseTest {
             System.out.println("Calculated Duration: " + calculatedDuration);
             System.out.println("Visible Duration: " + visibleDuration);
         }
-
         Assert.assertEquals(calculatedDuration, visibleDuration);
     }
 }

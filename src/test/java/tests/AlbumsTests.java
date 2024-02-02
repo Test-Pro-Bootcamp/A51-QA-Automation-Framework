@@ -33,8 +33,8 @@ public class AlbumsTests extends BaseTest {
 
 
         String infoForDuration = allSongsPage.visibleQuantityOfSongsAndDuration();
-        String calculatedDuration = allSongsPage.calculateTotalDuration();
-        String visibleDuration = allSongsPage.parseVisibleDurationOfSongs(infoForDuration);
+        String calculatedDuration = allSongsPage.calculateTotalDurationOfAllSongs();
+        String visibleDuration = allSongsPage.extractVisibleDurationOfAllSongs(infoForDuration);
 
         if (calculatedDuration.equals(visibleDuration)) {
             System.out.println("Calculated and visible durations match!");
