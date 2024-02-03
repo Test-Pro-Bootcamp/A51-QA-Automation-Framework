@@ -3,23 +3,59 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
+import pages.LoginPage;
+import pages.HomePage;
 import java.time.Duration;
 
 public class LoginTests extends BaseTest {
+
+        //Fluent interfaces example
+        @Test
+        public void loginInvalidEmailValidPassword() {
+
+            LoginPage loginPage = new LoginPage(getDriver());
+
+            loginPage.provideEmail("faizankhan@testpro.io")
+                    .providePassword("master21")
+                    .clickSubmit();
+
+            Assert.assertEquals(getDriver().getCurrentUrl(), url); //https://qa.koel.app/
+        }
+    @Test
+    public void loginValidEmailPassword () {
+
+        LoginPage loginPage = new LoginPage(getDriver());
+        HomePage homePage = new HomePage(getDriver());
+
+        loginPage.provideEmail("faizan.khan@testpro.io")
+                .providePassword("master21")
+                .clickSubmitBtn();
+
+        Assert.assertTrue(homePage.isAvatarDisplayed());
+    }
+
+    @Test
+    public void loginValidEmailEmptyPassword() {
+
+        LoginPage loginPage = new LoginPage(getDriver());
+
+        loginPage.provideEmail("faizan.khan@testpro.io")
+                .providePassword("")
+                .clickSubmit();
+
+        Assert.assertEquals(getDriver().getCurrentUrl(), url); //https://qa.koel.app/
+    }
+
+    //    OR
     @Test
     public void loginEmptyEmailPassword() {
 
-//      Added ChromeOptions argument below to fix websocket error
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
+        LoginPage loginPage = new LoginPage(getDriver());
 
-        WebDriver driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        loginPage.provideEmail("").providePassword("te$t$tudent").clickSubmit();
 
-        String url = "https://qa.koel.app/";
-        driver.get(url);
-        Assert.assertEquals(driver.getCurrentUrl(), url);
-        driver.quit();
+        Assert.assertEquals(getDriver().getCurrentUrl(), url);
     }
 }
+
+
