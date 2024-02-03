@@ -74,7 +74,6 @@ public class AllSongsPage extends BasePage {
             int seconds = Integer.parseInt(timeParts[1]);
             return minutes * 60 + seconds;
         } catch (NumberFormatException e) {
-            System.err.println("Error parsing duration: " + durationString);
             return 0;
         }
     }
@@ -85,5 +84,4 @@ public class AllSongsPage extends BasePage {
         int seconds = totalDurationInSeconds - (hours * 3600 + minutes * 60);
         return String.format("0%d:%02d:%02d", hours, minutes, seconds);
     }
-
 }
