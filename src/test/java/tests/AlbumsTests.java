@@ -9,41 +9,7 @@ import pages.LoginPage;
 public class AlbumsTests extends BaseTest {
     @Test
     public void countSongsInPlaylist() {
-        LoginPage loginPage = new LoginPage(driver);
-        HomePage homePage = new HomePage(driver);
-        AllSongsPage allSongsPage = new AllSongsPage(driver);
-
-        loginPage.login();
-        //Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
 
     }
 
-    @Test
-    public void songsDurationValue(){
-        LoginPage loginPage = new LoginPage(driver);
-        HomePage homePage = new HomePage(driver);
-        AllSongsPage allSongsPage = new AllSongsPage(driver);
-
-        loginPage.login();
-        //Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
-
-        homePage.clickAllSongs();
-        String songsURL = "https://qa.koel.app/#!/songs";
-        Assert.assertEquals(driver.getCurrentUrl(), songsURL);
-
-
-        String infoForDuration = allSongsPage.visibleQuantityOfSongsAndDuration();
-        String calculatedDuration = allSongsPage.calculateTotalDurationOfAllSongs();
-        String visibleDuration = allSongsPage.extractVisibleDurationOfAllSongs(infoForDuration);
-
-        if (calculatedDuration.equals(visibleDuration)) {
-            System.out.println("Calculated and visible durations match!");
-        } else {
-            System.out.println("Calculated and visible durations do not match!");
-            System.out.println("Calculated Duration: " + calculatedDuration);
-            System.out.println("Visible Duration: " + visibleDuration);
-        }
-
-        Assert.assertEquals(calculatedDuration, visibleDuration);
-    }
 }

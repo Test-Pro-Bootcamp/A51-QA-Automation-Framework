@@ -13,9 +13,4 @@ public class AlbumsPage extends BasePage {
         super(givenDriver);
     }
 
-
-
-
-
-
 }
