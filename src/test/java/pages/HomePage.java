@@ -22,9 +22,17 @@ public class HomePage extends BasePage{
     @FindBy (css = ".songs")
     private WebElement allSongs;
 
+    @FindBy (css = ".albums")
+    private WebElement albums;
+
     public void clickAllSongs(){
         WebElement allSongsMenu = wait.until(ExpectedConditions.visibilityOf(allSongs));
         allSongsMenu.click();
+    }
+
+    public void clickAlbums(){
+        WebElement albumsMenu = wait.until(ExpectedConditions.visibilityOf(albums));
+        albumsMenu.click();
     }
 
     public WebElement getUserAvatar(){

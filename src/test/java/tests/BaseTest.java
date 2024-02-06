@@ -30,6 +30,7 @@ public class BaseTest {
     public void launchBrowser (String BaseURL){
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
+        options.addArguments("--disable-notifications");
 
         driver = new ChromeDriver(options);
 
