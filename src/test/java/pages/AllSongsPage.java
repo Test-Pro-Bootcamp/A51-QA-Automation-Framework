@@ -1,8 +1,11 @@
 package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 import java.util.regex.Matcher;
@@ -18,6 +21,24 @@ public class AllSongsPage extends BasePage {
 
     @FindBy(xpath = "//*[@id=\"songsWrapper\"]/header/div[2]/span/span")
     public WebElement songsQuantity;
+
+    @FindBy (xpath = "//*[@id=\"songsWrapper\"]/div/div/div[1]/table/tr[2]")
+    public WebElement songToAdd;
+
+    @FindBy (css = "#songsWrapper > header > div.song-list-controls > span > button.btn-add-to")
+    public WebElement addToButton;
+
+    @FindBy (xpath = "//*[@id='songsWrapper']/header/div[3]/div/section[1]/ul/li")
+    public List<WebElement> playlistList;
+
+    @FindBy (xpath = "//*[@id='playlists']/ul/li[4]/a")
+    public WebElement newlyCreatedPlaylist;
+
+    @FindBy (xpath = "//*[@id=\"songsWrapper\"]/header/div[3]/div/section[1]/ul/li[5]")
+    public WebElement playlistForAddingSongs;
+
+    @FindBy (css = "div.success.show")
+    WebElement notificationMessage;
 
     public int countSongs() {
         System.out.println("Calculated quantity of songs: " + songsInList.size());
@@ -85,4 +106,31 @@ public class AllSongsPage extends BasePage {
         int seconds = totalDurationInSeconds - (hours * 3600 + minutes * 60);
         return String.format("0%d:%02d:%02d", hours, minutes, seconds);
     }
+
+    public void findYourPlaylist(String myPlaylist){
+        List<WebElement> playlistElements = driver.findElements(By.xpath("//*[@id='songsWrapper']/header/div[3]/div/section[1]/ul/li")); // Example XPath, replace with your actual locator
+
+        for (WebElement playlistElement : playlistElements) {
+            String playlistName = playlistElement.getText(); // Assuming the playlist name is displayed as text
+            if (playlistName.equals(myPlaylist)) {
+                playlistElement.click();
+                //break; // Exit the loop once the playlist is found
+            }
+        }
+    }
+
+    public AllSongsPage addSongToPlaylist() {
+        //wait.until(ExpectedConditions.visibilityOf(listButton));
+        Actions action = new Actions(driver);
+        action.moveToElement(playlistForAddingSongs);
+        playlistForAddingSongs.click();
+        return this;
+    }
+
+    public String verifyNotificationMessage() {
+        wait.until(ExpectedConditions.visibilityOf(notificationMessage));
+        return notificationMessage.getText();
+    }
+
+
 }

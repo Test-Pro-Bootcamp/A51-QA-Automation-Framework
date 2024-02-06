@@ -7,6 +7,7 @@
         <classes>
             <class name="tests.AllSongsTests"/>
             <class name="tests.AlbumsTests"/>
+            <class name="tests.PlaylistTests"/>
         </classes>
     </test>
 </suite>

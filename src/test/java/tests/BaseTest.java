@@ -55,6 +55,14 @@ public class BaseTest {
         };
     }
 
+    @DataProvider (name = "PlaylistNameData")
+    public static Object[][] getValidDataForPlaylistName(){
+        return new Object[][]{
+                {"A"},
+                {"p3rFk9uZn8LbCgA6iXsE0vYmUdHwN1oGjWqRxOyKtPzDfVcSlJ7M2aQ5eBrI4hT3p3rFk9uZn8LbCgA6iXsE0vYmUdHwN1oGjWqRxOyKtPzDfVcSlJ7M2aQ5eBrI4hT3p3rFk9uZn8LbCgA6iXsE0vYmUdHwN1oGjWqRxOyKtPzDfVcSlJ7M2aQ5eBrI4hT3p3rFk9uZn8LbCgA6iXsE0vYmUdHwN1oGjWqRxOyKtPzDfVcSlJ7M2aQ5eBrI4hT3"}
+        };
+    }
+
     @DataProvider (name = "ValidLoginData")
     public static Object[][] getInvalidDataFromDataProvider(){
         return new Object[][]{
