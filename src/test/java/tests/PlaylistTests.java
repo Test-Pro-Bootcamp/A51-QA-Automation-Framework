@@ -18,13 +18,15 @@ public class PlaylistTests extends BaseTest {
         LoginPage loginPage = new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
 
-
         loginPage.login();
         homePage.createPlaylist(myPlaylist);
 
+        //what assert is better? option 1 or 2?
+        //option 1
         WebElement newPlaylist = wait.until(ExpectedConditions.visibilityOf(homePage.newlyCreatedPlaylist));
         Assert.assertTrue(newPlaylist.isDisplayed(), "Playlist was NOT created");
 
+        //option 2
         String expectedMessage = "Created playlist \"" + myPlaylist + ".\"";
         Assert.assertEquals(homePage.verifyNotificationMessage(), expectedMessage);
     }
@@ -43,12 +45,9 @@ public class PlaylistTests extends BaseTest {
         allSongsPage.addSongToPlaylist();
         allSongsPage.verifyNotificationMessage();
 
-        //what assert is better? option 1 or 2?
-        //option 1
         String expectedMessage = "Added 1 song into \"" + myPlaylist + ".\"";
         Assert.assertEquals(allSongsPage.verifyNotificationMessage(), expectedMessage);
-
-        //option 2
+        
         homePage.myPlaylist.click();
         Assert.assertTrue(playlistPage.addedSong.isDisplayed(), "No songs in Playlist");
     }
