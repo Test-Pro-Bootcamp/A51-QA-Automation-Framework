@@ -22,6 +22,13 @@ public class AlbumsPage extends BasePage {
     @FindBy (xpath = "//*[@id=\"albumsWrapper\"]/div/article[2]/span/span")
     public  WebElement albumCover;
 
+
+    @FindBy(xpath = "//*[@id='albumsWrapper']/div/article//footer/div/a[1]")
+    private List<WebElement> albumNames;
+
+    @FindBy(xpath = "//*[@id='albumsWrapper']/div/article//footer/div/a[2]")
+    private List<WebElement> artistNames;
+
     @FindBy (xpath = "//*[@id=\"albumsWrapper\"]/div/article[1]/footer/p/span[2]/a[1]/i")
     public WebElement shuffleIcon;
 
@@ -30,6 +37,18 @@ public class AlbumsPage extends BasePage {
 
     public List<WebElement> getAllAlbumIcons() {
         return wait.until(ExpectedConditions.visibilityOfAllElements(albumIcons));
+    }
+
+    public WebElement getShuffleIcon(){
+        return wait.until(ExpectedConditions.visibilityOf(shuffleIcon));
+    }
+
+    public List<WebElement> getAllAlbumNames() {
+        return wait.until(ExpectedConditions.visibilityOfAllElements(albumNames));
+    }
+
+    public List<WebElement> getAllArtistNames() {
+        return wait.until(ExpectedConditions.visibilityOfAllElements(artistNames));
     }
 
     public void hoverOverFirstAlbum(){
@@ -52,18 +71,5 @@ public class AlbumsPage extends BasePage {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
     }
-    /*
-    public class ScrollUtils {
-
-        public static void scrollToElement(WebDriver driver, WebElement element) {
-            JavascriptExecutor js = (JavascriptExecutor) driver;
-            js.executeScript("arguments[0].scrollIntoView(true);", element);
-        }
-
-        public static void scrollToBottom(WebDriver driver) {
-            JavascriptExecutor js = (JavascriptExecutor) driver;
-            js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
-        }
-     */
 
 }

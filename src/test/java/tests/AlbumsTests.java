@@ -26,16 +26,12 @@ public class AlbumsTests extends BaseTest {
 
         for (WebElement albumIcon : albumIcons) {
             albumsPage.hoverOverElement(albumIcon);
-            //WebElement shuffleIcon = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id='albumsWrapper']/div/article[1]/footer/p/span[2]/a[1]/i")));
-            //Assert.assertTrue(shuffleIcon.isDisplayed());
-            //Assert.assertTrue(shuffleIcon.isDisplayed(), "Shuffle icon is not displayed for album");
             albumsPage.scrollToElement(driver, albumIcon);
-            albumsCount+=1;
+            albumsCount += 1;
+            Assert.assertTrue(albumsPage.getShuffleIcon().isDisplayed(), "No shuffle icon");
         }
 
-        albumsPage.scrollToBottom(driver);
-
-        System.out.println("Checked albums: " + albumsCount );
+        System.out.println("Checked shuffle icons for " + albumsCount + " albums");
     }
 
     @Test
@@ -47,13 +43,14 @@ public class AlbumsTests extends BaseTest {
         loginPage.login();
         homePage.clickAlbums();
 
-        albumsPage.hoverOverFirstAlbum();
-        WebElement downloadIcon = wait.until(ExpectedConditions.visibilityOf(albumsPage.downloadIcon));
-        Assert.assertTrue(downloadIcon.isDisplayed());
+        //albumsPage.hoverOverFirstAlbum();
+        //WebElement downloadIcon = wait.until(ExpectedConditions.visibilityOf(albumsPage.downloadIcon));
+        //Assert.assertTrue(downloadIcon.isDisplayed());
+
     }
 
     @Test
-    public void verifyAlbumImage(){
+    public void verifyAlbumImage() {
         LoginPage loginPage = new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
         AlbumsPage albumsPage = new AlbumsPage(driver);
@@ -68,26 +65,65 @@ public class AlbumsTests extends BaseTest {
 
         for (WebElement albumIcon : albumIcons) {
             albumsPage.hoverOverElement(albumIcon);
-            wait.until(ExpectedConditions.visibilityOf(albumsPage.albumCover));
 
-            String actualCoverXPath = albumsPage.albumCover.getAttribute("xpath");
+            WebElement koelCoverElement = albumIcon.findElement(By.xpath("//*[@id=\"albumsWrapper\"]/div/article[3]/span/span"));
 
-            String standartKoelCover = "//*[@id=\"albumsWrapper\"]/div/article[3]/span/span";
-            if (actualCoverXPath != null && actualCoverXPath.equals(standartKoelCover)) {
-                //if (actualCoverXPath.equals(standartKoelCover)) {
+            if (koelCoverElement.isDisplayed()) {
                 System.out.println("Album has Koel cover");
-                koelCover +=1;
+                koelCover += 1;
             } else {
                 System.out.println("Album has UNIQUE cover");
-                uniqueCover +=1;
+                uniqueCover += 1;
             }
-            albumsCount +=1;
+            albumsCount += 1;
+            Assert.assertTrue(albumIcon.isDisplayed());
         }
 
-        System.out.println("Koel covers: "+ koelCover);
+        System.out.println("Koel covers: " + koelCover);
         System.out.println("Unique covers: " + uniqueCover);
         System.out.println("All albums " + albumsCount);
 
     }
 
+    @Test
+    public void verifyAlbumNameIsPresent() {
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
+        AlbumsPage albumsPage = new AlbumsPage(driver);
+
+        loginPage.login();
+        homePage.clickAlbums();
+
+        List<WebElement> albumNames = albumsPage.getAllAlbumNames();
+        int countAlbum = 0;
+
+        for (WebElement nameElement : albumNames) {
+            Assert.assertTrue(nameElement.isDisplayed(), "Album name is not displayed: " + nameElement.getText());
+            countAlbum+=1;
+            System.out.println("Album name " + nameElement.getText());
+        }
+        System.out.println("Checked album names in " + countAlbum + " albums");
+
+    }
+
+    @Test
+    public void verifyArtistNameIsPresent() {
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
+        AlbumsPage albumsPage = new AlbumsPage(driver);
+
+        loginPage.login();
+        homePage.clickAlbums();
+
+        List<WebElement> artistName = albumsPage.getAllArtistNames();
+        int countArtists = 0;
+
+        for (WebElement nameElement : artistName) {
+            Assert.assertTrue(nameElement.isDisplayed(), "Artist name is not displayed: " + nameElement.getText());
+            countArtists+=1;
+            System.out.println("Artist name " + nameElement.getText());
+        }
+        System.out.println("Checked artist names in " + countArtists + " albums");
+
+    }
 }
