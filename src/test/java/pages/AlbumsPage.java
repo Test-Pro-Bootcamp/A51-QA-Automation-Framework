@@ -1,5 +1,6 @@
 package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -29,18 +30,22 @@ public class AlbumsPage extends BasePage {
     @FindBy(xpath = "//*[@id='albumsWrapper']/div/article//footer/div/a[2]")
     private List<WebElement> artistNames;
 
-    @FindBy (xpath = "//*[@id=\"albumsWrapper\"]/div/article[1]/footer/p/span[2]/a[1]/i")
+    //@FindBy (xpath = "//*[@id=\"albumsWrapper\"]/div/article[1]/footer/p/span[2]/a[1]/i")
+    @FindBy (xpath = "//*[@id=\"albumsWrapper\"]/div/article/footer/p/span[2]/a[1]")
     public WebElement shuffleIcon;
 
-    @FindBy (xpath = "//*[@id=\"albumsWrapper\"]/div/article[1]/footer/p/span[2]/a[2]/i")
+    @FindBy (xpath = "//*[@id=\"albumsWrapper\"]/div/article/footer/p/span[2]/a[2]")
     public WebElement downloadIcon;
 
     public List<WebElement> getAllAlbumIcons() {
         return wait.until(ExpectedConditions.visibilityOfAllElements(albumIcons));
     }
 
+    public WebElement getDownloadIcon(){
+        return wait.until(ExpectedConditions.visibilityOf(downloadIcon));
+    }
     public WebElement getShuffleIcon(){
-        return wait.until(ExpectedConditions.visibilityOf(shuffleIcon));
+        return wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(shuffleIcon.getText())));
     }
 
     public List<WebElement> getAllAlbumNames() {

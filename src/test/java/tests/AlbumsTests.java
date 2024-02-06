@@ -26,9 +26,12 @@ public class AlbumsTests extends BaseTest {
 
         for (WebElement albumIcon : albumIcons) {
             albumsPage.hoverOverElement(albumIcon);
-            albumsPage.scrollToElement(driver, albumIcon);
+
             albumsCount += 1;
-            Assert.assertTrue(albumsPage.getShuffleIcon().isDisplayed(), "No shuffle icon");
+            Assert.assertTrue(albumsPage.shuffleIcon.isDisplayed(), "No shuffle icon");
+            //Assert.assertTrue(albumsPage.shuffleIcon.isDisplayed());
+
+            albumsPage.scrollToElement(driver, albumIcon);
         }
 
         System.out.println("Checked shuffle icons for " + albumsCount + " albums");
@@ -47,6 +50,18 @@ public class AlbumsTests extends BaseTest {
         //WebElement downloadIcon = wait.until(ExpectedConditions.visibilityOf(albumsPage.downloadIcon));
         //Assert.assertTrue(downloadIcon.isDisplayed());
 
+        List<WebElement> albumIcons = albumsPage.getAllAlbumIcons();
+        int albumsCount = 0;
+
+        for (WebElement albumIcon : albumIcons) {
+            albumsPage.hoverOverElement(albumIcon);
+
+            albumsCount += 1;
+            Assert.assertTrue(albumsPage.getDownloadIcon().isDisplayed(), "No shuffle icon");
+
+            albumsPage.scrollToElement(driver, albumIcon);
+        }
+        System.out.println("Checked download icons for " + albumsCount + " albums");
     }
 
     @Test

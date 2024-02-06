@@ -16,8 +16,8 @@ public class AllSongsPage extends BasePage {
     @FindBy(tagName = "tr")
     private List<WebElement> songsInList;
 
-    @FindBy(xpath = "//*[@id='songsWrapper']//span/span")
-    private WebElement songsQuantity;
+    @FindBy(xpath = "//*[@id=\"songsWrapper\"]/header/div[2]/span/span")
+    public WebElement songsQuantity;
 
     public int countSongs() {
         System.out.println("Calculated quantity of songs: " + songsInList.size());
@@ -42,6 +42,7 @@ public class AllSongsPage extends BasePage {
     }
 
     public String extractVisibleDurationOfAllSongs(String input) {
+        //66 songs • 04:32:57
         String timeString = input.split(" • ")[1];
         String[] timeComponents = timeString.split(":");
         int hours = Integer.parseInt(timeComponents[0]);

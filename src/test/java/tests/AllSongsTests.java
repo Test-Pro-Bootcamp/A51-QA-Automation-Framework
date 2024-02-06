@@ -17,6 +17,7 @@ public class AllSongsTests extends BaseTest {
         homePage.clickAllSongs();
 
         int actualSongsQuantity = allSongsPage.countSongs();
+
         int visibleSongsQuantity = allSongsPage.extractVisibleQuantityOfAllSongs(allSongsPage.visibleQuantityOfSongsAndDuration());
 
         Assert.assertEquals(actualSongsQuantity, visibleSongsQuantity);
