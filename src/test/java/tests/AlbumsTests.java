@@ -139,6 +139,5 @@ public class AlbumsTests extends BaseTest {
             System.out.println("Artist name " + nameElement.getText());
         }
         System.out.println("Checked artist names in " + countArtists + " albums");
-
     }
 }

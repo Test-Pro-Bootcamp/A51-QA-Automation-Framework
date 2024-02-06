@@ -47,7 +47,7 @@ public class PlaylistTests extends BaseTest {
 
         String expectedMessage = "Added 1 song into \"" + myPlaylist + ".\"";
         Assert.assertEquals(allSongsPage.verifyNotificationMessage(), expectedMessage);
-        
+
         homePage.myPlaylist.click();
         Assert.assertTrue(playlistPage.addedSong.isDisplayed(), "No songs in Playlist");
     }
