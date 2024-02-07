@@ -30,7 +30,6 @@ public class AlbumsPage extends BasePage {
     @FindBy(xpath = "//*[@id='albumsWrapper']/div/article//footer/div/a[2]")
     private List<WebElement> artistNames;
 
-    //@FindBy (xpath = "//*[@id=\"albumsWrapper\"]/div/article[1]/footer/p/span[2]/a[1]/i")
     @FindBy (xpath = "//*[@id=\"albumsWrapper\"]/div/article/footer/p/span[2]/a[1]")
     public WebElement shuffleIcon;
 

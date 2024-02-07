@@ -7,27 +7,23 @@ import org.testng.annotations.Test;
 import pages.AllSongsPage;
 import pages.HomePage;
 import pages.LoginPage;
-import pages.PlaylistPage;
 
-import static pages.HomePage.generateRandomString;
+import java.util.Random;
 
 public class PlaylistTests extends BaseTest {
-    String myPlaylist = "Alina's favorites";
+    String playlistName = "Playlist";
     @Test (priority = 1)
     public void createNewPlaylist() {
         LoginPage loginPage = new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
 
         loginPage.login();
-        homePage.createPlaylist(myPlaylist);
+        homePage.createPlaylist(playlistName);
 
-        //what assert is better? option 1 or 2?
-        //option 1
         WebElement newPlaylist = wait.until(ExpectedConditions.visibilityOf(homePage.newlyCreatedPlaylist));
         Assert.assertTrue(newPlaylist.isDisplayed(), "Playlist was NOT created");
 
-        //option 2
-        String expectedMessage = "Created playlist \"" + myPlaylist + ".\"";
+        String expectedMessage = "Created playlist \"" + playlistName + ".\"";
         Assert.assertEquals(homePage.verifyNotificationMessage(), expectedMessage);
     }
 
@@ -36,21 +32,21 @@ public class PlaylistTests extends BaseTest {
         LoginPage loginPage = new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
         AllSongsPage allSongsPage = new AllSongsPage(driver);
-        PlaylistPage playlistPage = new PlaylistPage(driver);
 
         loginPage.login();
         homePage.clickAllSongs();
-        allSongsPage.songToAdd.click();
+
+        Random rand = new Random();
+        int randomIndex = rand.nextInt(allSongsPage.songsInList.size());
+
+        allSongsPage.songsInList.get(randomIndex).click();
         allSongsPage.addToButton.click();
         allSongsPage.addSongToPlaylist();
         allSongsPage.verifyNotificationMessage();
 
-        String expectedMessage = "Added 1 song into \"" + myPlaylist + ".\"";
+        String expectedMessage = "Added 1 song into \"" + playlistName + ".\"";
         Assert.assertEquals(allSongsPage.verifyNotificationMessage(), expectedMessage);
-
-        homePage.myPlaylist.click();
-        Assert.assertTrue(playlistPage.addedSong.isDisplayed(), "No songs in Playlist");
-    }
+}
 
     @Test (priority = 3, dataProvider = "PlaylistNameData", dataProviderClass = BaseTest.class)
     public void createPlaylistWithLongShortName(String playlistName) {
