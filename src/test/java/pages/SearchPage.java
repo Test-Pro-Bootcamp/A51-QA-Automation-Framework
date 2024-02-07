@@ -24,8 +24,6 @@ public class SearchPage extends BasePage {
     @FindBy(xpath = "//*[@id='searchExcerptsWrapper']/div/div/section[2]")
     private WebElement artistSection;
 
-
-
     public String verifySongsResult(){
         WebElement songInSearchResults = wait.until(ExpectedConditions.visibilityOf(searchResult));
         return  songInSearchResults.getText();
@@ -45,46 +43,4 @@ public class SearchPage extends BasePage {
         WebElement resultsSongs = wait.until(ExpectedConditions.visibilityOf(albumSection));
         return resultsSongs.getText();
     }
-
-
-    //WebElement resultsSongs = driver.findElement(By.xpath("//*[@id='searchExcerptsWrapper']/div[@class='main-scroll-wrap']//span[@class='main']/span[@class='details']"));
-    //String songsName = resultsSongs.getText();
-
-    /*
-    @FindBy(xpath = "//input[@name='q']")
-    private WebElement inputField;
-
-    @FindBy(xpath = "//section[@class='songs']//span[@class='details']")
-    private WebElement songDetailsContainer;
-
-    @FindBy(css = ".results .artists .name")
-    private WebElement nameArtist;
-
-    @FindBy(css = ".results .albums .name")
-    private WebElement nameAlbum;
-
-
-    public void enterSongName(String songName) {
-        inputField.clear();
-        inputField.click();
-        findElement(inputField).sendKeys(songName);
-    }
-
-    public boolean verifySongFound(String songName) {
-        findElement(songDetailsContainer);
-        return songDetailsContainer.getText().contains(songName);
-
-    }
-
-    public String getNameArtist() {
-        findElement(nameArtist);
-        return nameArtist.getText();
-    }
-
-    public boolean getNameAlbum(String songName) {
-        findElement(nameAlbum);
-        return nameAlbum.getText().contains(songName);
-    }
-*/
-
 }

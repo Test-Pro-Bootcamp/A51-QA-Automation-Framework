@@ -31,7 +31,7 @@ public class HomePage extends BasePage{
     private WebElement albums;
 
     @FindBy (xpath = "//*[@id=\"userBadge\"]//span[@class='name']")
-    public WebElement profileIcon;
+    private WebElement profileIcon;
 
     @FindBy (css = ".fa.fa-plus-circle.create")
     public WebElement addPlaylistButton;
@@ -57,6 +57,11 @@ public class HomePage extends BasePage{
     public void clickAlbums(){
         WebElement albumsMenu = wait.until(ExpectedConditions.visibilityOf(albums));
         albumsMenu.click();
+    }
+
+    public void clickProfileIcon() {
+        wait.until(ExpectedConditions.visibilityOf(profileIcon));
+        profileIcon.click();
     }
 
     public WebElement getUserAvatar(){
@@ -86,11 +91,14 @@ public class HomePage extends BasePage{
         wait.until(ExpectedConditions.visibilityOf(notificationMessage));
         return notificationMessage.getText();
     }
+
+    /*
     WebElement notification;
     public HomePage waitForInvisibilityOfNotificationMessage() {
        wait.until(ExpectedConditions.invisibilityOf(notification));
         return this;
     }
+     */
 
 
 

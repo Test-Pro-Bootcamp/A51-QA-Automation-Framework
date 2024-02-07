@@ -18,33 +18,12 @@ public class ProfileTests extends BaseTest {
         ProfilePage profilePage = new ProfilePage(driver);
 
         loginPage.login();
-        homePage.profileIcon.click();
-        profilePage.enterNewName();
-        profilePage.clickSaveButton();
+        homePage.clickProfileIcon();
+        profilePage.provideCurrentPassword()
+                .provideNewName()
+                .clickSaveButton();
 
         Assert.assertEquals(profilePage.verifyNotificationMessage(), "Profile updated.");
     }
-
-    private void clickAvatarIcon() {
-        WebElement avatarIcon = driver.findElement(By.cssSelector("img.avatar"));
-        avatarIcon.click();
-    }
-
-    private String generateRandomName() {
-        return UUID.randomUUID().toString().replace("-","");
-    }
-
-    private void provideCurrentPassword(String password) {
-        WebElement currentPassword = driver.findElement(By.cssSelector("[name='current_password']"));
-        currentPassword.clear();
-        currentPassword.sendKeys(password);
-    }
-
-    private void provideProfileName(String randomName) {
-        WebElement profileName = driver.findElement(By.cssSelector("[name='name']"));
-        profileName.clear();
-        profileName.sendKeys(randomName);
-    }
-
 
 }

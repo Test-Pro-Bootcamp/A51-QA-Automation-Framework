@@ -1,13 +1,10 @@
 package pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import java.util.List;
 import java.util.UUID;
 
 public class ProfilePage extends BasePage {
@@ -35,14 +32,20 @@ public class ProfilePage extends BasePage {
         saveButton.click();
     }
 
-    public void enterNewName(){
-        passwordInputField.click();
-        passwordInputField.clear();
-        passwordInputField.sendKeys("OPJKDUhA");
+    public ProfilePage provideNewName(){
         nameInputField.click();
         nameInputField.clear();
         nameInputField.sendKeys(generateRandomName());
+        return this;
     }
+
+    public ProfilePage provideCurrentPassword(){
+        passwordInputField.click();
+        passwordInputField.clear();
+        passwordInputField.sendKeys("OPJKDUhA");
+        return this;
+    }
+
 
     public String verifyNotificationMessage() {
         wait.until(ExpectedConditions.visibilityOf(notificationMessage));

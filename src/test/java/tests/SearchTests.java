@@ -14,7 +14,6 @@ import pages.SearchPage;
 
 
 public class SearchTests extends BaseTest {
-    //@Test (dataProvider = "ValidLoginData", dataProviderClass = BaseTest.class)
     @Test
     public void verifySearchFromHomePage_80382() {
         LoginPage loginPage = new LoginPage(driver);
@@ -27,22 +26,6 @@ public class SearchTests extends BaseTest {
         searchPage.verifySongsResult();
 
         Assert.assertTrue(searchPage.verifySongsResult().contains(songName));
-
-        /*
-        loginIntoKoel(email, password);
-
-        WebElement searchField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[type='search']")));
-        //WebElement searchField = driver.findElement(By.cssSelector("[type='search']"));
-        searchField.clear();
-        String songName = "Reactor";
-        searchField.sendKeys(songName);
-
-        WebElement songInSearchResults = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='searchExcerptsWrapper']/div[@class='main-scroll-wrap']//span[@class='main']/span[@class='details']")));
-        //WebElement songInSearchResults = driver.findElement(By.xpath("//*[@id='searchExcerptsWrapper']/div[@class='main-scroll-wrap']//span[@class='main']/span[@class='details']"));
-        String mySongsInSearchResults = songInSearchResults.getText();
-
-        Assert.assertTrue(mySongsInSearchResults.contains(songName));
-         */
     }
 
     @Test //issue INTERNSHIP-80407
@@ -57,44 +40,6 @@ public class SearchTests extends BaseTest {
         searchPage.verifyResultsInSongsSection();
 
         Assert.assertTrue(searchPage.verifyResultsInSongsSection().contains(songName));
-
-        /*
-        loginIntoKoel("alina.nikolaienko@testpro.io", "OPJKDUhA");
-
-        WebElement searchField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[type='search']")));
-        //WebElement searchField = driver.findElement(By.cssSelector("[type='search']"));
-        searchField.clear();
-        String searchName = "Pluto"; //song name
-        searchField.sendKeys(searchName);
-
-        //verification in songs section
-        WebElement resultsSongs = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='searchExcerptsWrapper']/div[@class='main-scroll-wrap']//span[@class='main']/span[@class='details']")));
-        //WebElement resultsSongs = driver.findElement(By.xpath("//*[@id='searchExcerptsWrapper']/div[@class='main-scroll-wrap']//span[@class='main']/span[@class='details']"));
-        String songsName = resultsSongs.getText();
-        Assert.assertTrue(songsName.contains(searchName));
-         */
-
-
-
-        /*
-        searchField.clear();
-        String searchName2 = "Unknown"; //Artist name
-        searchField.sendKeys(searchName2);
-
-        //verification in artists section
-        WebElement resultsArtists = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"searchExcerptsWrapper\"]/div/div/section[2]")));
-        //WebElement resultsArtists = driver.findElement(By.xpath("//*[@id=\"searchExcerptsWrapper\"]/div/div/section[2]"));
-        String artistName = resultsArtists.getText();
-        Assert.assertTrue(artistName.contains(searchName2));
-
-        searchField.clear();
-        String searchName3 = "Unknown";
-        searchField.sendKeys(searchName3);
-        //verification in albums section
-        WebElement resultsAlbums = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"searchExcerptsWrapper\"]/div/div/section[3]")));
-        //WebElement resultsAlbums = driver.findElement(By.xpath("//*[@id=\"searchExcerptsWrapper\"]/div/div/section[3]"));
-        String albumName = resultsAlbums.getText();
-        Assert.assertTrue(albumName.contains(searchName3));*/
     }
 
     @Test //issue INTERNSHIP-80407
@@ -109,21 +54,6 @@ public class SearchTests extends BaseTest {
         searchPage.verifyResultsInArtistSection();
 
         Assert.assertTrue(searchPage.verifyResultsInArtistSection().contains(artistName));
-
-        /*
-        loginIntoKoel("alina.nikolaienko@testpro.io", "OPJKDUhA");
-
-        WebElement searchField = driver.findElement(By.cssSelector("[type='search']"));
-        searchField.clear();
-        String searchName = "Xylo-Ziko"; //Artist name
-        searchField.sendKeys(searchName);
-
-        //verification in artists section
-        WebElement resultsArtists = driver.findElement(By.xpath("//*[@id=\"searchExcerptsWrapper\"]/div/div/section[2]"));
-        String artistName = resultsArtists.getText();
-
-        Assert.assertTrue(artistName.contains(searchName));
-         */
     }
 
     @Test //issue INTERNSHIP-80407
@@ -138,22 +68,6 @@ public class SearchTests extends BaseTest {
         searchPage.verifyResultsInAlbumSection();
 
         Assert.assertTrue(searchPage.verifyResultsInAlbumSection().contains(albumName));
-
-        /*
-        loginIntoKoel("alina.nikolaienko@testpro.io", "OPJKDUhA");
-
-        WebElement searchField = driver.findElement(By.cssSelector("[type='search']"));
-        searchField.clear();
-        String searchName = "Prism"; //Album name
-        searchField.sendKeys(searchName);
-
-        //verification in album section
-        WebElement resultsAlbum = driver.findElement(By.xpath("//*[@id=\"searchExcerptsWrapper\"]/div/div/section[3]"));
-        String albumName = resultsAlbum.getText();
-
-        Assert.assertTrue(albumName.contains(searchName));
-
-         */
     }
 
     @Test //issue INTERNSHIP-80423
@@ -170,44 +84,7 @@ public class SearchTests extends BaseTest {
         String albumSect = searchPage.verifyResultsInAlbumSection();
         String artistSect = searchPage.verifyResultsInArtistSection();
 
-
-        //Assert.assertEquals(songSect, "No results");
-        //Assert.assertEquals(albumSect, "No results");
-        //Assert.assertEquals(artistSect, "No results");
-        //Assert.assertEquals(songSect, "None found.");
-        //Assert.assertEquals(albumSect, "None found.");
         Assert.assertTrue(albumSect.contains(invalidName));
-
-
-        //Assert.assertEquals(artistSect, "None found.");
-
-        /*
-        loginIntoKoel("alina.nikolaienko@testpro.io", "OPJKDUhA");
-
-        WebElement searchField;
-        searchField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[type='search']")));
-        searchField.clear();
-        String songName = "qwerty";
-        searchField.sendKeys(songName);
-
-        WebElement noResultsSongs = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#searchExcerptsWrapper > div > div > section.songs > p")));
-        //WebElement noResultsSongs = driver.findElement(By.cssSelector("#searchExcerptsWrapper > div > div > section.songs > p"));
-        String noResultsSongsText = noResultsSongs.getText();
-        //Assert.assertEquals(noResultsSongsText, "No results");
-        Assert.assertEquals(noResultsSongsText, "None found.");
-
-        WebElement noResultsArtists = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#searchExcerptsWrapper > div > div > section.artists > p")));
-        //WebElement noResultsArtists = driver.findElement(By.cssSelector("#searchExcerptsWrapper > div > div > section.artists > p"));
-        String noResultsArtistsText = noResultsArtists.getText();
-        //Assert.assertEquals(noResultsArtistsText, "No results");
-        Assert.assertEquals(noResultsSongsText, "None found.");
-
-        WebElement noResultsAlbums = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#searchExcerptsWrapper > div > div > section.albums > p")));
-        //WebElement noResultsAlbums = driver.findElement(By.cssSelector("#searchExcerptsWrapper > div > div > section.albums > p"));
-        String noResultsAlbumsText = noResultsAlbums.getText();
-        //Assert.assertEquals(noResultsAlbumsText, "No results");
-        Assert.assertEquals(noResultsSongsText, "None found.");
-         */
     }
 
     @Test (dataProvider = "ValidLoginData", dataProviderClass = BaseTest.class)

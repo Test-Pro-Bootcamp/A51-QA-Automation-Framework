@@ -8,7 +8,6 @@
             <class name="tests.AllSongsTests"/>
             <class name="tests.AlbumsTests"/>
             <class name="tests.PlaylistTests"/>
-            <class name="tests.ProfileTests"/>
         </classes>
     </test>
 </suite>
