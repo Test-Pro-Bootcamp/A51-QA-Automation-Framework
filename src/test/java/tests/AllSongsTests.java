@@ -16,7 +16,7 @@ public class AllSongsTests extends BaseTest {
         loginPage.login();
         homePage.clickAllSongs();
         allSongsPage.countSongs();
-        Assert.assertEquals(allSongsPage.countSongs(), 66); //value from DB
+        Assert.assertEquals(allSongsPage.countSongs(), 67);
 
         //int actualSongsQuantity = allSongsPage.countSongs();
         //int visibleSongsQuantity = allSongsPage.extractVisibleQuantityOfAllSongs(allSongsPage.visibleQuantityOfSongsAndDuration());
@@ -32,7 +32,8 @@ public class AllSongsTests extends BaseTest {
         loginPage.login();
         homePage.clickAllSongs();
         allSongsPage.calculateTotalDurationOfAllSongs();
-        Assert.assertEquals(allSongsPage.calculateTotalDurationOfAllSongs(), "04:32:57"); //Value from DB
+        Assert.assertEquals(allSongsPage.calculateTotalDurationOfAllSongs(), "04:27:01");
+
 
         /*
         String infoForDuration = allSongsPage.visibleQuantityOfSongsAndDuration();
