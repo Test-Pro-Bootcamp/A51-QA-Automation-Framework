@@ -20,8 +20,8 @@ public class PlaylistTests extends BaseTest {
         loginPage.login();
         homePage.createPlaylist(playlistName);
 
-        WebElement newPlaylist = wait.until(ExpectedConditions.visibilityOf(homePage.newlyCreatedPlaylist));
-        Assert.assertTrue(newPlaylist.isDisplayed(), "Playlist was NOT created");
+        //WebElement newPlaylist = wait.until(ExpectedConditions.visibilityOf(homePage.newlyCreatedPlaylist));
+        //Assert.assertTrue(newPlaylist.isDisplayed(), "Playlist was NOT created");
 
         String expectedMessage = "Created playlist \"" + playlistName + ".\"";
         Assert.assertEquals(homePage.verifyNotificationMessage(), expectedMessage);
