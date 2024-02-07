@@ -30,6 +30,9 @@ public class HomePage extends BasePage{
     @FindBy (css = ".albums")
     private WebElement albums;
 
+    @FindBy (xpath = "//*[@id=\"userBadge\"]//span[@class='name']")
+    public WebElement profileIcon;
+
     @FindBy (css = ".fa.fa-plus-circle.create")
     public WebElement addPlaylistButton;
 
@@ -41,9 +44,6 @@ public class HomePage extends BasePage{
 
     @FindBy (xpath = "//*[@id='playlists']/ul/li[4]/a")
     public WebElement newlyCreatedPlaylist;
-
-    @FindBy (xpath = "//*[@id='playlists']/ul/li[3]")
-    public WebElement myPlaylist;
 
 
     @FindBy (css = "div.success.show")
@@ -92,10 +92,6 @@ public class HomePage extends BasePage{
         return this;
     }
 
-    public static String generateRandomString(int length) {
-        return UUID.randomUUID().toString().substring(0, length);
-        //return UUID.randomUUID().toString();
-    }
 
 
 

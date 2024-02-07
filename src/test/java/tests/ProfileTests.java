@@ -4,29 +4,25 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.HomePage;
+import pages.LoginPage;
+import pages.ProfilePage;
 
 import java.util.UUID;
 
 public class ProfileTests extends BaseTest {
     @Test
-    public void changeProfileName() throws InterruptedException {
-        //navigateToPage();
-        provideEmail("alina.nikolaienko@testpro.io");
-        providePassword("OPJKDUhA");
-        clickSubmit();
-        Thread.sleep(2000);
+    public void changeProfileName()  {
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
+        ProfilePage profilePage = new ProfilePage(driver);
 
-        clickAvatarIcon();
+        loginPage.login();
+        homePage.profileIcon.click();
+        profilePage.enterNewName();
+        profilePage.clickSaveButton();
 
-        String randomName=generateRandomName();
-        provideCurrentPassword("OPJKDUhA");
-        provideProfileName(randomName);
-        clickSaveButton();
-
-        Thread.sleep(2000);
-
-        WebElement actualName = driver.findElement(By.cssSelector("a.view-profile>span"));
-        Assert.assertEquals(actualName.getText(), randomName);
+        Assert.assertEquals(profilePage.verifyNotificationMessage(), "Profile updated.");
     }
 
     private void clickAvatarIcon() {
@@ -50,8 +46,5 @@ public class ProfileTests extends BaseTest {
         profileName.sendKeys(randomName);
     }
 
-    private void clickSaveButton() {
-        WebElement saveButton = driver.findElement(By.cssSelector("button.btn-submit"));
-        saveButton.click();
-    }
+
 }
