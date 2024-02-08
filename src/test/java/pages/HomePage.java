@@ -39,6 +39,9 @@ public class HomePage extends BasePage{
     @FindBy (css = "#playlists > nav > ul > li:nth-child(1)")
     public WebElement newPlaylistButton;
 
+    @FindBy (xpath = "//*[@id=\"playlists\"]/nav/ul/li[2]")
+    public WebElement newSmartPlaylistButton;
+
     @FindBy (css = "#playlists > form > input")
     public WebElement inputField;
 
