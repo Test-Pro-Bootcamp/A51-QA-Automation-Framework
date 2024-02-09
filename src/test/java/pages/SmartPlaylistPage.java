@@ -13,10 +13,6 @@ public class SmartPlaylistPage extends BasePage {
         super(givenDriver);
     }
 
-    public String smartPlaylistName = "SmartPlaylist";
-
-    String ruleInput = "Frantic";
-
     @FindBy (xpath = "//*[@id=\"mainWrapper\"]//form/div/div[1]/input")
     public WebElement nameInputField;
 
@@ -24,7 +20,7 @@ public class SmartPlaylistPage extends BasePage {
     public WebElement firstDropdown;
 
     @FindBy (xpath = "//*[@id=\"mainWrapper\"]/div/div/div/form/div/div[2]/div/div[2]/select[1]/option[1]")
-    public WebElement firstOptionFirstDropdown;
+    public WebElement firstRuleFirstDropdownOption;
 
     @FindBy (xpath = "//*[@id=\"mainWrapper\"]/div/div/div/form/div/div[2]/div/div[2]/select[1]/option")
     public List<WebElement> listFirstDropdown;
@@ -32,14 +28,47 @@ public class SmartPlaylistPage extends BasePage {
     @FindBy (xpath = "//*[@id=\"mainWrapper\"]//form/div/div[2]/div/div[2]/select[2]")
     public WebElement secondDropdown;
 
-    @FindBy (xpath = "//*[@id=\"mainWrapper\"]//form/div/div[2]/div/div[2]/select[2]/option[1]")
-    public WebElement firstOptionSecondDropdown;
+    @FindBy (xpath = "//*[@id=\"mainWrapper\"]//form/div/div[2]/div/div[2]/select[2]/option[3]")
+    public WebElement firstRuleSecondDropdownOption;
 
     @FindBy (xpath = "//*[@id=\"mainWrapper\"]//form/div/div[2]/div/div[2]/select[2]/option")
     public List<WebElement> listSecondDropDown;
 
     @FindBy (xpath = "//*[@id=\"mainWrapper\"]//form/div/div[2]/div/div[2]/span/input")
     public WebElement ruleInputField;
+
+    @FindBy (xpath = "//*[@id=\"mainWrapper\"]//form/div/div[2]/div/div[3]/select[1]")
+    public WebElement secondRuleFirstDropdown;
+
+    @FindBy (xpath = "//*[@id=\"mainWrapper\"]//form/div/div[2]/div/div[3]/select[2]")
+    public WebElement secondRuleSecondDropdown;
+
+    @FindBy (xpath = "//*[@id=\"mainWrapper\"]//form/div/div[2]/div/div[3]/select[1]/option[3]")
+    public WebElement secondRuleFirstDropdownOption;
+
+    @FindBy (xpath = "//*[@id=\"mainWrapper\"]//form/div/div[2]/div/div[3]/select[2]/option[3]")
+    public WebElement secondRuleSecondDropdownOption;
+
+    @FindBy (xpath = "//*[@id=\"mainWrapper\"]//form/div/div[2]/div/div[3]/span/input")
+    public WebElement secondRuleInputField;
+
+    @FindBy (xpath = "//*[@id=\"mainWrapper\"]//form/div/div[2]/button")
+    public WebElement addGroupButton;
+
+    @FindBy (xpath = "//*[@id=\"mainWrapper\"]//form/div/div[2]/div[2]/div[2]/select[1]")
+    public WebElement groupFirstDropdown;
+
+    @FindBy (xpath = "//*[@id=\"mainWrapper\"]//form/div/div[2]/div[2]/div[2]/select[1]/option[3]")
+    public WebElement groupFirstDropdownOption;
+
+    @FindBy (xpath = "//*[@id=\"mainWrapper\"]//form/div/div[2]/div[2]/div[2]/select[2]")
+    public WebElement groupSecondDropdown;
+
+    @FindBy (xpath = "//*[@id=\"mainWrapper\"]//form/div/div[2]/div[2]/div[2]/select[2]/option[3]")
+    public WebElement groupSecondDropdownOption;
+
+    @FindBy (xpath = "//*[@id=\"mainWrapper\"]//form/div/div[2]/div[2]/div[2]/span/input")
+    public WebElement groupInputField;
 
     @FindBy (xpath = "//*[@id=\"mainWrapper\"]//form/footer/button[1]")
     public WebElement saveButton;
@@ -50,7 +79,13 @@ public class SmartPlaylistPage extends BasePage {
     @FindBy (xpath = "//*[@id=\"playlistWrapper\"]/header/div[2]/h1")
     public WebElement createdSmartPlaylist;
 
-    public void provideNameForSmartPlaylist(){
+    @FindBy (xpath = "//*[@id=\"playlistWrapper\"]/div/div/div")
+    public WebElement emptyPageMessage;
+
+    @FindBy (xpath = "//*[@id=\"mainWrapper\"]//form/div/div[2]/div/button")
+    public WebElement addRuleButton;
+
+    public void provideNameForSmartPlaylist(String smartPlaylistName ){
         wait.until(ExpectedConditions.elementToBeClickable(nameInputField));
         nameInputField.clear();
         nameInputField.click();
@@ -60,26 +95,72 @@ public class SmartPlaylistPage extends BasePage {
     public void selectFirstDropdown(){
         wait.until(ExpectedConditions.visibilityOf(firstDropdown));
         firstDropdown.click();
-        firstOptionFirstDropdown.click();
+        firstRuleFirstDropdownOption.click();
     }
 
     public void selectSecondDropdown(){
         wait.until(ExpectedConditions.visibilityOf(secondDropdown));
         secondDropdown.click();
-        firstOptionSecondDropdown.click();
+        firstRuleSecondDropdownOption.click();
     }
 
 
-    public void provideRuleInputField(){
+    public void provideRuleInputField(String ruleInput){
         wait.until(ExpectedConditions.elementToBeClickable(ruleInputField));
         ruleInputField.click();
         ruleInputField.clear();
         ruleInputField.sendKeys(ruleInput);
     }
 
+    public void provideFirstRule(String ruleInput){
+        selectFirstDropdown();
+        firstRuleFirstDropdownOption.click();
+        selectSecondDropdown();
+        firstRuleSecondDropdownOption.click();
+        provideRuleInputField(ruleInput);
+    }
+
+    public void provideSecondRule(String ruleSecondInput){
+        secondRuleFirstDropdown.click();
+        secondRuleFirstDropdownOption.click();
+
+        secondRuleSecondDropdown.click();
+        secondRuleSecondDropdownOption.click();
+
+        secondRuleInputField.click();
+        secondRuleInputField.clear();
+        secondRuleInputField.sendKeys(ruleSecondInput);
+    }
+
+    public void clickAddRuleButton(){
+        wait.until(ExpectedConditions.elementToBeClickable(addRuleButton));
+        addRuleButton.click();
+    }
+
+    public void clickAddGroupButton(){
+        wait.until(ExpectedConditions.elementToBeClickable(addGroupButton));
+        addGroupButton.click();
+    }
+
+    public void provideGroup(String groupInput){
+        groupFirstDropdown.click();
+        groupFirstDropdownOption.click();
+        groupSecondDropdown.click();
+        groupSecondDropdownOption.click();
+
+        groupInputField.click();
+        groupInputField.clear();
+        groupInputField.sendKeys(groupInput);
+    }
+
     public void clickSaveButton(){
         wait.until(ExpectedConditions.elementToBeClickable(saveButton));
         saveButton.click();
+    }
+
+    public String getTextMessage() {
+        wait.until(ExpectedConditions.visibilityOf(emptyPageMessage));
+        return emptyPageMessage.getText();
     }
 
     public String verifyNotificationMessage() {
