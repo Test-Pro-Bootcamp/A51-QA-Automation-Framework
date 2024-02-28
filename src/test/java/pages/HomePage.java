@@ -9,6 +9,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import java.util.UUID;
 
@@ -51,6 +52,31 @@ public class HomePage extends BasePage{
 
     @FindBy (css = "div.success.show")
     WebElement notificationMessage;
+
+    //@FindBy (css = "#mainFooter > div.side.player-controls > span > span.album-thumb")
+    @FindBy (xpath = "//*[@id='mainFooter']/div[1]/span/span[1]")
+    public WebElement playButton;
+
+    @FindBy (xpath = "//*[@id=\"mainFooter\"]/div[1]/span/span[2]/i")
+    public WebElement playButtonActive;
+
+    @FindBy (xpath = "//*[@id=\"mainFooter\"]/div[2]/div[2]/div/button[1]/div")
+    public WebElement equalizerButton;
+
+    @FindBy (xpath = "//*[@id='progressPane']/p/a[1]")
+    public WebElement artistPlaying;
+
+    @FindBy (xpath = "//*[@id='progressPane']/p/a[2]")
+    public WebElement albumPlaying;
+
+    public void clickPlayButton(){
+        wait.until(ExpectedConditions.visibilityOf(playButton));
+        new Actions(driver).moveToElement(playButton).build().perform();
+        playButtonActive.click();
+        wait.until(ExpectedConditions.visibilityOf(equalizerButton));
+        //Assert.assertTrue(equalizerButton.isDisplayed());
+        //wait.until(ExpectedConditions.elementToBeClickable(playButton)).click();
+    }
 
     public void clickAllSongs(){
         WebElement allSongsMenu = wait.until(ExpectedConditions.visibilityOf(allSongs));
