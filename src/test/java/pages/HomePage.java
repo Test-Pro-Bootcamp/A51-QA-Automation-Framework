@@ -13,42 +13,41 @@ public class HomePage extends BasePage{
     }
 
 
-    @FindBy(xpath = "//*[@id='playlists']/ul/li[4]")
-    WebElement playlistExisting;
+    @FindBy(xpath="//*[@id='playlists']/h1/i")
+    WebElement playlistCreateOptions;
 
-    //By editPlaylist = By.xpath("//*[@id='playlists']/ul/li[4]/nav/ul/li[1]");
-    @FindBy(xpath="//*[@id='playlists']/ul/li[4]/nav/ul/li[1]")
-    WebElement editPlaylist;
-    //By playlistNameField =By.cssSelector("[name='name']");
-    @FindBy(css="[name='name']")
-    WebElement playlistNameField;
-    //By renamePlaylistSuccessMsg = By.cssSelector("div.success.show");
+
+    @FindBy(css="[data-testid='playlist-context-menu-create-smart']")
+    WebElement selectNewSmartPlaylistOption;
+
+
+
     @FindBy(css="div.success.show")
     WebElement renamePlaylistSuccessMsg;
 
-    public HomePage contextClickPlaylist(){
-        contextClick(playlistExisting);
+
+    public HomePage clickPlaylist(){
+        click(playlistCreateOptions);
+        return this;
+    }
+    public HomePage clickSmartPlaylist(){
+        click(selectNewSmartPlaylistOption);
         return this;
 
 
     }
- public HomePage clickEdit(){
-        click(editPlaylist);
-        return this;
- }
+// public HomePage clickEdit(){
+//        click(editPlaylist);
+//        return this;
+
 
 //    public WebElement getUserAvatar(){
 //        return findElement(userAvatarIcon);
 //    }
 
-    public HomePage enterNewPlaylistName(String playlistName){
-        findElement(playlistNameField);
-        playlistNameField.sendKeys(Keys.chord(Keys.CONTROL,"A",Keys.BACK_SPACE));
-        playlistNameField.sendKeys("melodious album");
-        playlistNameField.sendKeys(Keys.ENTER);
-        return this;
 
-    }
+
+
     public String getRenamePlaylistSuccessMsg(){
         return findElement (renamePlaylistSuccessMsg).getText();
 
