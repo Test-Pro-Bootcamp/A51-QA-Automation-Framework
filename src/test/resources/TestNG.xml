@@ -8,13 +8,8 @@
 
             <class name="BaseTest"/>
 
-            <class name="MediaPlayerTest"/>
-
             <class name="LoginTests"/>
-            <class name="MediaPlayerTest"/>
-            <class name="PlaylistTest"/>
-            <class name="AllSongsTest"/>
-            <class name="ProfileTest"/>
+
 
 
 

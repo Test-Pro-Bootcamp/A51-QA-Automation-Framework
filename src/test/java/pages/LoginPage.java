@@ -5,7 +5,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
-
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 
 public class LoginPage extends BasePage {
@@ -24,6 +24,9 @@ public class LoginPage extends BasePage {
     @FindBy(css = "[Type='submit']")
     WebElement submitButtonLocator;
 
+    @FindBy(xpath="//*[@id='app']/div/div/form/button")
+    WebElement emptyPasswordMsg;
+
     public void provideEmail(String email) {
 
         emailTxtField.sendKeys(email);
@@ -35,6 +38,11 @@ public class LoginPage extends BasePage {
 
         public void clickSubmit () {
             submitButtonLocator.click();
+        }
+
+        public String getTextMsg(){
+            wait.until(ExpectedConditions.visibilityOf(emptyPasswordMsg));
+            return emptyPasswordMsg.getText();
         }
 
 }

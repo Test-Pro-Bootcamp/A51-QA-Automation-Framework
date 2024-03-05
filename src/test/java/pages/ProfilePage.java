@@ -15,8 +15,10 @@ public class ProfilePage extends BasePage {
     @FindBy(css="[name='new_password']")
     WebElement newPasswordField;
 
+    @FindBy(xpath="//*[@id=\"inputProfileEmail\"]")
+    WebElement emailField;
     @FindBy(css="button.btn-submit")
-    WebElement savePassword;
+    WebElement saveButton;
 
     @FindBy(css="div.success.show")
     WebElement successNotification;
@@ -34,12 +36,19 @@ public class ProfilePage extends BasePage {
         return this;
 
     }
-
-    public ProfilePage clickSavePassword(){
-        click(savePassword);
+    public ProfilePage clickEmailField(String newEmail) {
+        click(emailField);
+        emailField.clear();
+        emailField.sendKeys(newEmail);
         return this;
     }
-  public String profileUpdateNotification(){
-        return findElement(successNotification).getText();
-  }
-}
+
+        public ProfilePage clickSave () {
+            click(saveButton);
+            return this;
+        }
+        public String profileUpdateNotification () {
+            return findElement(successNotification).getText();
+        }
+
+    }

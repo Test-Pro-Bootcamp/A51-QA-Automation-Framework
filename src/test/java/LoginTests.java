@@ -5,6 +5,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.LoginPage;
+import pages.ProfilePage;
 
 import java.time.Duration;
 
@@ -25,22 +26,24 @@ public class LoginTests extends BaseTest {
         driver.quit();
     }
 
-  @Test
+    @Test
 
-    public void loginValidEmailPassword(){
-        LoginPage loginPage =new LoginPage(driver);
+    public void loginValidEmailValidPassword() {
+        LoginPage loginPage = new LoginPage(driver);
         HomePage homepage = new HomePage(driver);
 
         loginPage.provideEmail("aparajita.jha@testpro.io");
-        loginPage.providePassword("testpro135@");
+        loginPage.providePassword("testpro1357@");
         loginPage.clickSubmit();
 
         Assert.assertTrue(homepage.getUserAvatar().isDisplayed());
 
-  }
-@Test
-    public void loginValidEmailemptyPassword(){
-        LoginPage loginPage =new LoginPage(driver);
+    }
+
+    @Test
+    public void loginValidEmailemptyPassword() {
+
+        LoginPage loginPage = new LoginPage(driver);
         HomePage homepage = new HomePage(driver);
 
         loginPage.provideEmail("aparajita.jha@testpro.io");
@@ -50,10 +53,11 @@ public class LoginTests extends BaseTest {
         Assert.assertTrue(homepage.getRegistrationLink().isDisplayed());
 
     }
-@Test
 
-    public void loginEmptyEmailValidPassword(){
-        LoginPage loginPage =new LoginPage(driver);
+    @Test
+
+    public void loginEmptyEmailValidPassword() {
+        LoginPage loginPage = new LoginPage(driver);
         HomePage homepage = new HomePage(driver);
 
         loginPage.provideEmail(" ");
@@ -62,9 +66,10 @@ public class LoginTests extends BaseTest {
 
         Assert.assertTrue(homepage.getRegistrationLink().isDisplayed());
     }
-@Test
-    public void loginEmptyEmailEmptyPassword(){
-        LoginPage loginPage =new LoginPage(driver);
+
+    @Test
+    public void loginEmptyEmailEmptyPassword() {
+        LoginPage loginPage = new LoginPage(driver);
         HomePage homepage = new HomePage(driver);
 
         loginPage.provideEmail(" ");
@@ -75,8 +80,8 @@ public class LoginTests extends BaseTest {
     }
 
     @Test
-    public void loginValidEmailInvalidPassword(){
-        LoginPage loginPage =new LoginPage(driver);
+    public void loginValidEmailInvalidPassword() {
+        LoginPage loginPage = new LoginPage(driver);
         HomePage homepage = new HomePage(driver);
 
         loginPage.provideEmail("aparajita.jha@testpro.io");
@@ -86,9 +91,10 @@ public class LoginTests extends BaseTest {
         Assert.assertTrue(homepage.getRegistrationLink().isDisplayed());
 
     }
+
     @Test
-    public void loginInvalidEmailValidPassword(){
-        LoginPage loginPage =new LoginPage(driver);
+    public void loginInvalidEmailValidPassword() {
+        LoginPage loginPage = new LoginPage(driver);
         HomePage homepage = new HomePage(driver);
 
         loginPage.provideEmail("random@testpro.io");
@@ -99,7 +105,75 @@ public class LoginTests extends BaseTest {
 
     }
 
+    @Test
+    public void editProfile() {
+
+        String updatedProfile = "Profile updated.";
+
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
+        ProfilePage profilePage = new ProfilePage(driver);
+
+        loginPage.provideEmail("aparajita.jha@testpro.io");
+        loginPage.providePassword("testpro1357@");
+        loginPage.clickSubmit();
+
+        homePage.clickProfileLink();
+
+        profilePage.clickCurrentPasswordField("testpro1357@");
+        profilePage.clickNewPasswordField("testpro135@");
+        profilePage.clickEmailField("aparajita.jha1@testpro.io");
+
+        profilePage.clickSave();
+
+        Assert.assertEquals(profilePage.profileUpdateNotification(), updatedProfile);
+    }
+
+    @Test
+
+    public void loginUpdatedEmailUpdatedPassword() {
+        String updatedPassword = "testpro135@";
+        String updatedEmail = "aparajita.jha1@testpro.io";
+
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homepage = new HomePage(driver);
+
+        loginPage.provideEmail(updatedEmail);
+        loginPage.providePassword(updatedPassword);
+        loginPage.clickSubmit();
+
+        Assert.assertTrue(homepage.getUserAvatar().isDisplayed());
+
+    }
+
+    @Test
+    public void loginUpdatedEmailOldPassword() {
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homepage = new HomePage(driver);
+
+        loginPage.provideEmail("aparajita.jha1@testpro.io");
+        loginPage.providePassword("testpro1357@");
+        loginPage.clickSubmit();
+
+        Assert.assertTrue(homepage.getRegistrationLink().isDisplayed());
+
+    }
+
+    @Test
+    public void loginOldEmailUpdatedPassword() {
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homepage = new HomePage(driver);
+
+        loginPage.provideEmail("aparajita.jha@testpro.io");
+        loginPage.providePassword("testpro135@");
+        loginPage.clickSubmit();
+
+        Assert.assertTrue(homepage.getRegistrationLink().isDisplayed());
+
+    }
+
 }
+
 
 
 
