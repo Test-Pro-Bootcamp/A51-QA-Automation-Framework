@@ -62,30 +62,4 @@ public class LoginPage extends BasePage {
         return driver.getCurrentUrl();
     }
 
-
-    /*
-
-    public boolean isLoggedOut() {
-        return findElement(passwordField).isDisplayed();
-    }
-
-    public boolean isDisplayedButtonSubmitLogin() {
-        return findElement(submitBtn).isDisplayed();
-    }
-
-    public String getTextEmailValidationMessage() {
-        return findElement(emailField).getAttribute("validationMessage");
-    }
-
-    public boolean isEmailValidationMessagePresent(String messageError) {
-        String validationMessage = findElement(emailField).getAttribute("validationMessage");
-        return validationMessage.contains(messageError);
-    }
-
-    public WebElement getSubmitLoginButton() {
-        return findElement(submitBtn);
-    }
-
-     */
-
 }

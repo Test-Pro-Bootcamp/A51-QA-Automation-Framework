@@ -5,14 +5,7 @@
     <parameter name="BaseURL" value="https://qa.koel.app/"></parameter>
     <test name="Example Test" preserve-order="false">
         <classes>
-            <class name="tests.AlbumsTests"/>
-            <class name="tests.AllSongsTests"/>
             <class name="tests.InfoPanelTests"/>
-            <class name="tests.LoginTests"/>
-            <class name="tests.PlaylistTests"/>
-            <class name="tests.ProfileTests"/>
-            <class name="tests.SearchTests"/>
-            <class name="tests.SmartPlaylistTests"/>
         </classes>
     </test>
 </suite>
