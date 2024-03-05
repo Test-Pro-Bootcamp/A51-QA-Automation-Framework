@@ -24,6 +24,13 @@ public class SearchPage extends BasePage {
     @FindBy(xpath = "//*[@id='searchExcerptsWrapper']/div/div/section[2]")
     private WebElement artistSection;
 
+    @FindBy (xpath = "//*[@id=\"searchExcerptsWrapper\"]/div/div/section[2]/ul/li/article/span/span/a")
+    //*[@id="searchExcerptsWrapper"]/div/div/section[1]/ul/article/span[1]
+    public WebElement playButtonArtistSection;
+
+    @FindBy (xpath = "//*[@id='searchExcerptsWrapper']/div/div/section[1]/ul/article/span[1]")
+    public WebElement playButtonSongsSection;
+
     public String verifySongsResult(){
         WebElement songInSearchResults = wait.until(ExpectedConditions.visibilityOf(searchResult));
         return  songInSearchResults.getText();

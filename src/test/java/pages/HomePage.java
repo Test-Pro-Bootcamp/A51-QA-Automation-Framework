@@ -69,13 +69,19 @@ public class HomePage extends BasePage{
     @FindBy (xpath = "//*[@id='progressPane']/p/a[2]")
     public WebElement albumPlaying;
 
+    @FindBy (css = "#mainFooter > div.media-info-wrap > div.other-controls > div > button.control.text-uppercase")
+    public WebElement infoFooterButton;
+
     public void clickPlayButton(){
         wait.until(ExpectedConditions.visibilityOf(playButton));
         new Actions(driver).moveToElement(playButton).build().perform();
         playButtonActive.click();
         wait.until(ExpectedConditions.visibilityOf(equalizerButton));
-        //Assert.assertTrue(equalizerButton.isDisplayed());
-        //wait.until(ExpectedConditions.elementToBeClickable(playButton)).click();
+    }
+
+    public void clickInfoFooterButton(){
+        wait.until(ExpectedConditions.visibilityOf(infoFooterButton));
+        infoFooterButton.click();
     }
 
     public void clickAllSongs(){
