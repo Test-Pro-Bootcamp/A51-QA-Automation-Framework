@@ -85,7 +85,7 @@ public class LoginTests extends BaseTest {
         HomePage homepage = new HomePage(driver);
 
         loginPage.provideEmail("aparajita.jha@testpro.io");
-        loginPage.providePassword("abc ");
+        loginPage.providePassword("abcd ");
         loginPage.clickSubmit();
 
         Assert.assertTrue(homepage.getRegistrationLink().isDisplayed());
