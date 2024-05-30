@@ -1,0 +1,91 @@
+package db;
+import org.mariadb.jdbc.Connection;
+import util.listeners.TestListener;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+
+public class KoelDbActions extends KoelDbBase {
+    private static Connection db ;
+    private static PreparedStatement st;
+    private static ResultSet rs;
+
+
+    private final String getTotalDuration = """
+             SELECT SUM(length) as duration FROM dbkoel.songs
+             """;
+    private final String getDuration = """
+            SELECT SUM(duration.length/60/60) FROM (SELECT * FROM dbkoel.songs  LIMIT = ?) as duration
+            """;
+
+    private String getTotalSongCount = """
+            SELECT COUNT(*) as count FROM dbkoel.songs
+            """;
+    private String getUserPlaylists = """
+            SELECT * FROM dbkoel.users u JOIN dbkoel.playlists p ON u.id = p.user_id WHERE u.email = ?
+            """;
+    private String checkNewPlaylistName = """
+            SELECT p.name FROM dbkoel.users u JOIN dbkoel.playlists p ON u.id = p.user_id WHERE u.email = ? AND p.name = ?
+            """;
+    private String getSongsInPlaylist = """
+            SELECT s.title FROM dbkoel.songs s JOIN dbkoel.playlist_song ps ON s.id = ps.song_id JOIN dbkoel.playlists p ON ps.playlist_id  = p.id  JOIN dbkoel.users u ON p.user_id = u.id WHERE u.email = ?
+            """;
+    private String getDuplicatePlaylistNames = """
+            SELECT COUNT(*) as count FROM dbkoel.playlists p JOIN dbkoel.users u ON p.user_id = u.id WHERE u.email = ? AND p.name = ?
+            """;
+    private ResultSet simpleQuery(String sql) throws SQLException {
+        db = getDbConnection();
+        st=db.prepareStatement(sql);
+        rs=st.executeQuery();
+        TestListener.logInfoDetails("SQL statement: " + sql);
+        return rs;
+    }
+    private ResultSet query(String sql, String[] args) throws SQLException {
+        TestListener.logInfoDetails("SQL statement: " + sql);
+        db = getDbConnection();
+        st = db.prepareStatement(sql);
+        if (args.length > 1) {
+            for (int i = 0; i < args.length; i++) {
+                if (args[i].matches("-?(0|[1-9]\\d*)")) {
+                    st.setInt(i+1 , Integer.parseInt(args[i]));
+                }
+                st.setString(i+1, args[i]);
+            }
+        } else {
+            st.setString(1, args[0]);
+        }
+        rs = st.executeQuery();
+        return rs;
+    }
+    public ResultSet totalSongCount() throws SQLException {
+        return simpleQuery(getTotalSongCount);
+    }
+    public ResultSet totalDuration() throws SQLException {
+        return simpleQuery(getTotalDuration);
+    }
+    public ResultSet getUserPlaylst(String user) throws SQLException {
+        TestListener.logInfoDetails("User " + user);
+        String[] str = new String[]{user};
+        return query(getUserPlaylists, str);
+    }
+    public ResultSet getSpecificDuration(String songTotal) throws SQLException {
+        TestListener.logInfoDetails("String songTotal: " + songTotal);
+        String[] str = new String[]{songTotal};
+        return query(getDuration, str);
+    }
+    public ResultSet checkNewPlaylist(String user, String playlist) throws SQLException {
+        TestListener.logInfoDetails("User: " + user);
+        TestListener.logInfoDetails("New playlist name: " + playlist);
+        String[] str = new String[]{user, playlist};
+        return query(checkNewPlaylistName, str);
+    }
+    public ResultSet checkSongsInPlaylist(String user) throws SQLException {
+        String[] str = new String[]{user};
+        return query(getSongsInPlaylist, str);
+    }
+    public ResultSet checkDuplicatePlaylistNames(String user, String playlist) throws SQLException {
+        String[] str = new String[]{user, playlist};
+        return query(getDuplicatePlaylistNames, str);
+    }
+}
